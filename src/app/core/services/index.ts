@@ -4,3 +4,4 @@ export * from './validation.service';
 export * from './theme.service';
 export * from './language.service';
 export * from './navigation.service';
+export * from './transloco-loader.service';

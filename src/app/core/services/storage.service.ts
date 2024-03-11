@@ -29,4 +29,8 @@ export class StorageService {
   set token(accessToken: string) {
     localStorage.setItem(StorageKey.token, accessToken);
   }
+
+  removeToken(): void {
+    localStorage.removeItem(StorageKey.token);
+  }
 }

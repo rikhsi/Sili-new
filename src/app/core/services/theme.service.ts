@@ -10,7 +10,7 @@ import { StorageService } from './storage.service';
   providedIn: 'root'
 })
 export class ThemeService {
-  #themeState = new BehaviorSubject<ThemeType>({current: Theme.default});
+  #themeState = new BehaviorSubject<ThemeType>(null);
   themeState$: Observable<ThemeType> = this.#themeState.asObservable();
 
   get renderer(): Renderer2 {
