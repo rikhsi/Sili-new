@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardRoute, RootRoute } from './constants';
 import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout.component';
-import { authGuard } from './core/guards/auth.guard';
+import { authGuard } from './core/guards';
 
 const routes: Routes = [
   {

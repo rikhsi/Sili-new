@@ -4,14 +4,22 @@ import {
   TranslocoLoader,
   TranslocoModule
 } from '@ngneat/transloco';
-import { inject, Injectable, isDevMode, NgModule } from '@angular/core';
+import { APP_INITIALIZER, inject, Injectable, isDevMode, NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NZ_I18N, ru_RU } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
-import ru from '@angular/common/locales/ru';
 import { Language } from 'src/app/constants';
+import { Observable } from 'rxjs';
+import { LanguageService, StorageService } from '../services';
 
-registerLocaleData(ru);
+export function langFactory(
+  langService: LanguageService, 
+  storageService: StorageService
+): () => Observable<Language> {
+  const lang = storageService.lang ?? Language.ru;
+
+  langService.onChangeLang(lang);
+
+  return () => langService.currentLang$;
+}
 
 @Injectable({ providedIn: 'root' })
 export class TranslocoHttpLoader implements TranslocoLoader {
@@ -28,13 +36,17 @@ export class TranslocoHttpLoader implements TranslocoLoader {
       provideTransloco({
         config: {
           availableLangs: [Language.ru, Language.uz, Language.en],
-          defaultLang: Language.ru,
           reRenderOnLangChange: true,
           prodMode: !isDevMode(),
         },
         loader: TranslocoHttpLoader
       }),
-      { provide: NZ_I18N, useValue: ru_RU }
+      {
+        provide: APP_INITIALIZER,
+        multi: true,
+        useFactory: langFactory,
+        deps: [LanguageService, StorageService],
+      }
   ],
 })
 export class LanguageModule {}
