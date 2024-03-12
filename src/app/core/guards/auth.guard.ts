@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { StorageService } from '../services';
-import { AuthRoute, RootRoute } from 'src/app/constants';
+import { AUTH_ROUTE, ROOT_ROUTE } from 'src/app/constants';
 
 export const authGuard: CanActivateFn = (): boolean => {
   const jwt = inject(JwtHelperService);
@@ -12,7 +12,7 @@ export const authGuard: CanActivateFn = (): boolean => {
 
   if(isExpired) {
     storage.removeToken();
-    router.navigate([RootRoute.auth, AuthRoute.login]);
+    router.navigate([ROOT_ROUTE.auth, AUTH_ROUTE.login]);
   }
 
   return isExpired;

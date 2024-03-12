@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Language, StorageKey, Theme } from 'src/app/constants';
+import { LANGUAGE, STORAGE_KEY, THEME } from 'src/app/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
 
-  get lang(): Language {
-    return localStorage.getItem(StorageKey.lang) as Language;
+  get lang(): LANGUAGE {
+    return localStorage.getItem(STORAGE_KEY.lang) as LANGUAGE;
   }
 
-  set lang(activeLang: Language) {
-    localStorage.setItem(StorageKey.lang, activeLang);
+  set lang(activeLang: LANGUAGE) {
+    localStorage.setItem(STORAGE_KEY.lang, activeLang);
   }
 
-  get theme(): Theme {
-    return localStorage.getItem(StorageKey.theme) as Theme;
+  get theme(): THEME {
+    return localStorage.getItem(STORAGE_KEY.theme) as THEME;
   }
 
-  set theme(activeTheme: Theme) {
-    localStorage.setItem(StorageKey.theme, activeTheme);
+  set theme(activeTheme: THEME) {
+    localStorage.setItem(STORAGE_KEY.theme, activeTheme);
   }
 
   get token(): string {
-    return localStorage.getItem(StorageKey.token);
+    return localStorage.getItem(STORAGE_KEY.token);
   }
 
   set token(accessToken: string) {
-    localStorage.setItem(StorageKey.token, accessToken);
+    localStorage.setItem(STORAGE_KEY.token, accessToken);
   }
 
   removeToken(): void {
-    localStorage.removeItem(StorageKey.token);
+    localStorage.removeItem(STORAGE_KEY.token);
   }
 }

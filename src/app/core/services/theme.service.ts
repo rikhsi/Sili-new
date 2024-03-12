@@ -1,10 +1,11 @@
 import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
-import { Theme } from 'src/app/constants';
+import { THEME } from 'src/app/constants';
 import { DOCUMENT } from '@angular/common';
 import { ThemeType } from 'src/app/typings';
 import { StorageService } from './storage.service';
+import { MetaService } from './meta.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +29,11 @@ export class ThemeService {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private rendererF: RendererFactory2,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private metaService: MetaService
   ){}
 
-  private getElementByID(theme: Theme): HTMLElement {
+  private getElementByID(theme: THEME): HTMLElement {
     return this.document.getElementById(theme);
   }
 
@@ -56,7 +58,7 @@ export class ThemeService {
     });
   }
 
-  private removePrevTheme(theme: Theme): void {
+  private removePrevTheme(theme: THEME): void {
     const prev = this.getElementByID(theme);
 
     if (prev) {
@@ -65,7 +67,7 @@ export class ThemeService {
     }
   }
 
-  loadTheme(current: Theme, prev: Theme): Observable<ThemeType> {
+  loadTheme(current: THEME, prev: THEME): Observable<ThemeType> {
     this.#themeState.next({ current, prev });
 
    return this.themeState$
@@ -77,6 +79,7 @@ export class ThemeService {
         }
   
         this.renderer.addClass(this.documentEl, v.current);
+        this.metaService.updateWorkerColor(v.current);
         this.storageService.theme = v.current;
       })
     )  

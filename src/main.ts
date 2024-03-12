@@ -5,7 +5,7 @@ import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
 import { provideTransloco } from '@ngneat/transloco';
-import { Language } from './app/constants';
+import { LANGUAGE } from './app/constants';
 import { LanguageService, StorageService, ThemeService, TranslocoHttpLoader } from './app/core/services';
 import { provideServiceWorker } from '@angular/service-worker';
 import { AngularYandexMapsModule } from 'angular8-yandex-maps';
@@ -38,7 +38,7 @@ bootstrapApplication(
       }),
       provideTransloco({
         config: {
-          availableLangs: [Language.ru, Language.uz, Language.en],
+          availableLangs: [LANGUAGE.ru, LANGUAGE.uz, LANGUAGE.en],
           reRenderOnLangChange: true,
           prodMode: !isDevMode(),
         },

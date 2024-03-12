@@ -1,6 +1,6 @@
-import { Theme } from "../constants"
+import { THEME } from "../constants"
 
 export type ThemeType = {
-    current: Theme,
-    prev?: Theme
+    current: THEME,
+    prev?: THEME
 }

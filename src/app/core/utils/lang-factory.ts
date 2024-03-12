@@ -1,12 +1,12 @@
-import { Language } from "src/app/constants";
+import { LANGUAGE } from "src/app/constants";
 import { LanguageService, StorageService } from "../services";
 import { Observable, take } from "rxjs";
 
 export function langFactory(
     langService: LanguageService, 
     storageService: StorageService
-  ): () => Observable<Language> {
-    const lang = storageService.lang ?? Language.ru;
+  ): () => Observable<LANGUAGE> {
+    const lang = storageService.lang ?? LANGUAGE.ru;
   
     langService.onChangeLang(lang);
   

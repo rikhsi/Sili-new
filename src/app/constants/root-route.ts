@@ -1,4 +1,4 @@
-export enum RootRoute {
+export enum ROOT_ROUTE {
     auth = 'auth',
     dashboard = 'dashboard',
     access_error = '403',

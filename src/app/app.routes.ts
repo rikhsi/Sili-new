@@ -1,55 +1,55 @@
 import { Routes } from '@angular/router';
-import { DashboardRoute, RootRoute } from './constants';
+import { DASHBOARD_ROUTE, ROOT_ROUTE } from './constants';
 import { authGuard } from './core/guards';
 import { AuthLayoutComponent, DashboardLayoutComponent } from './layout';
 
 export const routes: Routes = [
     {
-      path: RootRoute.auth,
+      path: ROOT_ROUTE.auth,
       component: AuthLayoutComponent,
       loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
     },
     {
-      path: RootRoute.dashboard,
+      path: ROOT_ROUTE.dashboard,
       component: DashboardLayoutComponent,
       canActivate: [authGuard],
       children: [
         {
-          path: DashboardRoute.car,
+          path: DASHBOARD_ROUTE.car,
           loadChildren: () => import('./modules/car/car.module').then(m => m.CarModule)
         },
         {
-          path: DashboardRoute.shop,
+          path: DASHBOARD_ROUTE.shop,
           loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule)
         },
         {
-          path: DashboardRoute.feedback,
+          path: DASHBOARD_ROUTE.feedback,
           loadChildren: () => import('./modules/feedback/feedback.module').then(m => m.FeedbackModule)
         },
         {
-          path: DashboardRoute.request,
+          path: DASHBOARD_ROUTE.request,
           loadChildren: () => import('./modules/request/request.module').then(m => m.RequestModule)
         },
         {
-          path: DashboardRoute.partner,
+          path: DASHBOARD_ROUTE.partner,
           loadChildren: () => import('./modules/partner/partner.module').then(m => m.PartnerModule)
         }
       ]
     },
     {
-      path: RootRoute.access_error,
+      path: ROOT_ROUTE.access_error,
       loadChildren: () => import('./modules/error/error.module').then(m => m.ErrorModule)
     },
     {
-      path: RootRoute.not_found,
+      path: ROOT_ROUTE.not_found,
       loadChildren: () => import('./modules/error/error.module').then(m => m.ErrorModule)
     },
     {
-      path: RootRoute.server_error,
+      path: ROOT_ROUTE.server_error,
       loadChildren: () => import('./modules/error/error.module').then(m => m.ErrorModule)
     },
     {
       path: '**',
-      redirectTo: RootRoute.auth
+      redirectTo: ROOT_ROUTE.auth
     }
   ];
