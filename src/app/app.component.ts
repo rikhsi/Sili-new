@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
-import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout.component';
 import { NgProgressComponent, NgProgressModule } from 'ngx-progressbar';
 import { DestroyService, ProgressService } from './core/services';
 import { filter, takeUntil, tap } from 'rxjs';
+import { AuthLayoutComponent, DashboardLayoutComponent } from './layout';
 
 @Component({
   selector: 'sili-root',
