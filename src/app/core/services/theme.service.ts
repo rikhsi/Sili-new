@@ -72,15 +72,15 @@ export class ThemeService {
 
    return this.themeState$
     .pipe(
-      switchMap(v => this.loadCss(v)),
-      tap(v => {
-        if(v.prev) {
-          this.removePrevTheme(v.prev)
+      switchMap(theme => this.loadCss(theme)),
+      tap(theme => {
+        if(theme.prev) {
+          this.removePrevTheme(theme.prev)
         }
   
-        this.renderer.addClass(this.documentEl, v.current);
-        this.metaService.updateWorkerColor(v.current);
-        this.storageService.theme = v.current;
+        this.renderer.addClass(this.documentEl, theme.current);
+        this.metaService.updateWorkerColor(theme.current);
+        this.storageService.theme = theme.current;
       })
     )  
   }
