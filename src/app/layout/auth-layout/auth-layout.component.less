@@ -1,5 +1,26 @@
 @import 'mixins';
 
 .theme-mixin({
-
+    :host {
+        .aside {
+            background: @auth-layout-aside;
+        }
+    }
 });
+
+.auth-layout {
+    display: flex;
+    height: 100svh;
+
+    .aside {
+        flex: 1;
+
+        .media-mixin(@media-md, {
+            display: none;
+        });
+    }
+
+    .main {
+        flex: 1;
+    }
+}

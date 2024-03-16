@@ -14,15 +14,16 @@
    @media @bp {@rules();}
 }
 
+
 .theme-mixin(@rules) {
-    html {
-      &.default {
-        @import 'default';
-        @rules();
-      }
-      &.dark {
-        @import 'dark';
-        @rules();
-      }
+  html {
+    &.default {
+      @import 'default';
+      @rules();
     }
+    &.dark {
+      @import 'dark';
+      @rules();
+    }
+  }
 }
