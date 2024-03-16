@@ -11,7 +11,7 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { AngularYandexMapsModule } from 'angular8-yandex-maps';
 import { jwtOptionsFactory, langFactory, themeFactory } from './app/core/utils';
 import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
-import { CoreInterceptor } from './app/core/interceptors';
+import { CoreInterceptor, ProgressInterceptor } from './app/core/interceptors';
 
 bootstrapApplication(
   AppComponent, 
@@ -59,6 +59,11 @@ bootstrapApplication(
       {
         provide: HTTP_INTERCEPTORS,
         useClass: CoreInterceptor,
+        multi: true
+      },
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: ProgressInterceptor,
         multi: true
       }
     ]

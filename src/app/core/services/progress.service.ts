@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProgressService {
-  #status = new BehaviorSubject<boolean>(true);
+  #status = new BehaviorSubject<boolean>(false);
   status$: Observable<boolean> = this.#status.asObservable();
 
   set status(state: boolean) {
