@@ -1,1 +1,24 @@
-{}
+{
+    "title": "Все еще увлечен",
+    "auth": {
+        "login_title": "Авторизация",
+        "layout_description": "Единая система входа на все сервисы Sili"
+    },
+    "theme": {
+        "default": "Основная",
+        "dark": "Тёмная"
+    },
+    "inputs": {
+        "login": {
+            "label": "Логин",
+            "placeholder": ""
+        },
+        "password": {
+            "label": "Пароль",
+            "placeholder": ""
+        }
+    },
+    "buttons": {
+        "continue": "Продолжить"
+    }
+}

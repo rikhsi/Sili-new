@@ -1,1 +1,11 @@
-<p>circle-button works!</p>
+<button 
+    nz-button
+    [nzShape]="'circle'"
+    [nzSize]="size"
+    [nzDanger]="danger"
+    [disabled]="blocked"
+    [nzGhost]="ghost"
+    [nzLoading]="loading"
+>
+    <ng-content></ng-content>
+</button>

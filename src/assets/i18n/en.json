@@ -1,1 +1,24 @@
-{}
+{
+    "title": "Still Infatuated",
+    "auth": {
+        "login_title": "Authorization",
+        "layout_description": "Single login system for all Sili services"
+    },
+    "theme": {
+        "default": "Default",
+        "dark": "Dark"
+    },
+    "inputs": {
+        "login": {
+            "label": "Login",
+            "placeholder": ""
+        },
+        "password": {
+            "label": "Password",
+            "placeholder": ""
+        }
+    },
+    "buttons": {
+        "continue": "Continue"
+    }
+}

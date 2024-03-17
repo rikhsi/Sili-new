@@ -1,6 +1,74 @@
 <section class="auth-layout">
-    <aside class="aside"></aside>
+    <aside class="aside">
+       <div class="container">
+            <sili-svg-icon 
+                [size]="35"
+                [name]="'sili'"
+            >
+                <span class="brand">
+                    {{$brands().sili}}
+                </span>
+            </sili-svg-icon>
+
+            <h2 class="description">
+                {{'auth.layout_description' | transloco}}
+            </h2>
+       </div>
+    </aside>
+    
     <main class="main">
         <router-outlet></router-outlet>
+        
+        <div class="language">
+            <sili-circle-button 
+                nz-dropdown 
+                [nzDropdownMenu]="langMenu"
+                [nzTrigger]="'click'"
+            >
+                {{currentLang$ | async | uppercase}}
+            </sili-circle-button>
+
+            <sili-circle-button 
+                nz-dropdown 
+                [nzDropdownMenu]="themeMenu"
+                [nzTrigger]="'click'"
+            >
+                <sili-svg-icon [name]="'star'"></sili-svg-icon>
+            </sili-circle-button>
+        </div>
     </main>
 </section>
+
+<nz-dropdown-menu #langMenu="nzDropdownMenu">
+    <ul 
+        nz-menu 
+        nzSelectable
+    >
+        @for (item of langs$ | async; track $index) {
+            <li 
+                nz-menu-item 
+                [nzSelected]="item.isSelected"
+                (click)="onSelectLang(item.name)"
+            >
+                {{item.name | uppercase}}
+            </li>
+        }
+    </ul>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #themeMenu="nzDropdownMenu">
+    <ul 
+        nz-menu 
+        nzSelectable
+    >
+        @for (item of themes$ | async; track $index) {
+            <li 
+                nz-menu-item 
+                [nzSelected]="item.isSelected"
+                (click)="onSelectTheme(item.theme)"
+            >
+                {{item.name | transloco}}
+            </li>
+        }
+    </ul>
+</nz-dropdown-menu>

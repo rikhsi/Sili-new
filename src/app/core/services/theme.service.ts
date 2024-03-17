@@ -11,8 +11,12 @@ import { MetaService } from './meta.service';
   providedIn: 'root'
 })
 export class ThemeService {
-  #themeState = new BehaviorSubject<ThemeType>(null);
-  themeState$: Observable<ThemeType> = this.#themeState.asObservable();
+  #currentTheme = new BehaviorSubject<ThemeType>(null);
+  currentTheme$: Observable<ThemeType> = this.#currentTheme.asObservable();
+
+  get theme(): ThemeType {
+    return this.#currentTheme.getValue();
+  }
 
   get renderer(): Renderer2 {
     return this.rendererF.createRenderer(null,null);
@@ -68,20 +72,19 @@ export class ThemeService {
   }
 
   loadTheme(current: THEME, prev: THEME): Observable<ThemeType> {
-    this.#themeState.next({ current, prev });
-
-   return this.themeState$
-    .pipe(
-      switchMap(theme => this.loadCss(theme)),
-      tap(theme => {
-        if(theme.prev) {
-          this.removePrevTheme(theme.prev)
-        }
+    this.#currentTheme.next({current, prev});
   
-        this.renderer.addClass(this.documentEl, theme.current);
-        this.metaService.updateWorkerColor(theme.current);
-        this.storageService.theme = theme.current;
-      })
-    )  
+    return this.loadCss({current, prev})
+      .pipe(
+        tap(theme => {
+          if (theme.prev) {
+            this.removePrevTheme(theme.prev);
+          }
+  
+          this.renderer.addClass(this.documentEl, theme.current);
+          this.metaService.updateWorkerColor(theme.current);
+          this.storageService.theme = theme.current;
+        })
+      );
   }
 }

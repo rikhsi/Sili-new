@@ -4,6 +4,10 @@
     :host {
         .aside {
             background: @auth-layout-aside;
+
+            .brand, .description {
+                color: @auth-layout-text;
+            }
         }
     }
 });
@@ -14,13 +18,42 @@
 
     .aside {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         .media-mixin(@media-md, {
             display: none;
         });
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            row-gap: 24px;
+
+            .brand {
+                .text-mixin(600,42px,100%);
+            }
+    
+            .description {
+                max-width: 320px;
+
+                .text-mixin(600,25px,120%);
+            }
+        }
     }
 
     .main {
+        position: relative;
         flex: 1;
+
+        .language {
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            column-gap: 16px;
+        }
     }
 }

@@ -6,3 +6,5 @@ export * from './language';
 export * from './storage';
 export * from './validation';
 export * from './icons';
+export * from './brands';
+

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgProgressComponent, NgProgressModule } from 'ngx-progressbar';
 import { DestroyService, ProgressService } from './core/services';

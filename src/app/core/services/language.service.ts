@@ -12,7 +12,7 @@ import { MetaService } from './meta.service';
 export class LanguageService {
   #currentLang = new BehaviorSubject<LANGUAGE>(null);
   currentLang$: Observable<LANGUAGE> = this.#currentLang.asObservable();
-  
+
   constructor(
     private translocoService: TranslocoService,
     private storageService: StorageService,
@@ -23,8 +23,10 @@ export class LanguageService {
   onChangeLang(lang: LANGUAGE): void {  
     this.#currentLang.next(lang);
     this.translocoService.setActiveLang(lang);
-    this.storageService.lang = lang;
     this.i18nService.setLocale(LANGUAGE_LOCALE[lang]);
     this.metaService.updateLocale(lang);
+    this.metaService.updateTitle();
+
+    this.storageService.lang = lang;
   }
 }

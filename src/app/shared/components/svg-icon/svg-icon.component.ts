@@ -34,5 +34,5 @@ export class SvgIconComponent {
   @Input() color: string;
   @Input() name: CUSTOM_ICONS_TYPE | NZ_ICONS_TYPE;
   @Input() gap: number;
-  @Input() cursor: ICONS_CURSOR_TYPE = 'default';
+  @Input() cursor: ICONS_CURSOR_TYPE = 'inherit';
 }

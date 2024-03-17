@@ -13,6 +13,7 @@ import { iconFactory, jwtOptionsFactory, langFactory, themeFactory } from './app
 import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
 import { CoreInterceptor, ProgressInterceptor } from './app/core/interceptors';
 import { NzIconService } from 'ng-zorro-antd/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 bootstrapApplication(
   AppComponent, 
@@ -32,6 +33,7 @@ bootstrapApplication(
             deps: [StorageService],
           },
         }),
+        BrowserAnimationsModule
       ),
       provideServiceWorker('ngsw-worker.js',{
         enabled: !isDevMode(),

@@ -1,6 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
+import { TranslocoService } from '@ngneat/transloco';
+import { map, tap } from 'rxjs';
 import { LANGUAGE, THEME_COLOR, THEME } from 'src/app/constants';
 
 @Injectable({
@@ -10,8 +12,18 @@ export class MetaService {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private meta: Meta
+    private meta: Meta,
+    private title: Title,
+    private translocoService: TranslocoService
   ) { }
+
+  updateTitle(): void {
+    this.translocoService.selectTranslate('title')
+    .pipe(
+      map( title => `Sili - ${title}`),
+      tap( title => this.title.setTitle(title))
+    ).subscribe();
+  }
 
   updateWorkerColor(theme: THEME): void {
     this.meta.updateTag({ 
