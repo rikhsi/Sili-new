@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgProgressComponent, NgProgressModule } from 'ngx-progressbar';
 import { DestroyService, ProgressService } from './core/services';
-import { filter, takeUntil, tap } from 'rxjs';
+import { map, takeUntil } from 'rxjs';
 import { AuthLayoutComponent, DashboardLayoutComponent } from './layout';
 
 @Component({
@@ -40,10 +40,13 @@ export class AppComponent implements AfterViewInit{
   private initProgress(): void {
     this.progressService.status$
     .pipe(
-      filter(v => v),
-      tap(() => this.progress.start()),
-      filter(v => !v),
-      tap(() => this.progress.complete()),
+      map(status => {
+        if(status) {
+          this.progress.start();
+        }
+
+        this.progress.complete();
+      }),
       takeUntil(this.destroy$)
     )
     .subscribe();
