@@ -7,7 +7,7 @@ export function themeFactory(
     themeService: ThemeService, 
     storageService: StorageService
   ): () => Observable<ThemeType> {
-    const storageTheme = storageService.theme ?? THEME.dark;
+    const storageTheme = storageService.theme ?? THEME.default;
   
     return () => themeService.loadTheme(
       storageTheme, 

@@ -1,6 +1,6 @@
 import { LANGUAGE } from "src/app/constants";
 import { LanguageService, StorageService } from "../services";
-import { Observable, take } from "rxjs";
+import { EMPTY, Observable } from "rxjs";
 
 export function langFactory(
     langService: LanguageService, 
@@ -10,5 +10,5 @@ export function langFactory(
   
     langService.onChangeLang(lang);
   
-    return () => langService.currentLang$.pipe(take(1));
+    return () => EMPTY;
   }

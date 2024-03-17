@@ -9,9 +9,10 @@ import { LANGUAGE } from './app/constants';
 import { LanguageService, StorageService, ThemeService, TranslocoHttpLoader } from './app/core/services';
 import { provideServiceWorker } from '@angular/service-worker';
 import { AngularYandexMapsModule } from 'angular8-yandex-maps';
-import { jwtOptionsFactory, langFactory, themeFactory } from './app/core/utils';
+import { iconFactory, jwtOptionsFactory, langFactory, themeFactory } from './app/core/utils';
 import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
 import { CoreInterceptor, ProgressInterceptor } from './app/core/interceptors';
+import { NzIconService } from 'ng-zorro-antd/icon';
 
 bootstrapApplication(
   AppComponent, 
@@ -55,6 +56,12 @@ bootstrapApplication(
         useFactory: langFactory,
         multi: true,
         deps: [LanguageService, StorageService],
+      },
+      {
+        provide: APP_INITIALIZER,
+        useFactory: iconFactory,
+        multi: true,
+        deps: [NzIconService],
       },
       {
         provide: HTTP_INTERCEPTORS,
