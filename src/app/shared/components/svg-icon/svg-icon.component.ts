@@ -13,6 +13,8 @@ import { NzFlexModule } from 'ng-zorro-antd/flex';
           nz-flex 
           [nzVertical]="false"
           [nzGap]="gap"
+          [nzAlign]="'center'"
+          [nzJustify]="'center'"
           [ngStyle]="{ cursor }"
       >
       <span 
@@ -26,6 +28,11 @@ import { NzFlexModule } from 'ng-zorro-antd/flex';
       
       <ng-content></ng-content>
     </div>
+  `,
+  styles:`
+    :host {
+      width: fit-content;
+    }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

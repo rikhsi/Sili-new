@@ -1,1 +1,14 @@
-<p>default-button works!</p>
+<button 
+    nz-button
+    [nzType]="type"
+    [nzShape]="'round'"
+    [nzSize]="size"
+    [nzDanger]="danger"
+    [disabled]="blocked"
+    [nzGhost]="ghost"
+    [nzLoading]="loading"
+    [nzBlock]="block"
+    (click)="clicked.emit()"
+>
+    <ng-content></ng-content>
+</button>

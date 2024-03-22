@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
-import { VALIDATION_ERROR, VALIDATION_STATUS } from 'src/app/constants';
+import { NzValidateStatus } from 'ng-zorro-antd/core/types';
+import { VALIDATION_ERROR } from 'src/app/constants';
 
 @Injectable({
     providedIn: 'root'
@@ -21,21 +22,21 @@ export class ValidationService {
       };
     
       #validationStatusType = {
-        [VALIDATION_ERROR.required]: () => VALIDATION_STATUS.error,
-        [VALIDATION_ERROR.email]: () => VALIDATION_STATUS.error,
-        [VALIDATION_ERROR.notRegistered]: () => VALIDATION_STATUS.error,
-        [VALIDATION_ERROR.connectionError]: () => VALIDATION_STATUS.error,
-        [VALIDATION_ERROR.minLength]: () => VALIDATION_STATUS.error,
-        [VALIDATION_ERROR.maxLength]: () =>VALIDATION_STATUS.error,
-        [VALIDATION_ERROR.validating]: () => VALIDATION_STATUS.validating,
-        [VALIDATION_ERROR.successEmail]: () => VALIDATION_STATUS.success,
-        [VALIDATION_ERROR.wrongData]: () => VALIDATION_STATUS.error,
-        [VALIDATION_ERROR.noMessage]: () => VALIDATION_STATUS.error,
-        [VALIDATION_ERROR.equal]: () => VALIDATION_STATUS.warning,
+        [VALIDATION_ERROR.required]: () => 'error',
+        [VALIDATION_ERROR.email]: () =>'error',
+        [VALIDATION_ERROR.notRegistered]: () =>'error',
+        [VALIDATION_ERROR.connectionError]: () =>'error',
+        [VALIDATION_ERROR.minLength]: () =>'error',
+        [VALIDATION_ERROR.maxLength]: () =>'error',
+        [VALIDATION_ERROR.validating]: () => 'validating',
+        [VALIDATION_ERROR.successEmail]: () => 'success',
+        [VALIDATION_ERROR.wrongData]: () =>'error',
+        [VALIDATION_ERROR.noMessage]: () =>'error',
+        [VALIDATION_ERROR.equal]: () => 'warning',
       }
     
-      validateStatus(control: AbstractControl): VALIDATION_STATUS {
-        if(control?.valid && control?.dirty) return VALIDATION_STATUS.success;
+      validateStatus(control: AbstractControl): NzValidateStatus {
+        if(control?.valid && control?.dirty) return 'success';
         
         if (control?.errors && control?.dirty) {
           const controlKeys = Object.keys(control?.errors ? control?.errors : {});
@@ -47,10 +48,10 @@ export class ValidationService {
             return arr;
           }, new Array<string>());
         
-          return messages.join('. ') as VALIDATION_STATUS;
+          return messages.join('. ') as NzValidateStatus;
         }
     
-        return VALIDATION_STATUS.formControl;
+        return '';
       }
     
       validateField(control: AbstractControl): string {

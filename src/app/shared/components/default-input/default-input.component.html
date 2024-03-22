@@ -1,1 +1,23 @@
-<p>default-input works!</p>
+<nz-form-item>
+    <nz-form-label
+        [nzLabelAlign]="'left'"
+        [nzXs]="24"
+        [nzLabelWrap]="labelWrap"
+        [nzRequired]="required" 
+        [nzFor]="label"
+        [nzNoColon]="noColon"
+    >
+        {{label}}
+    </nz-form-label>
+    <nz-form-control 
+        [nzHasFeedback]="isFeedback"
+        [nzValidateStatus]="status"
+        [nzWarningTip]="message"
+    >
+        <input 
+            nz-input 
+            [nzSize]="size"
+            [id]="label" 
+        />
+    </nz-form-control>
+</nz-form-item>

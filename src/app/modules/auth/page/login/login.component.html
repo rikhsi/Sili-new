@@ -1,1 +1,44 @@
-<p>login works!</p>
+<section 
+    nz-flex 
+    [nzAlign]="'center'"
+    [nzJustify]="'center'"
+    *transloco="let t"
+    class="login"
+>
+    <div class="container">
+        <h1 nz-typography>
+            {{t('auth.login_title')}}
+        </h1>
+        
+        <nz-divider></nz-divider>
+
+        <ng-form 
+            nz-flex 
+            [nzVertical]="true"
+        >
+            <sili-default-input
+                [label]="t('inputs.login.label')"
+                [required]="true"
+                [labelWrap]="true"
+                [message]="controlMessage('login')"
+                [status]="controlStatus('login')"
+            >
+            </sili-default-input>
+            <sili-default-input
+                [label]="t('inputs.password.label')"
+                [required]="true"
+                [labelWrap]="true"
+                [message]="controlMessage('password')"
+                [status]="controlStatus('password')"
+            >
+            </sili-default-input>
+            <sili-default-button
+                [type]="'primary'"
+                [block]="true"
+                (clicked)="onSubmit()"
+            >
+                {{t('buttons.continue')}}
+            </sili-default-button>
+        </ng-form>
+    </div>
+</section>

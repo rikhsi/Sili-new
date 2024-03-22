@@ -1,11 +1,13 @@
 <button 
     nz-button
+    [nzType]="type"
     [nzShape]="'circle'"
     [nzSize]="size"
     [nzDanger]="danger"
     [disabled]="blocked"
     [nzGhost]="ghost"
     [nzLoading]="loading"
+    (click)="clicked.emit()"
 >
     <ng-content></ng-content>
 </button>

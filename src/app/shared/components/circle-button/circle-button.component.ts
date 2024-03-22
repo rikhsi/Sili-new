@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input } from '@angular/core';
+import { NzButtonModule, NzButtonType } from 'ng-zorro-antd/button';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 
 @Component({
@@ -11,9 +11,11 @@ import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CircleButtonComponent {
-  @Input() size: NzSizeLDSType = 'default';
+  @Input() size: NzSizeLDSType = 'large';
   @Input() danger: boolean;
   @Input() blocked: boolean;
   @Input() ghost: boolean;
   @Input() loading: boolean;
+  @Input() type: NzButtonType;
+  @Input() clicked = new EventEmitter<void>();
 }
