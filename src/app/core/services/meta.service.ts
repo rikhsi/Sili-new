@@ -18,7 +18,9 @@ export class MetaService {
   ) { }
 
   updateTitle(): void {
-    this.translocoService.selectTranslate('title')
+    const key = 'auth.layout_description';
+
+    this.translocoService.selectTranslate(key)
     .pipe(
       map( title => `Sili - ${title}`),
       tap( title => this.title.setTitle(title))
