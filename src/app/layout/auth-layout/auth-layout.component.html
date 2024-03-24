@@ -28,6 +28,8 @@
                     [nzTrigger]="'click'"
                     [ariaLabel]="'language'"
                     [tooltipText]=" t('auth.actions.lang')"
+                    [isTooltip]="isTooltip()"
+                    (nzVisibleChange)="onDropdown($event)"
                 >
                     {{currentLang$ | async | uppercase}}
                 </sili-circle-button>
@@ -38,6 +40,8 @@
                     [nzTrigger]="'click'"
                     [ariaLabel]="'theme'"
                     [tooltipText]="t('auth.actions.theme')"
+                    [isTooltip]="isTooltip()"
+                    (nzVisibleChange)="onDropdown($event)"
                 >
                     <sili-svg-icon [name]="'star'"></sili-svg-icon>
                 </sili-circle-button>

@@ -1,8 +1,7 @@
 <button 
     nz-button
     nz-tooltip
-    [(nzTooltipVisible)]="isTooltip"
-    [nzTooltipTitle]="tooltipText"
+    [nzTooltipTitle]="isTooltip ? tooltipText : null"
     [nzTooltipTrigger]="tooltipTrigger"
     [nzTooltipArrowPointAtCenter]="tooltipArrow"
     [nzTooltipMouseEnterDelay]="tooltipMouseEnterDelay"
@@ -14,7 +13,7 @@
     [nzGhost]="ghost"
     [nzLoading]="loading"
     [attr.aria-label]="ariaLabel"
-    (click)="onClick()"
+    (click)="clicked.emit()"
 >
     <ng-content></ng-content>
 </button>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, WritableSignal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { NzButtonModule, NzButtonType } from 'ng-zorro-antd/button';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzToolTipModule, NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
@@ -23,14 +23,6 @@ export class CircleButtonComponent {
   @Input() tooltipTrigger: NzTooltipTrigger = 'hover';
   @Input() tooltipArrow: boolean;
   @Input() tooltipMouseEnterDelay: number = 1;
-
+  @Input() isTooltip: boolean = false;
   @Output() clicked = new EventEmitter<void>();
-
-  readonly isTooltip: WritableSignal<boolean> = signal(false);
-
-  onClick(): void {
-    this.isTooltip.set(false);
-
-    this.clicked.emit();
-  }
 }

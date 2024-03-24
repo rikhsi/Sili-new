@@ -10,7 +10,6 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { Observable, takeUntil } from 'rxjs';
 import { LanguageItem, ThemeItem, ThemeType } from 'src/app/typings';
 import { AuthLayoutService } from './auth-layout.service';
-import { NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
 
 @Component({
   selector: 'sili-auth-layout',
@@ -34,6 +33,7 @@ import { NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
 })
 export class AuthLayoutComponent implements OnInit {
   brands: Signal<typeof BRAND> = signal(BRAND);
+  isTooltip: WritableSignal<boolean> = signal(true);
   currentLang$: Observable<LANGUAGE>;
   currentTheme$: Observable<ThemeType>;
   themes$: Observable<ThemeItem[]>;
@@ -71,4 +71,7 @@ export class AuthLayoutComponent implements OnInit {
     ).subscribe();
   }
 
+  onDropdown(state: boolean): void {
+    this.isTooltip.set(!state);
+  }
 }
