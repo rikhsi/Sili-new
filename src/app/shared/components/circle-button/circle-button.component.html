@@ -1,5 +1,11 @@
 <button 
     nz-button
+    nz-tooltip
+    [(nzTooltipVisible)]="isTooltip"
+    [nzTooltipTitle]="tooltipText"
+    [nzTooltipTrigger]="tooltipTrigger"
+    [nzTooltipArrowPointAtCenter]="tooltipArrow"
+    [nzTooltipMouseEnterDelay]="tooltipMouseEnterDelay"
     [nzType]="type"
     [nzShape]="'circle'"
     [nzSize]="size"
@@ -7,8 +13,8 @@
     [disabled]="blocked"
     [nzGhost]="ghost"
     [nzLoading]="loading"
-    (click)="clicked.emit()"
     [attr.aria-label]="ariaLabel"
+    (click)="onClick()"
 >
     <ng-content></ng-content>
 </button>

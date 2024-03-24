@@ -21,7 +21,11 @@
     },
     "auth": {
         "login_title": "Kirish",
-        "layout_description": "Barcha Sili xizmatlari uchun yagona kirish tizimi"
+        "layout_description": "Barcha Sili xizmatlari uchun yagona kirish tizimi",
+        "actions": {
+            "theme": "Ranglar ro`yxati",
+            "lang": "Tillar ro`yxati"
+        }
     },
     "theme": {
         "default": "Asosiy",

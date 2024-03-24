@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit, Signal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Signal, WritableSignal, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TranslocoPipe } from '@ngneat/transloco';
+import { TranslocoDirective } from '@ngneat/transloco';
 import { BRAND, LANGUAGE, THEME } from 'src/app/constants';
 import { DestroyService, LanguageService, ThemeService } from 'src/app/core/services';
 import { CircleButtonComponent, SvgIconComponent } from 'src/app/shared/components';
@@ -10,13 +10,14 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { Observable, takeUntil } from 'rxjs';
 import { LanguageItem, ThemeItem, ThemeType } from 'src/app/typings';
 import { AuthLayoutService } from './auth-layout.service';
+import { NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
 
 @Component({
   selector: 'sili-auth-layout',
   standalone: true,
   imports: [
     RouterOutlet, 
-    TranslocoPipe,
+    TranslocoDirective,
     SvgIconComponent,
     NzFlexModule,
     CircleButtonComponent,
@@ -69,4 +70,5 @@ export class AuthLayoutComponent implements OnInit {
       takeUntil(this.destroy$)
     ).subscribe();
   }
+
 }

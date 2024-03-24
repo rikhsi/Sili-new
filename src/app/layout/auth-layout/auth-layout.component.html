@@ -1,77 +1,81 @@
-<section class="auth-layout">
-    <aside class="aside">
-       <div class="container">
-            <sili-svg-icon 
-                [size]="50"
-                [name]="'sili'"
-                [gap]="20"
-            >
-                <span class="brand">
-                    {{brands().sili}}
-                </span>
-            </sili-svg-icon>
-
-            <h2 class="description">
-                {{'auth.layout_description' | transloco}}
-            </h2>
-       </div>
-    </aside>
+<ng-container *transloco="let t">
+    <section class="auth-layout">
+        <aside class="aside">
+           <div class="container">
+                <sili-svg-icon 
+                    [size]="50"
+                    [name]="'sili'"
+                    [gap]="20"
+                >
+                    <span class="brand">
+                        {{brands().sili}}
+                    </span>
+                </sili-svg-icon>
     
-    <main class="main">
-        <router-outlet></router-outlet>
+                <h2 class="description">
+                    {{t('auth.layout_description')}}
+                </h2>
+           </div>
+        </aside>
         
-        <div class="language">
-            <sili-circle-button 
-                nz-dropdown 
-                [nzDropdownMenu]="langMenu"
-                [nzTrigger]="'click'"
-                [ariaLabel]="'language'"
-            >
-                {{currentLang$ | async | uppercase}}
-            </sili-circle-button>
-
-            <sili-circle-button 
-                nz-dropdown 
-                [nzDropdownMenu]="themeMenu"
-                [nzTrigger]="'click'"
-                [ariaLabel]="'theme'"
-            >
-                <sili-svg-icon [name]="'star'"></sili-svg-icon>
-            </sili-circle-button>
-        </div>
-    </main>
-</section>
-
-<nz-dropdown-menu #langMenu="nzDropdownMenu">
-    <ul 
-        nz-menu 
-        nzSelectable
-    >
-        @for (item of langs$ | async; track $index) {
-            <li 
-                nz-menu-item 
-                [nzSelected]="item.isSelected"
-                (click)="onSelectLang(item.name)"
-            >
-                {{item.name | uppercase}}
-            </li>
-        }
-    </ul>
-</nz-dropdown-menu>
-
-<nz-dropdown-menu #themeMenu="nzDropdownMenu">
-    <ul 
-        nz-menu 
-        nzSelectable
-    >
-        @for (item of themes$ | async; track $index) {
-            <li 
-                nz-menu-item 
-                [nzSelected]="item.isSelected"
-                (click)="onSelectTheme(item.theme)"
-            >
-                {{item.name | transloco}}
-            </li>
-        }
-    </ul>
-</nz-dropdown-menu>
+        <main class="main">
+            <router-outlet></router-outlet>
+            
+            <div class="language">
+                <sili-circle-button 
+                    nz-dropdown 
+                    [nzDropdownMenu]="langMenu"
+                    [nzTrigger]="'click'"
+                    [ariaLabel]="'language'"
+                    [tooltipText]=" t('auth.actions.lang')"
+                >
+                    {{currentLang$ | async | uppercase}}
+                </sili-circle-button>
+    
+                <sili-circle-button 
+                    nz-dropdown 
+                    [nzDropdownMenu]="themeMenu"
+                    [nzTrigger]="'click'"
+                    [ariaLabel]="'theme'"
+                    [tooltipText]="t('auth.actions.theme')"
+                >
+                    <sili-svg-icon [name]="'star'"></sili-svg-icon>
+                </sili-circle-button>
+            </div>
+        </main>
+    </section>
+    
+    <nz-dropdown-menu #langMenu="nzDropdownMenu">
+        <ul 
+            nz-menu 
+            nzSelectable
+        >
+            @for (item of langs$ | async; track $index) {
+                <li 
+                    nz-menu-item 
+                    [nzSelected]="item.isSelected"
+                    (click)="onSelectLang(item.name)"
+                >
+                    {{item.name | uppercase}}
+                </li>
+            }
+        </ul>
+    </nz-dropdown-menu>
+    
+    <nz-dropdown-menu #themeMenu="nzDropdownMenu">
+        <ul 
+            nz-menu 
+            nzSelectable
+        >
+            @for (item of themes$ | async; track $index) {
+                <li 
+                    nz-menu-item 
+                    [nzSelected]="item.isSelected"
+                    (click)="onSelectTheme(item.theme)"
+                >
+                    {{t(item.name)}}
+                </li>
+            }
+        </ul>
+    </nz-dropdown-menu>
+</ng-container>

@@ -21,7 +21,11 @@
     },
     "auth": {
         "login_title": "Authorization",
-        "layout_description": "Single login system for all Sili services"
+        "layout_description": "Single login system for all Sili services",
+        "actions": {
+            "theme": "Theme list",
+            "lang": "Language list"
+        }
     },
     "theme": {
         "default": "Default",

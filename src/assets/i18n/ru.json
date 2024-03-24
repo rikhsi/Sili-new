@@ -21,7 +21,11 @@
     },
     "auth": {
         "login_title": "Авторизация",
-        "layout_description": "Единая система входа на все сервисы Sili"
+        "layout_description": "Единая система входа на все сервисы Sili",
+           "actions": {
+            "theme": "Список тем",
+            "lang": "Список языков"
+        }
     },
     "theme": {
         "default": "Основная",
