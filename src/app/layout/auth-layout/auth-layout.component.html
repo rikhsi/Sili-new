@@ -25,6 +25,7 @@
                 nz-dropdown 
                 [nzDropdownMenu]="langMenu"
                 [nzTrigger]="'click'"
+                [ariaLabel]="'language'"
             >
                 {{currentLang$ | async | uppercase}}
             </sili-circle-button>
@@ -33,6 +34,7 @@
                 nz-dropdown 
                 [nzDropdownMenu]="themeMenu"
                 [nzTrigger]="'click'"
+                [ariaLabel]="'theme'"
             >
                 <sili-svg-icon [name]="'star'"></sili-svg-icon>
             </sili-circle-button>

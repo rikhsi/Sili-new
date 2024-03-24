@@ -17,5 +17,6 @@ export class CircleButtonComponent {
   @Input() ghost: boolean;
   @Input() loading: boolean;
   @Input() type: NzButtonType;
+  @Input() ariaLabel: string;
   @Input() clicked = new EventEmitter<void>();
 }

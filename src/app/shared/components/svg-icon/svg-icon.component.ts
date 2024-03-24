@@ -20,6 +20,7 @@ import { NzFlexModule } from 'ng-zorro-antd/flex';
       >
       <span 
           nz-icon 
+          [attr.aria-label]="ariaLabel"
           [nzType]="name" 
           [ngStyle]="{ 
               fontSize: size + 'px', 
@@ -43,6 +44,7 @@ export class SvgIconComponent {
   @Input() name: CUSTOM_ICONS_TYPE | NZ_ICONS_TYPE;
   @Input() gap: number;
   @Input() cursor: ICONS_CURSOR_TYPE = 'inherit';
+  @Input() ariaLabel: string;
 
   @Output() clicked = new EventEmitter<void>();
 }

@@ -14,6 +14,7 @@ import { AuthLoginForm, NZ_ICONS_TYPE } from 'src/app/typings';
   selector: 'sili-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.less',
+  providers: [DestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {

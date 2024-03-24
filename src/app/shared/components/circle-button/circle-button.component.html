@@ -8,6 +8,7 @@
     [nzGhost]="ghost"
     [nzLoading]="loading"
     (click)="clicked.emit()"
+    [attr.aria-label]="ariaLabel"
 >
     <ng-content></ng-content>
 </button>

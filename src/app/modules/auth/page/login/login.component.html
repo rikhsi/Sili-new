@@ -12,7 +12,7 @@
         
         <nz-divider></nz-divider>
 
-        <ng-form 
+        <form 
             sili-submit
             nz-flex 
             [nzVertical]="true"
@@ -24,6 +24,7 @@
                 [required]="true"
                 [labelWrap]="true"
                 [isFeedback]="true"
+                [autocomplete]="'username'"
                 [label]="t('inputs.login.label')"
                 [message]="controlMessage('login')"
                 [status]="controlStatus('login')"
@@ -36,6 +37,7 @@
                 [required]="true"
                 [labelWrap]="true"
                 [isFeedback]="true"
+                [autocomplete]="'current-password'"
                 [label]="t('inputs.password.label')"
                 [message]="controlMessage('password')"
                 [status]="controlStatus('password')"
@@ -45,6 +47,7 @@
                     [name]="eye()" 
                     [size]="20"
                     [cursor]="'pointer'"
+                    [ariaLabel]="'password_toggle'"
                     (clicked)="toggleEye()">
                 </sili-svg-icon>
             </sili-default-input>
@@ -60,6 +63,6 @@
             >
                 {{t('buttons.continue')}}
             </sili-default-button>
-        </ng-form>
+        </form>
     </div>
 </section>

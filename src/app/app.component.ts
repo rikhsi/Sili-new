@@ -19,6 +19,7 @@ import { AsyncPipe } from '@angular/common';
   ],
   template: `
     <ng-progress 
+      [ariaLabel]="'progress'"
       [color]="statusColor$ | async"
       [spinner]="false"
       [thick]="true">

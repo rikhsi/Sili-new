@@ -31,6 +31,7 @@ export class DefaultInputComponent implements ControlValueAccessor {
   @Input() message: string;
   @Input() blocked: boolean;
   @Input() type: string = 'text';
+  @Input() autocomplete: string;
 
   onChange: Function = () => {};
   onTouched: Function = () => {};

@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { TranslocoService } from '@ngneat/transloco';
-import { map, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { LANGUAGE, THEME_COLOR, THEME } from 'src/app/constants';
 
 @Injectable({
@@ -22,8 +22,11 @@ export class MetaService {
 
     this.translocoService.selectTranslate(key)
     .pipe(
-      map( title => `Sili - ${title}`),
-      tap( title => this.title.setTitle(title))
+      tap( title => this.title.setTitle(`Sili - ${title}`)),
+      tap(title => this.meta.updateTag({
+        name: 'description', 
+        content: title
+      }))
     ).subscribe();
   }
 
