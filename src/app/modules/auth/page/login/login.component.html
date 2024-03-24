@@ -13,29 +13,50 @@
         <nz-divider></nz-divider>
 
         <ng-form 
+            sili-submit
             nz-flex 
             [nzVertical]="true"
+            [formGroup]="loginForm"
+            [stopTrigger]="loginForm.disabled"
+            (enterTrigger)="onSubmit()"
         >
             <sili-default-input
-                [label]="t('inputs.login.label')"
                 [required]="true"
                 [labelWrap]="true"
+                [isFeedback]="true"
+                [label]="t('inputs.login.label')"
                 [message]="controlMessage('login')"
                 [status]="controlStatus('login')"
+                formControlName="login"
             >
             </sili-default-input>
+
             <sili-default-input
-                [label]="t('inputs.password.label')"
+                [type]="passwordType()"
                 [required]="true"
                 [labelWrap]="true"
+                [isFeedback]="true"
+                [label]="t('inputs.password.label')"
                 [message]="controlMessage('password')"
                 [status]="controlStatus('password')"
+                formControlName="password"
             >
+                <sili-svg-icon 
+                    [name]="eye()" 
+                    [size]="20"
+                    [cursor]="'pointer'"
+                    (clicked)="toggleEye()">
+                </sili-svg-icon>
             </sili-default-input>
+            
             <sili-default-button
-                [type]="'primary'"
+                [blocked]="loginForm.disabled"
+                [loading]="loginForm.disabled"
                 [block]="true"
+                [mode]="'primary'"
+                [size]="'large'"
                 (clicked)="onSubmit()"
+                class="submit"
             >
                 {{t('buttons.continue')}}
             </sili-default-button>

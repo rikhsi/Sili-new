@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
 import { DASHBOARD_ROUTE, ROOT_ROUTE } from './constants';
-import { authGuard } from './core/guards';
+import { authGuard, coreGuard } from './core/guards';
 import { AuthLayoutComponent, DashboardLayoutComponent } from './layout';
 
 export const routes: Routes = [
     {
       path: ROOT_ROUTE.auth,
+      canActivate: [coreGuard],
       component: AuthLayoutComponent,
       loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
     },

@@ -11,12 +11,12 @@ import { NzButtonModule, NzButtonType } from 'ng-zorro-antd/button';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultButtonComponent {
-  @Input() size: NzSizeLDSType = 'large';
+  @Input() size: NzSizeLDSType;
   @Input() danger: boolean;
   @Input() blocked: boolean;
   @Input() ghost: boolean;
   @Input() loading: boolean;
-  @Input() type: NzButtonType;
+  @Input() mode: NzButtonType;
   @Input() block: boolean;
   @Output() clicked = new EventEmitter<void>();
 }

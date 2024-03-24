@@ -41,3 +41,5 @@ export type NZ_ICONS_TYPE =
         | 'message'
         | 'phone'
         | 'star'
+        | 'eye'
+        | 'eye-invisible'

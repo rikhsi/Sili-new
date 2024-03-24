@@ -1,4 +1,24 @@
 {
+    "validation": {
+        "required": "Required field",
+        "minlength": "Minimum number of characters",
+        "maxlength": "Maximum number of characters"
+    },
+    "messages": {
+        "success": {
+            "update": "Successfully updated",
+            "delete": "Successfully deleted",
+            "create": "Successfully created"
+        },
+        "info": {
+            "change": "No changes detected"
+        },
+        "error": {
+            "unauthorized": "Please, authorize",
+            "server": "Sorry, server is currently unavailable",
+            "login": "Incorrect login or password"
+        }
+    },
     "auth": {
         "login_title": "Authorization",
         "layout_description": "Single login system for all Sili services"

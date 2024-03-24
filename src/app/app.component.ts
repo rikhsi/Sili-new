@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgProgressComponent, NgProgressModule } from 'ngx-progressbar';
-import { DestroyService, ProgressService } from './core/services';
-import { map, takeUntil } from 'rxjs';
+import { DestroyService, ProgressService, ThemeService } from './core/services';
+import { Observable, map, takeUntil } from 'rxjs';
 import { AuthLayoutComponent, DashboardLayoutComponent } from './layout';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'sili-root',
@@ -13,25 +14,32 @@ import { AuthLayoutComponent, DashboardLayoutComponent } from './layout';
     RouterOutlet,
     AuthLayoutComponent,
     DashboardLayoutComponent,
-    NgProgressModule
+    NgProgressModule,
+    AsyncPipe
   ],
   template: `
     <ng-progress 
-      [color]="'#377E95'"
-      [debounceTime]="100"
+      [color]="statusColor$ | async"
       [spinner]="false"
       [thick]="true">
     </ng-progress>
     <router-outlet></router-outlet>
   `
 })
-export class AppComponent implements AfterViewInit{
+export class AppComponent implements OnInit, AfterViewInit{
   @ViewChild(NgProgressComponent) progress: NgProgressComponent;
+
+  statusColor$: Observable<string>;
 
   constructor(
     private progressService: ProgressService,
-    private destroy$: DestroyService
+    private destroy$: DestroyService,
+    private themeService: ThemeService
   ) {}
+
+  ngOnInit(): void {
+    this.statusColor$ = this.themeService.primaryColor$;
+  }
 
   ngAfterViewInit(): void {
     this.initProgress();
@@ -43,9 +51,9 @@ export class AppComponent implements AfterViewInit{
       map(status => {
         if(status) {
           this.progress.start();
+        } else {
+          this.progress.complete();
         }
-
-        this.progress.complete();
       }),
       takeUntil(this.destroy$)
     )

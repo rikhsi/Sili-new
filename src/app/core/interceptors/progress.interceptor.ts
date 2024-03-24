@@ -1,22 +1,14 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-} from '@angular/common/http';
-import { Observable, finalize, tap } from 'rxjs';
-import { ProgressService, } from '../services';
+import { HttpInterceptorFn } from "@angular/common/http";
+import { ProgressService } from "../services";
+import { finalize } from "rxjs";
+import { inject } from "@angular/core";
 
-@Injectable()
-export class ProgressInterceptor implements HttpInterceptor {
+export const progressInterceptor: HttpInterceptorFn = (req, next) => {
+    const progress = inject(ProgressService);
 
-    constructor( private progressService: ProgressService ) {}
+    progress.status = true;
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(
-            tap(() => this.progressService.status = true),
-            finalize(() => this.progressService.status = false)
-        )
-    }
-}
+    return next(req).pipe(
+        finalize(() => progress.status = false)
+    )
+  };

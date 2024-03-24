@@ -1,6 +1,6 @@
 import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { THEME } from 'src/app/constants';
 import { DOCUMENT } from '@angular/common';
 import { ThemeType } from 'src/app/typings';
@@ -13,6 +13,14 @@ import { MetaService } from './meta.service';
 export class ThemeService {
   #currentTheme = new BehaviorSubject<ThemeType>(null);
   currentTheme$: Observable<ThemeType> = this.#currentTheme.asObservable();
+
+  primaryColor$: Observable<string> = this.currentTheme$.pipe(
+    map(state => {
+      const isDefault = state.current === THEME.default;
+
+      return isDefault ? '#377E95' : '#913DF3';
+    })
+  );  
 
   get theme(): ThemeType {
     return this.#currentTheme.getValue();

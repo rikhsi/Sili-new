@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CUSTOM_ICONS_TYPE, ICONS_CURSOR_TYPE, NZ_ICONS_TYPE } from 'src/app/typings';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
@@ -16,6 +16,7 @@ import { NzFlexModule } from 'ng-zorro-antd/flex';
           [nzAlign]="'center'"
           [nzJustify]="'center'"
           [ngStyle]="{ cursor }"
+          (click)="clicked.emit()"
       >
       <span 
           nz-icon 
@@ -42,4 +43,6 @@ export class SvgIconComponent {
   @Input() name: CUSTOM_ICONS_TYPE | NZ_ICONS_TYPE;
   @Input() gap: number;
   @Input() cursor: ICONS_CURSOR_TYPE = 'inherit';
+
+  @Output() clicked = new EventEmitter<void>();
 }

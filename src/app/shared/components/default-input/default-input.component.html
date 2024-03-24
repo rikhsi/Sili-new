@@ -7,17 +7,32 @@
         [nzFor]="label"
         [nzNoColon]="noColon"
     >
-        {{label}}
+       <span class="label">{{label}}</span>
     </nz-form-label>
     <nz-form-control 
         [nzHasFeedback]="isFeedback"
         [nzValidateStatus]="status"
+        [nzErrorTip]="message"
+        [nzValidatingTip]="message"
         [nzWarningTip]="message"
+        [nzSuccessTip]="message"
     >
-        <input 
-            nz-input 
+        <nz-input-group 
             [nzSize]="size"
-            [id]="label" 
-        />
+            [nzSuffix]="suffix"
+        >
+            <input 
+                nz-input 
+                [type]="type"
+                [disabled]="blocked"
+                [id]="label" 
+                [(ngModel)]="value"
+                (ngModelChange)="onModelChange($event)"
+            />
+        </nz-input-group>
+
+        <ng-template #suffix>
+            <ng-content></ng-content>
+        </ng-template>
     </nz-form-control>
 </nz-form-item>

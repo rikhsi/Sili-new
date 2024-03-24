@@ -32,7 +32,7 @@ import { AuthLayoutService } from './auth-layout.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthLayoutComponent implements OnInit {
-  $brands: Signal<typeof BRAND> = signal(BRAND);
+  brands: Signal<typeof BRAND> = signal(BRAND);
   currentLang$: Observable<LANGUAGE>;
   currentTheme$: Observable<ThemeType>;
   themes$: Observable<ThemeItem[]>;

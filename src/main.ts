@@ -1,7 +1,7 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { APP_INITIALIZER, importProvidersFrom, isDevMode } from '@angular/core';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
 import { provideTransloco } from '@ngneat/transloco';
@@ -11,17 +11,22 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { AngularYandexMapsModule } from 'angular8-yandex-maps';
 import { iconFactory, jwtOptionsFactory, langFactory, themeFactory } from './app/core/utils';
 import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
-import { CoreInterceptor, ProgressInterceptor } from './app/core/interceptors';
+import { coreInterceptor, progressInterceptor } from './app/core/interceptors';
 import { NzIconService } from 'ng-zorro-antd/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 bootstrapApplication(
   AppComponent, 
   {
     providers: [
-      provideHttpClient(),
+      provideHttpClient(withInterceptors([
+        progressInterceptor,
+        coreInterceptor
+      ])),
       provideRouter(routes),
       importProvidersFrom(
+        NzMessageService,
         AngularYandexMapsModule.forRoot({
           apikey: 'd306c0df-8591-4784-ae3e-23323936fbd4',
           lang: 'ru_RU'
@@ -65,16 +70,6 @@ bootstrapApplication(
         multi: true,
         deps: [NzIconService],
       },
-      {
-        provide: HTTP_INTERCEPTORS,
-        useClass: CoreInterceptor,
-        multi: true
-      },
-      {
-        provide: HTTP_INTERCEPTORS,
-        useClass: ProgressInterceptor,
-        multi: true
-      }
     ]
   }
 );

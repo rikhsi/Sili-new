@@ -11,7 +11,7 @@ import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CircleButtonComponent {
-  @Input() size: NzSizeLDSType = 'large';
+  @Input() size: NzSizeLDSType;
   @Input() danger: boolean;
   @Input() blocked: boolean;
   @Input() ghost: boolean;

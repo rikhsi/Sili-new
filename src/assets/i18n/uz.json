@@ -1,4 +1,24 @@
 {
+    "validation": {
+        "required": "Majburiy maydon",
+        "minlength": "Minimun belgilar soni",
+        "maxlength": "Maksimun belgilar soni"
+    },
+    "messages": {
+        "success": {
+            "update": "Muvaffaqiyatli yangilandi",
+            "delete": "Muvaffaqiyatli o'chirildi",
+            "create": "Muvaffaqiyatli yaratildi"
+        },
+        "info": {
+            "change": "O'zgarishlar aniqlanmadi"
+        },
+        "error": {
+            "unauthorized": "Iltimos, autentifikatsiyadan o'ting",
+            "server": "Kechirasiz, hozirgi vaqtda serverga kirish mumkin emas",
+            "login": "Noto'g'ri login yoki parol"
+        }
+    },
     "auth": {
         "login_title": "Kirish",
         "layout_description": "Barcha Sili xizmatlari uchun yagona kirish tizimi"
