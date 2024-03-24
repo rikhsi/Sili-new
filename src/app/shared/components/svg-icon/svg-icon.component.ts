@@ -34,6 +34,7 @@ import { NzFlexModule } from 'ng-zorro-antd/flex';
   styles:`
     :host {
       width: fit-content;
+      user-select: none;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
