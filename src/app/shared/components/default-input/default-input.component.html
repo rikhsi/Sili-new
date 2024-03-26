@@ -5,7 +5,6 @@
         [nzLabelWrap]="labelWrap"
         [nzRequired]="required" 
         [nzFor]="label"
-        [nzNoColon]="noColon"
     >
        <span class="label">{{label}}</span>
     </nz-form-label>
@@ -24,7 +23,7 @@
             <input 
                 nz-input 
                 [type]="type"
-                [disabled]="blocked"
+                [disabled]="disabled"
                 [id]="label" 
                 [(ngModel)]="value"
                 [autocomplete]="autocomplete"

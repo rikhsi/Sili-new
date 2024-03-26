@@ -24,14 +24,14 @@ export class DefaultInputComponent implements ControlValueAccessor {
   @Input() required: boolean;
   @Input() label: string;
   @Input() labelWrap: boolean = true;
-  @Input() noColon: boolean = true;
   @Input() size: NzSizeLDSType = 'large';
   @Input() status: NzValidateStatus;
   @Input() isFeedback: boolean;
   @Input() message: string;
-  @Input() blocked: boolean;
   @Input() type: string = 'text';
   @Input() autocomplete: string;
+
+  disabled: boolean;
 
   onChange: Function = () => {};
   onTouched: Function = () => {};
@@ -53,7 +53,7 @@ export class DefaultInputComponent implements ControlValueAccessor {
   }
 
   setDisabledState(state: boolean): void {
-    this.blocked = state;
+    this.disabled = state;
   }
 
   onModelChange($event: string): void {
