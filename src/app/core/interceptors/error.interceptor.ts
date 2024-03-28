@@ -27,6 +27,14 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
                 );
             }
 
+            if(err.status === 500) {
+                if(storageService.token) {
+                    storageService.removeToken();
+                }
+
+                navigationService.onServerErrorPage();
+            }
+
             return throwError(() => err);
         })
     )

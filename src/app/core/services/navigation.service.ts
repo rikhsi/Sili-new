@@ -16,4 +16,8 @@ export class NavigationService {
   onLogIn(): Promise<boolean> {
     return this.router.navigate([ROOT_ROUTE.dashboard]);
   }
+
+  onServerErrorPage(): Promise<boolean> {
+    return this.router.navigate([ROOT_ROUTE.server_error]);
+  }
 }

@@ -5,6 +5,11 @@ import { AuthLayoutComponent, DashboardLayoutComponent } from './layout';
 
 export const routes: Routes = [
     {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: ROOT_ROUTE.auth
+    },
+    {
       path: ROOT_ROUTE.auth,
       canActivate: [coreGuard],
       component: AuthLayoutComponent,
@@ -38,10 +43,6 @@ export const routes: Routes = [
       ]
     },
     {
-      path: ROOT_ROUTE.access_error,
-      loadChildren: () => import('./modules/error/error.module').then(m => m.ErrorModule)
-    },
-    {
       path: ROOT_ROUTE.not_found,
       loadChildren: () => import('./modules/error/error.module').then(m => m.ErrorModule)
     },
@@ -51,6 +52,6 @@ export const routes: Routes = [
     },
     {
       path: '**',
-      redirectTo: ROOT_ROUTE.auth
+      redirectTo: ROOT_ROUTE.not_found
     }
   ];
