@@ -7,9 +7,8 @@ import { CircleButtonComponent, SvgIconComponent } from 'src/app/shared/componen
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { AsyncPipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { Observable, takeUntil } from 'rxjs';
+import { Observable, from, map, of, switchMap, takeUntil, toArray, withLatestFrom } from 'rxjs';
 import { LanguageItem, ThemeItem, ThemeType } from 'src/app/typings';
-import { AuthLayoutService } from './auth-layout.service';
 
 @Component({
   selector: 'sili-auth-layout',
@@ -28,7 +27,7 @@ import { AuthLayoutService } from './auth-layout.service';
   ],
   templateUrl: './auth-layout.component.html',
   styleUrl: './auth-layout.component.less',
-  providers: [AuthLayoutService, DestroyService],
+  providers: [DestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthLayoutComponent implements OnInit {
@@ -36,21 +35,48 @@ export class AuthLayoutComponent implements OnInit {
   isTooltip: WritableSignal<boolean> = signal(true);
   currentLang$: Observable<LANGUAGE>;
   currentTheme$: Observable<ThemeType>;
-  themes$: Observable<ThemeItem[]>;
-  langs$: Observable<LanguageItem[]>;
+  
+  get langs$(): Observable<LanguageItem[]> {
+    return this.languageService.currentLang$.pipe(
+      withLatestFrom(of(Object.values(LANGUAGE))),
+      switchMap(([currentLang, langList]) => {
+        return from(langList).pipe(
+          map(lang => ({
+            name: lang,
+            isSelected: currentLang === lang
+          })),
+          toArray()
+        )
+      })
+    );
+  }
+
+  get themes$(): Observable<ThemeItem[]> {
+    return this.themeService.currentTheme$.pipe(
+      map(themeState => themeState.current),
+      withLatestFrom(of(Object.values(THEME))),
+      switchMap(([currentTheme, themeList]) => {
+        return from(themeList).pipe(
+          map(theme => ({
+            theme,
+            name: `theme.${theme}`,
+            isSelected: currentTheme === theme
+          })),
+          toArray()
+        )
+      })
+    )
+  }
 
   constructor(
     private languageService: LanguageService,
     private themeService: ThemeService,
-    private destroy$: DestroyService,
-    private authLayoutService: AuthLayoutService
+    private destroy$: DestroyService
   ){}
 
   ngOnInit(): void {
     this.currentLang$ = this.languageService.currentLang$;
     this.currentTheme$ = this.themeService.currentTheme$;
-    this.langs$ = this.authLayoutService.langs$;
-    this.themes$ = this.authLayoutService.themes$;
   }
 
   onSelectLang(lang: LANGUAGE): void {

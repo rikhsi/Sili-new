@@ -9,18 +9,10 @@
         "@schematics/angular:component": {
           "style": "less",
           "changeDetection": "OnPush",
-          "standalone": false,
-          "skipTests": true
+          "standalone": false
         },
         "@schematics/angular:directive": {
-          "standalone": true,
-          "skipTests": true
-        },
-        "@schematics/angular:service": {
-          "skipTests": true
-        },
-        "@schematics/angular:pipe": {
-          "skipTests": true
+          "standalone": true
         }
       },
       "root": "",
