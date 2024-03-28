@@ -16,7 +16,7 @@
         "error": {
             "unauthorized": "Iltimos, autentifikatsiyadan o'ting",
             "server": "Kechirasiz, hozirgi vaqtda serverga kirish mumkin emas",
-            "login": "Noto'g'ri login yoki parol"
+            "forbidden": "Kechirasiz, sizga ushbu resursga kirish ruhsati mavjud emas"
         }
     },
     "auth": {

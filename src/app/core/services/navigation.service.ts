@@ -9,11 +9,11 @@ export class NavigationService {
 
   constructor(private router: Router) { }
 
-  onLogout(): void {
-    this.router.navigate([ROOT_ROUTE.auth, AUTH_ROUTE.login]);
+  onLogout(): Promise<boolean> {
+    return this.router.navigate([ROOT_ROUTE.auth, AUTH_ROUTE.login]);
   }
 
-  onLogIn(): void {
-    this.router.navigate([ROOT_ROUTE.dashboard]);
+  onLogIn(): Promise<boolean> {
+    return this.router.navigate([ROOT_ROUTE.dashboard]);
   }
 }

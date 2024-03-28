@@ -16,7 +16,7 @@
         "error": {
             "unauthorized": "Please, authorize",
             "server": "Sorry, server is currently unavailable",
-            "login": "Incorrect login or password"
+            "forbidden": "Sorry, you do not have permission to access this resource"
         }
     },
     "auth": {

@@ -11,7 +11,7 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { AngularYandexMapsModule } from 'angular8-yandex-maps';
 import { iconFactory, jwtOptionsFactory, langFactory, themeFactory } from './app/core/utils';
 import { JWT_OPTIONS, JwtModule } from '@auth0/angular-jwt';
-import { coreInterceptor, progressInterceptor } from './app/core/interceptors';
+import { coreInterceptor, errorInterceptor, progressInterceptor } from './app/core/interceptors';
 import { NzIconService } from 'ng-zorro-antd/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -22,7 +22,8 @@ bootstrapApplication(
     providers: [
       provideHttpClient(withInterceptors([
         progressInterceptor,
-        coreInterceptor
+        coreInterceptor,
+        errorInterceptor
       ])),
       provideRouter(routes),
       importProvidersFrom(
@@ -69,7 +70,7 @@ bootstrapApplication(
         useFactory: iconFactory,
         multi: true,
         deps: [NzIconService],
-      },
+      }
     ]
   }
 );
