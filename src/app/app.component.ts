@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { NgProgressComponent, NgProgressModule } from 'ngx-progressbar';
 import { DestroyService, ProgressService, ThemeService } from './core/services';
 import { Observable, map, takeUntil } from 'rxjs';
-import { AuthLayoutComponent, DashboardLayoutComponent } from './layout';
+import { AuthLayoutComponent, DashboardLayoutModule } from './layout';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -13,7 +13,7 @@ import { AsyncPipe } from '@angular/common';
   imports: [
     RouterOutlet,
     AuthLayoutComponent,
-    DashboardLayoutComponent,
+    DashboardLayoutModule,
     NgProgressModule,
     AsyncPipe
   ],

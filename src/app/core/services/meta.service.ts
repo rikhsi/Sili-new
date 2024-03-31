@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { TranslocoService } from '@ngneat/transloco';
-import { tap } from 'rxjs';
+import { take, tap } from 'rxjs';
 import { LANGUAGE, THEME_COLOR, THEME } from 'src/app/constants';
 
 @Injectable({
@@ -26,7 +26,8 @@ export class MetaService {
       tap(title => this.meta.updateTag({
         name: 'description', 
         content: title
-      }))
+      })),
+      take(1)
     ).subscribe();
   }
 

@@ -1,0 +1,35 @@
+@import 'mixins';
+
+.theme-mixin({
+    :host {
+        .sider::-webkit-scrollbar-thumb {
+            background-color: @primary-color;
+        }
+    }
+});
+
+.main {
+    display: flex;
+    flex-wrap: nowrap;
+
+    .sider{
+        height: calc(100svh - 80px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+        }
+    }
+
+    .content {
+        width: 100%;
+        height: calc(100svh - 80px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
