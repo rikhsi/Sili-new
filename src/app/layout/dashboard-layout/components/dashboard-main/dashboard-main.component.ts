@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, WritableSignal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { DashboardMenuItem } from 'src/app/typings';
 
 @Component({
   selector: 'sili-dashboard-main',
@@ -7,5 +8,6 @@ import { ChangeDetectionStrategy, Component, WritableSignal, signal } from '@ang
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardMainComponent {
-  siderWidth: WritableSignal<string> = signal('250px');
+  @Input() menuItems: DashboardMenuItem[];
+  @Output() clicked = new EventEmitter<void>();
 }

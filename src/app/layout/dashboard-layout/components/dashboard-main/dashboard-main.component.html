@@ -1,6 +1,6 @@
 <nz-layout class="main">
     <nz-sider 
-        [nzWidth]="siderWidth()"
+        [nzWidth]="'250px'"
         [nzCollapsible]="true"
         class="sider"
     >
@@ -8,12 +8,19 @@
             nz-menu 
             nzMode="inline"
         >
-            @for (item of [1,2]; track $index) {
+            @for (item of menuItems; track item.route) {
                 <li 
-                    nz-menu-item     
+                    nz-menu-item  
+                    nzMatchRouter
+                    [nzDisabled]="item.disabled"
                 >
-                    <span nz-icon nzType="mail"></span>
-                    <span>Navigation One</span>
+                    <a 
+                        [routerLink]="['/dashboard', item.route]"
+                        (click)="clicked.emit()"
+                    >
+                        <span nz-icon [nzType]="item.icon"></span>
+                        <span>{{item.title | transloco}}</span>
+                    </a>
                 </li>
             }
         </ul>

@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { DashboardLayoutComponent } from './dashboard-layout.component';
 import { DashboardHeaderComponent } from './components/dashboard-header/dashboard-header.component';
 import { DashboardMainComponent } from './components/dashboard-main/dashboard-main.component';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [DashboardLayoutComponent, DashboardHeaderComponent, DashboardMainComponent],
@@ -17,7 +18,8 @@ import { DashboardMainComponent } from './components/dashboard-main/dashboard-ma
     NzLayoutModule, 
     NzMenuModule,
     SvgIconComponent, 
-    NzIconModule
+    NzIconModule,
+    TranslocoModule
   ]
 })
 export class DashboardLayoutModule { }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, Signal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal, signal } from '@angular/core';
 import { BRAND } from 'src/app/constants';
 
 @Component({

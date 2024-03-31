@@ -1,5 +1,8 @@
 <nz-layout class="dashboard-layout">
     <sili-dashboard-header></sili-dashboard-header>
 
-    <sili-dashboard-main></sili-dashboard-main>
+    <sili-dashboard-main
+        [menuItems]="menuItems$ | async"
+        (clicked)="onSelectMenuItem()">
+    </sili-dashboard-main>
 </nz-layout>
