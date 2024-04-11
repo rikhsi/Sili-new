@@ -35,27 +35,69 @@ export class AuthLayoutComponent implements OnInit {
   isTooltip: WritableSignal<boolean> = signal(true);
   currentLang$: Observable<LANGUAGE>;
   currentTheme$: Observable<ThemeType>;
-  
-  get langs$(): Observable<LanguageItem[]> {
-    return this.languageService.currentLang$
-      .pipe(
-        withLatestFrom(
-          of(Object.values(LANGUAGE))
-        ),
-        switchMap(([currentLang, langList]) => {
-          return from(langList).pipe(
-            map(lang => ({
-              name: lang,
-              isSelected: currentLang === lang
-            })),
-            toArray()
-          )
-        })
-      );
+  langs$: Observable<LanguageItem[]>;
+  themes$: Observable<ThemeItem[]>;
+
+  constructor(
+    private languageService: LanguageService,
+    private themeService: ThemeService,
+    private destroy$: DestroyService
+  ){}
+
+  ngOnInit(): void {
+    this.initLangs();
+    this.initThemes();
   }
 
-  get themes$(): Observable<ThemeItem[]> {
-    return this.themeService.currentTheme$.pipe(
+  onSelectLang(lang: LANGUAGE): void {
+    this.languageService.onChangeLang$(lang)
+    .pipe(
+      takeUntil(this.destroy$)
+    ).subscribe();
+  }
+
+  onSelectTheme(selectedTheme: string): void {
+    const themeState: ThemeType = {
+      current: selectedTheme as THEME,
+      prev: this.themeService.theme.current
+    };
+
+    this.themeService.loadTheme$(
+      themeState.current,
+      themeState.prev
+    ).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe();
+  }
+
+  onDropdown(state: boolean): void {
+    this.isTooltip.set(!state);
+  }
+
+  private initLangs(): void {
+    this.currentLang$ = this.languageService.currentLang$;
+
+    this.langs$ = this.languageService.currentLang$
+    .pipe(
+      withLatestFrom(
+        of(Object.values(LANGUAGE))
+      ),
+      switchMap(([currentLang, langList]) => {
+        return from(langList).pipe(
+          map(lang => ({
+            name: lang,
+            isSelected: currentLang === lang
+          })),
+          toArray()
+        )
+      })
+    );
+  }
+
+  private initThemes(): void {
+    this.currentTheme$ = this.themeService.currentTheme$;
+
+    this.themes$ = this.themeService.currentTheme$.pipe(
       map(themeState => themeState.current),
       withLatestFrom(
         of(Object.values(THEME))
@@ -73,42 +115,6 @@ export class AuthLayoutComponent implements OnInit {
           toArray()
         )
       ))
-    )
-  }
-
-  constructor(
-    private languageService: LanguageService,
-    private themeService: ThemeService,
-    private destroy$: DestroyService
-  ){}
-
-  ngOnInit(): void {
-    this.currentLang$ = this.languageService.currentLang$;
-    this.currentTheme$ = this.themeService.currentTheme$;
-  }
-
-  onSelectLang(lang: LANGUAGE): void {
-    this.languageService.onChangeLang$(lang)
-    .pipe(
-      takeUntil(this.destroy$)
-    ).subscribe();
-  }
-
-  onSelectTheme(selectedTheme: string): void {
-    const themeState: ThemeType = {
-      current: selectedTheme as THEME,
-      prev: this.themeService.theme.current
-    }
-
-    this.themeService.loadTheme$(
-      themeState.current,
-      themeState.prev
-    ).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe();
-  }
-
-  onDropdown(state: boolean): void {
-    this.isTooltip.set(!state);
+    );
   }
 }
