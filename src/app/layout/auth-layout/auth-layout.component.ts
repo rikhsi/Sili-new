@@ -37,26 +37,34 @@ export class AuthLayoutComponent implements OnInit {
   currentTheme$: Observable<ThemeType>;
   
   get langs$(): Observable<LanguageItem[]> {
-    return this.languageService.currentLang$.pipe(
-      withLatestFrom(of(Object.values(LANGUAGE))),
-      switchMap(([currentLang, langList]) => {
-        return from(langList).pipe(
-          map(lang => ({
-            name: lang,
-            isSelected: currentLang === lang
-          })),
-          toArray()
-        )
-      })
-    );
+    return this.languageService.currentLang$
+      .pipe(
+        withLatestFrom(
+          of(Object.values(LANGUAGE))
+        ),
+        switchMap(([currentLang, langList]) => {
+          return from(langList).pipe(
+            map(lang => ({
+              name: lang,
+              isSelected: currentLang === lang
+            })),
+            toArray()
+          )
+        })
+      );
   }
 
   get themes$(): Observable<ThemeItem[]> {
     return this.themeService.currentTheme$.pipe(
       map(themeState => themeState.current),
-      withLatestFrom(of(Object.values(THEME))),
-      switchMap(([currentTheme, themeList]) => {
-        return from(themeList).pipe(
+      withLatestFrom(
+        of(Object.values(THEME))
+      ),
+      switchMap(([
+        currentTheme, 
+        themeList
+      ]) => (
+        from(themeList).pipe(
           map(theme => ({
             theme,
             name: `theme.${theme}`,
@@ -64,7 +72,7 @@ export class AuthLayoutComponent implements OnInit {
           })),
           toArray()
         )
-      })
+      ))
     )
   }
 
@@ -80,7 +88,10 @@ export class AuthLayoutComponent implements OnInit {
   }
 
   onSelectLang(lang: LANGUAGE): void {
-    this.languageService.onChangeLang(lang);
+    this.languageService.onChangeLang$(lang)
+    .pipe(
+      takeUntil(this.destroy$)
+    ).subscribe();
   }
 
   onSelectTheme(selectedTheme: string): void {
@@ -89,7 +100,7 @@ export class AuthLayoutComponent implements OnInit {
       prev: this.themeService.theme.current
     }
 
-    this.themeService.loadTheme(
+    this.themeService.loadTheme$(
       themeState.current,
       themeState.prev
     ).pipe(

@@ -3,7 +3,7 @@ export enum THEME {
     dark = 'dark'
 }
 
-export const THEME_COLOR: { [key in THEME]: string } = {
-    default: '#121212',
-    dark: '#292929'
+export const PRIMARY_COLOR: { [key in THEME]: string } = {
+    default: '#377E95',
+    dark: '#913DF3'
 }

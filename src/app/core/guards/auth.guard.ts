@@ -12,6 +12,7 @@ export const authGuard: CanActivateFn = (): boolean => {
 
   if(isExpired) {
     storage.removeToken();
+    
     router.navigate([
       ROOT_ROUTE.auth, 
       AUTH_ROUTE.login

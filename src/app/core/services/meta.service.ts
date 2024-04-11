@@ -2,8 +2,8 @@ import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { TranslocoService } from '@ngneat/transloco';
-import { take, tap } from 'rxjs';
-import { LANGUAGE, THEME_COLOR, THEME } from 'src/app/constants';
+import { Observable, first, tap } from 'rxjs';
+import { LANGUAGE, PRIMARY_COLOR, THEME } from 'src/app/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -17,24 +17,26 @@ export class MetaService {
     private translocoService: TranslocoService
   ) { }
 
-  updateTitle(): void {
+  updateTitle$(): Observable<string> {
     const key = 'auth.layout_description';
 
-    this.translocoService.selectTranslate(key)
+    return this.translocoService.selectTranslate(key)
     .pipe(
-      tap( title => this.title.setTitle(`Sili - ${title}`)),
+      first(),
+      tap( title => this.title.setTitle(
+        `Sili - ${title}`
+      )),
       tap(title => this.meta.updateTag({
         name: 'description', 
         content: title
-      })),
-      take(1)
-    ).subscribe();
+      }))
+    );
   }
 
   updateWorkerColor(theme: THEME): void {
     this.meta.updateTag({ 
       name: 'theme-color', 
-      content: THEME_COLOR[theme] 
+      content: PRIMARY_COLOR[theme] 
     });
   }
 
@@ -48,7 +50,7 @@ export class MetaService {
       'http-equiv': 'Content-Language', 
       content: lang 
     });
-    
+
     this.document.documentElement.lang = lang;
   }
 }

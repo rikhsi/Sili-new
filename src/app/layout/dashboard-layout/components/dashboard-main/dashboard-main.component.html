@@ -18,8 +18,13 @@
                         [routerLink]="['/dashboard', item.route]"
                         (click)="clicked.emit()"
                     >
-                        <span nz-icon [nzType]="item.icon"></span>
-                        <span>{{item.title | transloco}}</span>
+                        <span 
+                            nz-icon 
+                            [nzType]="item.icon">
+                        </span>
+                        <span>
+                            {{item.title | transloco}}
+                        </span>
                     </a>
                 </li>
             }

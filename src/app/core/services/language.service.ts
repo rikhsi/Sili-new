@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, first, tap } from 'rxjs';
 import { LANGUAGE, LANGUAGE_LOCALE } from 'src/app/constants';
 import { StorageService } from './storage.service';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
@@ -11,7 +11,10 @@ import { MetaService } from './meta.service';
 })
 export class LanguageService {
   #currentLang = new BehaviorSubject<LANGUAGE>(null);
-  currentLang$: Observable<LANGUAGE> = this.#currentLang.asObservable();
+
+  get currentLang$(): Observable<LANGUAGE> {
+    return this.#currentLang.asObservable();
+  }
 
   constructor(
     private translocoService: TranslocoService,
@@ -20,13 +23,20 @@ export class LanguageService {
     private metaService: MetaService
   ) { }
 
-  onChangeLang(lang: LANGUAGE): void {  
-    this.#currentLang.next(lang);
-    this.translocoService.setActiveLang(lang);
-    this.i18nService.setLocale(LANGUAGE_LOCALE[lang]);
-    this.metaService.updateLocale(lang);
-    this.metaService.updateTitle();
-
-    this.storageService.lang = lang;
+  onChangeLang$(lang: LANGUAGE): Observable<string> {  
+    return this.metaService.updateTitle$()
+    .pipe(
+      first(),
+      tap(() => {
+        this.#currentLang.next(lang);
+        this.translocoService.setActiveLang(lang);
+        this.i18nService.setLocale(
+          LANGUAGE_LOCALE[lang]
+        );
+        this.metaService.updateLocale(lang);
+      
+        this.storageService.lang = lang; 
+      })
+    );
   }
 }

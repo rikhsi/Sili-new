@@ -3,6 +3,7 @@ import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { NzValidateStatus } from 'ng-zorro-antd/core/types';
 import { VALIDATION_ERROR } from 'src/app/constants';
+import { ControlType } from 'src/app/typings';
 
 @Injectable({
     providedIn: 'root'
@@ -27,13 +28,18 @@ export class ValidationService {
   constructor(private translocoService: TranslocoService){}
 
   private getTranslation(key: string, control?: AbstractControl): string {
-    const translation = this.translocoService.translate(`validation.${key}`);
+    const translation = this.translocoService.translate(
+      `validation.${key}`
+    );
 
     if(control) {
-      return `${translation}: ${control.getError(key).requiredLength}`
+      return (
+        `${translation}: 
+         ${control.getError(key).requiredLength}`
+      )
     }
 
-    return translation 
+    return translation;
   }
 
   validateStatus(control: AbstractControl): NzValidateStatus {
@@ -58,9 +64,15 @@ export class ValidationService {
   validateField(control: AbstractControl): string {
     if (!control?.invalid || !control?.dirty) return '';
 
-    const controlErrorKeys = Object.keys(control?.errors ? control?.errors : {});
+    const controlErrorKeys = Object.keys(
+      control?.errors ? 
+      control?.errors : {}
+    );
 
-    const errorMessages = Object.values(VALIDATION_ERROR).reduce((arr, error) => {
+    const errorMessages = Object.values(VALIDATION_ERROR).reduce((
+      arr, 
+      error
+    ) => {
       if (controlErrorKeys.includes(VALIDATION_ERROR[error])) {
         arr.push(this.#validationMessages[error](control));
       }
@@ -70,7 +82,7 @@ export class ValidationService {
     return errorMessages.join('. ');
   }
 
-  updateControlStatus(control: AbstractControl | FormGroup | FormArray): void {
+  updateControlStatus(control: ControlType): void {
     if (control instanceof FormGroup || control instanceof FormArray) {
       Object.values(control.controls).forEach((innerControl) => {
         this.updateControlStatus(innerControl);

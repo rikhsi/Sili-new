@@ -1,4 +1,24 @@
-<nz-header class="header">
+<nz-header 
+    nz-flex
+    [nzAlign]="'center'"
+    [nzJustify]="'space-between'"
+    class="header"
+>
+    <div class="actions">
+        <sili-circle-button 
+            [ariaLabel]="'language'"
+            (clicked)="langClick.emit()"
+        >
+            {{currentLang | uppercase}}
+        </sili-circle-button>
+
+        <sili-circle-button 
+            [ariaLabel]="'language'"
+            (clicked)="langClick.emit()"
+        >
+            <sili-svg-icon [name]="'star'"></sili-svg-icon>
+        </sili-circle-button>
+    </div>
     <article class="logo">
         <sili-svg-icon 
             [size]="35"
@@ -11,3 +31,4 @@
         </sili-svg-icon>
     </article>
 </nz-header>
+

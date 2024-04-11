@@ -9,7 +9,7 @@ export class SubmitDirective {
   @Output() enterTrigger = new EventEmitter<void>();
 
   @HostListener('document:keydown.enter', ['$event'])
-  handleKeyDown() {
+  handleKeyDown(): void {
     this.enterTrigger.emit();
   }
 }

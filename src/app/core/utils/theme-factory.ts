@@ -9,8 +9,8 @@ export function themeFactory(
   ): () => Observable<ThemeType> {
     const storageTheme = storageService.theme ?? THEME.default;
   
-    return () => themeService.loadTheme(
+    return () => themeService.loadTheme$(
       storageTheme, 
       null
-    ).pipe(take(1));
+    );
 }

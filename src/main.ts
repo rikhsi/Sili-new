@@ -20,11 +20,13 @@ bootstrapApplication(
   AppComponent, 
   {
     providers: [
-      provideHttpClient(withInterceptors([
-        progressInterceptor,
-        coreInterceptor,
-        errorInterceptor
-      ])),
+      provideHttpClient(
+        withInterceptors([
+          progressInterceptor,
+          coreInterceptor,
+          errorInterceptor
+        ])
+      ),
       provideRouter(routes),
       importProvidersFrom(
         NzMessageService,
@@ -47,7 +49,11 @@ bootstrapApplication(
       }),
       provideTransloco({
         config: {
-          availableLangs: [LANGUAGE.ru, LANGUAGE.uz, LANGUAGE.en],
+          availableLangs: [
+            LANGUAGE.ru, 
+            LANGUAGE.uz, 
+            LANGUAGE.en
+          ],
           reRenderOnLangChange: true,
           prodMode: !isDevMode(),
         },
@@ -57,13 +63,19 @@ bootstrapApplication(
         provide: APP_INITIALIZER,
         useFactory: themeFactory,
         multi: true,
-        deps: [ThemeService, StorageService],
+        deps: [
+          ThemeService, 
+          StorageService
+        ],
       },
       {
         provide: APP_INITIALIZER,
         useFactory: langFactory,
         multi: true,
-        deps: [LanguageService, StorageService],
+        deps: [
+          LanguageService, 
+          StorageService
+        ],
       },
       {
         provide: APP_INITIALIZER,

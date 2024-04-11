@@ -1,7 +1,7 @@
 import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
-import { THEME } from 'src/app/constants';
+import { first, map, tap } from 'rxjs/operators';
+import { PRIMARY_COLOR, THEME } from 'src/app/constants';
 import { DOCUMENT } from '@angular/common';
 import { ThemeType } from 'src/app/typings';
 import { StorageService } from './storage.service';
@@ -12,15 +12,18 @@ import { MetaService } from './meta.service';
 })
 export class ThemeService {
   #currentTheme = new BehaviorSubject<ThemeType>(null);
-  currentTheme$: Observable<ThemeType> = this.#currentTheme.asObservable();
 
-  primaryColor$: Observable<string> = this.currentTheme$.pipe(
-    map(state => {
-      const isDefault = state.current === THEME.default;
+  get currentTheme$(): Observable<ThemeType> {
+    return this.#currentTheme.asObservable();
+  }
 
-      return isDefault ? '#377E95' : '#913DF3';
-    })
-  );  
+  get primaryColor$(): Observable<string> {
+    return this.currentTheme$.pipe(
+      map(state => (
+        PRIMARY_COLOR[state.current]
+      ))
+    );  
+  }
 
   get theme(): ThemeType {
     return this.#currentTheme.getValue();
@@ -45,11 +48,38 @@ export class ThemeService {
     private metaService: MetaService
   ){}
 
+  loadTheme$(
+    current: THEME, 
+    prev: THEME
+  ): Observable<ThemeType> {
+    this.#currentTheme.next({current, prev});
+  
+    return this.loadCss$({current, prev})
+      .pipe(
+        first(),
+        tap(theme => {
+          if (theme.prev) {
+            this.removePrevTheme(theme.prev);
+          }
+  
+          this.renderer.addClass(
+            this.documentEl, 
+            theme.current
+          );
+          this.metaService.updateWorkerColor(
+            theme.current
+          );
+
+          this.storageService.theme = theme.current;
+        })
+      );
+  }
+
   private getElementByID(theme: THEME): HTMLElement {
     return this.document.getElementById(theme);
   }
 
-  private loadCss(themeState: ThemeType): Observable<ThemeType> {
+  private loadCss$(themeState: ThemeType): Observable<ThemeType> {
     return new Observable<ThemeType>(observer => {
       const link = this.renderer.createElement('link');
 
@@ -74,25 +104,15 @@ export class ThemeService {
     const prev = this.getElementByID(theme);
 
     if (prev) {
-      this.renderer.removeClass(this.documentEl, theme);
-      this.renderer.removeChild(this.documentHead, prev);
-    }
-  }
-
-  loadTheme(current: THEME, prev: THEME): Observable<ThemeType> {
-    this.#currentTheme.next({current, prev});
-  
-    return this.loadCss({current, prev})
-      .pipe(
-        tap(theme => {
-          if (theme.prev) {
-            this.removePrevTheme(theme.prev);
-          }
-  
-          this.renderer.addClass(this.documentEl, theme.current);
-          this.metaService.updateWorkerColor(theme.current);
-          this.storageService.theme = theme.current;
-        })
+      this.renderer.removeClass(
+        this.documentEl, 
+        theme
       );
+      
+      this.renderer.removeChild(
+        this.documentHead, 
+        prev
+      );
+    }
   }
 }

@@ -47,12 +47,12 @@ export class LoginComponent implements OnInit {
     }) ;
   }
 
-  private onLoginError(): Observable<never> {
+  private onLoginError$(): Observable<never> {
     this.loginForm.reset();
     this.loginForm.enable();
     this.cdr.markForCheck();
 
-    return EMPTY
+    return EMPTY;
   }
 
   private onLoginSuccess(token: string): void {
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
   controlStatus(controlName: keyof AuthLoginForm): NzValidateStatus {
     return this.validationService.validateStatus(
       this.loginForm.get(controlName)
-    )
+    );
   }
 
   onSubmit(): void {
@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
       ).pipe(
           map(response => response.token),
           tap((token) => this.onLoginSuccess(token)),
-          catchError(() => this.onLoginError()),
+          catchError(() => this.onLoginError$()),
           takeUntil(this.destroy$)
       ).subscribe();
     } else {
