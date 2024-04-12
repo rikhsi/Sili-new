@@ -54,7 +54,7 @@
             nz-menu 
             nzSelectable
         >
-            @for (item of langs$ | async; track $index) {
+            @for (item of langList$ | async; track $index) {
                 <li 
                     nz-menu-item 
                     [nzSelected]="item.isSelected"
@@ -71,7 +71,7 @@
             nz-menu 
             nzSelectable
         >
-            @for (item of themes$ | async; track $index) {
+            @for (item of themeList$ | async; track $index) {
                 <li 
                     nz-menu-item 
                     [nzSelected]="item.isSelected"

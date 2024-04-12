@@ -1,11 +1,12 @@
 import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { first, map, tap } from 'rxjs/operators';
-import { PRIMARY_COLOR, THEME } from 'src/app/constants';
+import { BehaviorSubject, EMPTY, Observable, from, of } from 'rxjs';
+import { catchError, first, map, switchMap, tap, toArray, withLatestFrom } from 'rxjs/operators';
+import { ERROR_MESSAGE, PRIMARY_COLOR, SUCCESS_MESSAGE, THEME } from 'src/app/constants';
 import { DOCUMENT } from '@angular/common';
-import { ThemeType } from 'src/app/typings';
+import { ThemeItem, ThemeType } from 'src/app/typings';
 import { StorageService } from './storage.service';
 import { MetaService } from './meta.service';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,28 @@ export class ThemeService {
 
   get currentTheme$(): Observable<ThemeType> {
     return this.#currentTheme.asObservable();
+  }
+
+  get themeList$(): Observable<ThemeItem[]> {
+    return this.currentTheme$.pipe(
+      map(themeState => themeState.current),
+      withLatestFrom(
+        of(Object.values(THEME))
+      ),
+      switchMap(([
+        currentTheme, 
+        themeList
+      ]) => (
+        from(themeList).pipe(
+          map(theme => ({
+            theme,
+            name: `theme.${theme}`,
+            isSelected: currentTheme === theme
+          })),
+          toArray()
+        )
+      ))
+    );
   }
 
   get primaryColor$(): Observable<string> {
@@ -45,33 +68,25 @@ export class ThemeService {
     @Inject(DOCUMENT) private document: Document,
     private rendererF: RendererFactory2,
     private storageService: StorageService,
-    private metaService: MetaService
+    private metaService: MetaService,
+    private messageService: MessageService
   ){}
 
   loadTheme$(
-    current: THEME, 
-    prev: THEME
+    current: THEME,
+    isMessage: boolean = true
   ): Observable<ThemeType> {
-    this.#currentTheme.next({current, prev});
+    const prev = this.theme?.current;
   
     return this.loadCss$({current, prev})
       .pipe(
         first(),
         tap(theme => {
-          if (theme.prev) {
-            this.removePrevTheme(theme.prev);
-          }
-  
-          this.renderer.addClass(
-            this.documentEl, 
-            theme.current
-          );
-          this.metaService.updateWorkerColor(
-            theme.current
-          );
-
-          this.storageService.theme = theme.current;
-        })
+          this.themeChangeSuccess(theme,isMessage);
+        }),
+        catchError(() => (
+          this.themeChangeError$()
+        ))
       );
   }
 
@@ -114,5 +129,38 @@ export class ThemeService {
         prev
       );
     }
+  }
+
+  private themeChangeSuccess(theme: ThemeType, isMessage: boolean): void {
+    if (theme?.prev) {
+      this.removePrevTheme(theme.prev);
+    }
+
+    this.renderer.addClass(
+      this.documentEl, 
+      theme.current
+    );
+
+    this.metaService.updateWorkerColor(
+      theme.current
+    );
+
+    this.#currentTheme.next(theme);
+
+    this.storageService.theme = theme.current;
+
+    if(isMessage) {
+      this.messageService.onNotifySuccess(
+        SUCCESS_MESSAGE.theme
+      );
+    }
+  }
+
+  private themeChangeError$(): Observable<never> {
+    this.messageService.onNotifyError(
+      ERROR_MESSAGE.theme
+    );
+
+    return EMPTY;
   }
 }

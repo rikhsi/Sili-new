@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
-import { BehaviorSubject, Observable, first, tap } from 'rxjs';
-import { LANGUAGE, LANGUAGE_LOCALE } from 'src/app/constants';
+import { BehaviorSubject, EMPTY, Observable, catchError, first, from, map, of, startWith, switchMap, tap, toArray, withLatestFrom } from 'rxjs';
+import { ERROR_MESSAGE, LANGUAGE, LANGUAGE_LOCALE, SUCCESS_MESSAGE } from 'src/app/constants';
 import { StorageService } from './storage.service';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { MetaService } from './meta.service';
+import { LanguageItem } from 'src/app/typings';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,27 +18,76 @@ export class LanguageService {
     return this.#currentLang.asObservable();
   }
 
+  get langItems$(): Observable<LanguageItem[]> {
+    return this.currentLang$
+    .pipe(
+      withLatestFrom(
+        of(Object.values(LANGUAGE))
+      ),
+      switchMap(([currentLang, langList]) => {
+        return from(langList).pipe(
+          map(lang => ({
+            name: lang,
+            isSelected: currentLang === lang
+          })),
+          toArray()
+        )
+      })
+    );
+  }
+
   constructor(
     private translocoService: TranslocoService,
     private storageService: StorageService,
     private i18nService: NzI18nService,
-    private metaService: MetaService
+    private metaService: MetaService,
+    private messageService: MessageService
   ) { }
 
-  onChangeLang$(lang: LANGUAGE): Observable<string> {  
-    return this.metaService.updateTitle$()
+  onChangeLang$(
+    lang: LANGUAGE, 
+    isMessage: boolean = true
+  ): Observable<string> {    
+    return this.translocoService.setActiveLang(lang).events$
     .pipe(
+      startWith({}),
       first(),
+      switchMap(() => (
+        this.metaService.updateTitle$()
+      )),
       tap(() => {
-        this.#currentLang.next(lang);
-        this.translocoService.setActiveLang(lang);
-        this.i18nService.setLocale(
-          LANGUAGE_LOCALE[lang]
-        );
-        this.metaService.updateLocale(lang);
-      
-        this.storageService.lang = lang; 
-      })
+        this.langChangeSuccess(lang, isMessage);
+      }),
+      catchError(() => (
+        this.langChangeError$()
+      )),
     );
+  }
+
+  private langChangeSuccess(
+    lang: LANGUAGE, 
+    isMessage: boolean
+  ): void {
+    this.#currentLang.next(lang);
+    this.i18nService.setLocale(
+      LANGUAGE_LOCALE[lang]
+    );
+    this.metaService.updateLocale(lang);
+  
+    this.storageService.lang = lang; 
+
+    if(isMessage) {
+      this.messageService.onNotifySuccess(
+        SUCCESS_MESSAGE.lang
+      );
+    }
+  }
+
+  private langChangeError$(): Observable<never> {
+    this.messageService.onNotifyError(
+      ERROR_MESSAGE.lang
+    );
+
+    return EMPTY;
   }
 }

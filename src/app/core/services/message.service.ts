@@ -3,8 +3,6 @@ import { TranslocoService } from '@ngneat/transloco';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ERROR_MESSAGE, INFO_MESSAGE, SUCCESS_MESSAGE } from 'src/app/constants';
 
-
-
 @Injectable({
   providedIn: 'root'
 })

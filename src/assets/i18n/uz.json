@@ -8,7 +8,9 @@
         "success": {
             "update": "Muvaffaqiyatli yangilandi",
             "delete": "Muvaffaqiyatli o'chirildi",
-            "create": "Muvaffaqiyatli yaratildi"
+            "create": "Muvaffaqiyatli yaratildi",
+            "lang": "Til muvaffaqiyatli yuklandi",
+            "theme": "Ranglar muvaffaqiyatli yuklandi"
         },
         "info": {
             "change": "O'zgarishlar aniqlanmadi"
@@ -16,7 +18,9 @@
         "error": {
             "unauthorized": "Iltimos, autentifikatsiyadan o'ting",
             "server": "Kechirasiz, hozirgi vaqtda serverga kirish mumkin emas",
-            "forbidden": "Kechirasiz, sizga ushbu resursga kirish ruhsati mavjud emas"
+            "forbidden": "Kechirasiz, sizga ushbu resursga kirish ruhsati mavjud emas",
+            "lang": "Kechirasiz, hozirgi vaqtda til mavjud emas",
+            "theme": "Kechirasiz, hozirgi vaqtda ranglar mavjud emas"
         }
     },
     "auth": {
@@ -43,5 +47,13 @@
     },
     "buttons": {
         "continue": "Davom etish"
+    },
+    "menu": {
+        "shop": "Do'konlar",
+        "car": "Avtomobillar",
+        "partner": "Hamkorlar",
+        "request": "So'rovnoma",
+        "feedback": "Qayta aloqa",
+        "settings": "Sozlamalar"
     }
 }

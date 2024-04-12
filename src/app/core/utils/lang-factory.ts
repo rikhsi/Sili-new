@@ -8,5 +8,5 @@ export function langFactory(
   ): () => Observable<string> {
     const lang = storageService.lang ?? LANGUAGE.ru;
   
-    return () => langService.onChangeLang$(lang);
+    return () => langService.onChangeLang$(lang, false);
   }

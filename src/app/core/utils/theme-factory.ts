@@ -1,4 +1,4 @@
-import { Observable, take } from "rxjs";
+import { Observable } from "rxjs";
 import { StorageService, ThemeService } from "../services";
 import { ThemeType } from "src/app/typings";
 import { THEME } from "src/app/constants";
@@ -10,7 +10,7 @@ export function themeFactory(
     const storageTheme = storageService.theme ?? THEME.default;
   
     return () => themeService.loadTheme$(
-      storageTheme, 
-      null
+      storageTheme,
+      false
     );
 }

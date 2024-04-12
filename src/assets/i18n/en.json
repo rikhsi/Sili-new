@@ -8,7 +8,9 @@
         "success": {
             "update": "Successfully updated",
             "delete": "Successfully deleted",
-            "create": "Successfully created"
+            "create": "Successfully created",
+            "lang": "Language successfully loaded",
+            "theme": "Theme successfully loaded"
         },
         "info": {
             "change": "No changes detected"
@@ -16,7 +18,9 @@
         "error": {
             "unauthorized": "Please, authorize",
             "server": "Sorry, server is currently unavailable",
-            "forbidden": "Sorry, you do not have permission to access this resource"
+            "forbidden": "Sorry, you do not have permission to access this resource",
+            "lang": "Sorry, lang is currently unavailable",
+            "theme": "Sorry, theme is currently unavailable"
         }
     },
     "auth": {
@@ -43,5 +47,13 @@
     },
     "buttons": {
         "continue": "Continue"
+    },
+    "menu": {
+        "shop": "Shops",
+        "car": "Cars",
+        "partner": "Partners",
+        "request": "Requests",
+        "feedback": "Feedback",
+        "settings": "Settings"
     }
 }

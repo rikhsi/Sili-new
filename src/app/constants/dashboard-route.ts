@@ -3,5 +3,7 @@ export enum DASHBOARD_ROUTE {
     shop = 'shop',
     partner = 'partner',
     request = 'request',
-    feedback = 'feedback'
+    feedback = 'feedback',
+    settings = 'settings',
+    profile = 'profile'
 }

@@ -37,6 +37,11 @@ export class DashboardLayoutService {
         title: 'menu.feedback',
         icon: 'phone',
         route: DASHBOARD_ROUTE.feedback
+      },
+      {
+        title: 'menu.settings',
+        icon: 'setting',
+        route: DASHBOARD_ROUTE.settings
       }
     ]
   }

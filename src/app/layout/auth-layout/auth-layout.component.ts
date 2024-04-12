@@ -7,7 +7,7 @@ import { CircleButtonComponent, SvgIconComponent } from 'src/app/shared/componen
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { AsyncPipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { Observable, from, map, of, switchMap, takeUntil, toArray, withLatestFrom } from 'rxjs';
+import { Observable, Subject, switchMap, takeUntil} from 'rxjs';
 import { LanguageItem, ThemeItem, ThemeType } from 'src/app/typings';
 
 @Component({
@@ -35,8 +35,11 @@ export class AuthLayoutComponent implements OnInit {
   isTooltip: WritableSignal<boolean> = signal(true);
   currentLang$: Observable<LANGUAGE>;
   currentTheme$: Observable<ThemeType>;
-  langs$: Observable<LanguageItem[]>;
-  themes$: Observable<ThemeItem[]>;
+  langList$: Observable<LanguageItem[]>;
+  themeList$: Observable<ThemeItem[]>;
+  
+  readonly langEmit$ = new Subject<LANGUAGE>();
+  readonly themeEmit$ = new Subject<THEME>();
 
   constructor(
     private languageService: LanguageService,
@@ -45,76 +48,45 @@ export class AuthLayoutComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    this.initLangs();
-    this.initThemes();
+    this.initLang();
+    this.initTheme(); 
   }
 
-  onSelectLang(lang: LANGUAGE): void {
-    this.languageService.onChangeLang$(lang)
-    .pipe(
-      takeUntil(this.destroy$)
-    ).subscribe();
+  onSelectLang(selectedLang: LANGUAGE): void {
+    this.langEmit$.next(selectedLang);
   }
 
-  onSelectTheme(selectedTheme: string): void {
-    const themeState: ThemeType = {
-      current: selectedTheme as THEME,
-      prev: this.themeService.theme.current
-    };
-
-    this.themeService.loadTheme$(
-      themeState.current,
-      themeState.prev
-    ).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe();
+  onSelectTheme(selectedTheme: THEME): void {
+    this.themeEmit$.next(selectedTheme);
   }
 
   onDropdown(state: boolean): void {
     this.isTooltip.set(!state);
   }
 
-  private initLangs(): void {
+  private initLang(): void {
     this.currentLang$ = this.languageService.currentLang$;
+    this.langList$ = this.languageService.langItems$;
 
-    this.langs$ = this.languageService.currentLang$
+    this.langEmit$
     .pipe(
-      withLatestFrom(
-        of(Object.values(LANGUAGE))
-      ),
-      switchMap(([currentLang, langList]) => {
-        return from(langList).pipe(
-          map(lang => ({
-            name: lang,
-            isSelected: currentLang === lang
-          })),
-          toArray()
-        )
-      })
-    );
+      switchMap((lang) => (
+        this.languageService.onChangeLang$(lang)
+      )),
+      takeUntil(this.destroy$)
+    ).subscribe();
   }
 
-  private initThemes(): void {
+  private initTheme(): void {
     this.currentTheme$ = this.themeService.currentTheme$;
+    this.themeList$ = this.themeService.themeList$;
 
-    this.themes$ = this.themeService.currentTheme$.pipe(
-      map(themeState => themeState.current),
-      withLatestFrom(
-        of(Object.values(THEME))
-      ),
-      switchMap(([
-        currentTheme, 
-        themeList
-      ]) => (
-        from(themeList).pipe(
-          map(theme => ({
-            theme,
-            name: `theme.${theme}`,
-            isSelected: currentTheme === theme
-          })),
-          toArray()
-        )
-      ))
-    );
+    this.themeEmit$
+    .pipe(
+      switchMap((theme) => (
+        this.themeService.loadTheme$(theme)
+      )),
+      takeUntil(this.destroy$)
+    ).subscribe();
   }
 }

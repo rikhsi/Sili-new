@@ -40,6 +40,10 @@ export const routes: Routes = [
         {
           path: DASHBOARD_ROUTE.partner,
           loadChildren: () => import('./modules/partner/partner.module').then(m => m.PartnerModule)
+        },
+        {
+          path: DASHBOARD_ROUTE.settings,
+          loadChildren: () => import('./modules/settings/settings.module').then(m => m.SettingsModule)
         }
       ]
     },

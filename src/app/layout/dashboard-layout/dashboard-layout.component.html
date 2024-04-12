@@ -1,8 +1,5 @@
 <nz-layout class="dashboard-layout">
-    <sili-dashboard-header
-        [currentLang]="currentLang$ | async"
-        (langClick)="onToggleLang()">
-    </sili-dashboard-header>
+    <sili-dashboard-header></sili-dashboard-header>
 
     <sili-dashboard-main
         [menuItems]="menuItems$ | async"

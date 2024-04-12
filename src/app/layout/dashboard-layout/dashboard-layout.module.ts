@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { CircleButtonComponent, SvgIconComponent } from 'src/app/shared/components';
+import { SvgIconComponent } from 'src/app/shared/components';
 import { RouterModule } from '@angular/router';
 import { DashboardLayoutComponent } from './dashboard-layout.component';
 import { DashboardHeaderComponent } from './components/dashboard-header/dashboard-header.component';
@@ -25,7 +25,6 @@ import { NzFlexModule } from 'ng-zorro-antd/flex';
     SvgIconComponent, 
     NzIconModule,
     TranslocoModule,
-    CircleButtonComponent,
     NzFlexModule
   ]
 })
