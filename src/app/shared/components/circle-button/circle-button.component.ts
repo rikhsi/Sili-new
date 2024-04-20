@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { NzButtonModule, NzButtonType } from 'ng-zorro-antd/button';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzToolTipModule, NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
@@ -12,17 +12,21 @@ import { NzToolTipModule, NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CircleButtonComponent {
-  @Input() size: NzSizeLDSType;
-  @Input() danger: boolean;
-  @Input() blocked: boolean;
-  @Input() ghost: boolean;
-  @Input() loading: boolean;
-  @Input() type: NzButtonType;
-  @Input() ariaLabel: string;
-  @Input() tooltipText: string;
-  @Input() tooltipTrigger: NzTooltipTrigger = 'hover';
-  @Input() tooltipArrow: boolean;
-  @Input() tooltipMouseEnterDelay: number = 1;
-  @Input() isTooltip: boolean = false;
-  @Output() clicked = new EventEmitter<void>();
+  size = input<NzSizeLDSType>();
+  danger = input<boolean>();
+  blocked = input<boolean>();
+  ghost = input<boolean>();
+  loading = input<boolean>();
+  type = input<NzButtonType>();
+  ariaLabel = input<string>();
+  tooltipText = input<string>();
+  tooltipTrigger = input<NzTooltipTrigger>('hover');
+  tooltipArrow = input<boolean>();
+  tooltipMouseEnterDelay = input<number>(1);
+  isTooltip = input<boolean>(false);
+  clicked = output<void>();
+  
+  tooltipTitle = computed(() => (
+    this.isTooltip() ? this.tooltipText() : null
+  ));
 }

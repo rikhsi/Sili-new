@@ -1,7 +1,7 @@
 import { NgStyle } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { CUSTOM_ICONS_TYPE, ICONS_CURSOR_TYPE, NZ_ICONS_TYPE } from 'src/app/typings';
+import { ICONS_CURSOR_TYPE, ICONS_TYPE } from 'src/app/typings';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 
 @Component({
@@ -12,19 +12,19 @@ import { NzFlexModule } from 'ng-zorro-antd/flex';
     <div 
           nz-flex 
           [nzVertical]="false"
-          [nzGap]="gap"
+          [nzGap]="gap()"
           [nzAlign]="'center'"
           [nzJustify]="'center'"
-          [ngStyle]="{ cursor }"
+          [ngStyle]="{ cursor: cursor() }"
           (click)="clicked.emit()"
       >
       <span 
           nz-icon 
-          [attr.aria-label]="ariaLabel"
-          [nzType]="name" 
+          [attr.aria-label]="ariaLabel()"
+          [nzType]="name()" 
           [ngStyle]="{ 
-              fontSize: size + 'px', 
-              color 
+              fontSize: size() + 'px', 
+              color: color() 
           }">
       </span>
       
@@ -40,12 +40,11 @@ import { NzFlexModule } from 'ng-zorro-antd/flex';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SvgIconComponent {
-  @Input() size: number;
-  @Input() color: string;
-  @Input() name: CUSTOM_ICONS_TYPE | NZ_ICONS_TYPE;
-  @Input() gap: number;
-  @Input() cursor: ICONS_CURSOR_TYPE = 'inherit';
-  @Input() ariaLabel: string;
-
-  @Output() clicked = new EventEmitter<void>();
+  size = input<number>();
+  color = input<string>();
+  name = input<ICONS_TYPE>();
+  gap = input<number>();
+  cursor = input<ICONS_CURSOR_TYPE>('inherit');
+  ariaLabel = input<string>();
+  clicked = output<void>();
 }

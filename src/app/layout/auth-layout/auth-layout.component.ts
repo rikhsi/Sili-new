@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, Signal, WritableSignal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslocoDirective } from '@ngneat/transloco';
 import { BRAND, LANGUAGE, THEME } from 'src/app/constants';
@@ -31,8 +31,9 @@ import { LanguageItem, ThemeItem, ThemeType } from 'src/app/typings';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthLayoutComponent implements OnInit {
-  brands: Signal<typeof BRAND> = signal(BRAND);
-  isTooltip: WritableSignal<boolean> = signal(true);
+  brands = signal<typeof BRAND>(BRAND);
+  isTooltip = signal<boolean>(true);
+
   currentLang$: Observable<LANGUAGE>;
   currentTheme$: Observable<ThemeType>;
   langList$: Observable<LanguageItem[]>;

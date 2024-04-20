@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { DashboardMenuItem } from 'src/app/typings';
 
 @Component({
@@ -8,6 +8,6 @@ import { DashboardMenuItem } from 'src/app/typings';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardMainComponent {
-  @Input() menuItems: DashboardMenuItem[];
-  @Output() clicked = new EventEmitter<void>();
+  menuItems = input<DashboardMenuItem[]>();
+  clicked = output<void>();
 }

@@ -16,3 +16,5 @@ export type NZ_ICONS_TYPE =
         | 'eye'
         | 'eye-invisible'
         | 'setting'
+
+export type ICONS_TYPE = CUSTOM_ICONS_TYPE | NZ_ICONS_TYPE;

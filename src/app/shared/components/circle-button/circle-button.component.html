@@ -1,18 +1,18 @@
 <button 
     nz-button
     nz-tooltip
-    [nzTooltipTitle]="isTooltip ? tooltipText : null"
-    [nzTooltipTrigger]="tooltipTrigger"
-    [nzTooltipArrowPointAtCenter]="tooltipArrow"
-    [nzTooltipMouseEnterDelay]="tooltipMouseEnterDelay"
-    [nzType]="type"
+    [nzTooltipTitle]="tooltipTitle()"
+    [nzTooltipTrigger]="tooltipTrigger()"
+    [nzTooltipArrowPointAtCenter]="tooltipArrow()"
+    [nzTooltipMouseEnterDelay]="tooltipMouseEnterDelay()"
+    [nzType]="type()"
     [nzShape]="'circle'"
-    [nzSize]="size"
-    [nzDanger]="danger"
-    [disabled]="blocked"
-    [nzGhost]="ghost"
-    [nzLoading]="loading"
-    [attr.aria-label]="ariaLabel"
+    [nzSize]="size()"
+    [nzDanger]="danger()"
+    [disabled]="blocked()"
+    [nzGhost]="ghost()"
+    [nzLoading]="loading()"
+    [attr.aria-label]="ariaLabel()"
     (click)="clicked.emit()"
 >
     <ng-content></ng-content>

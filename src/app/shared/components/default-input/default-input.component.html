@@ -2,31 +2,31 @@
     <nz-form-label
         [nzLabelAlign]="'left'"
         [nzXs]="24"
-        [nzLabelWrap]="labelWrap"
-        [nzRequired]="required" 
-        [nzFor]="label"
+        [nzLabelWrap]="labelWrap()"
+        [nzRequired]="required()" 
+        [nzFor]="label()"
     >
-       <span class="label">{{label}}</span>
+       <span class="label">{{label()}}</span>
     </nz-form-label>
     <nz-form-control 
-        [nzHasFeedback]="isFeedback"
-        [nzValidateStatus]="status"
-        [nzErrorTip]="message"
-        [nzValidatingTip]="message"
-        [nzWarningTip]="message"
-        [nzSuccessTip]="message"
+        [nzHasFeedback]="isFeedback()"
+        [nzValidateStatus]="status()"
+        [nzErrorTip]="message()"
+        [nzValidatingTip]="message()"
+        [nzWarningTip]="message()"
+        [nzSuccessTip]="message()"
     >
         <nz-input-group 
-            [nzSize]="size"
+            [nzSize]="size()"
             [nzSuffix]="suffix"
         >
             <input 
                 nz-input 
-                [type]="type"
-                [disabled]="disabled"
-                [id]="label" 
+                [type]="type()"
+                [disabled]="disabled()"
+                [id]="label()" 
                 [(ngModel)]="value"
-                [autocomplete]="autocomplete"
+                [autocomplete]="autocomplete()"
                 (ngModelChange)="onModelChange($event)"
             />
         </nz-input-group>

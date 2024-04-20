@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input, model, signal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NzSizeLDSType, NzValidateStatus } from 'ng-zorro-antd/core/types';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { FunctionType } from 'src/app/typings';
 
 @Component({
   selector: 'sili-default-input',
@@ -20,40 +21,35 @@ import { NzInputModule } from 'ng-zorro-antd/input';
   ]
 })
 export class DefaultInputComponent implements ControlValueAccessor {
-  @Input() value: string;
-  @Input() required: boolean;
-  @Input() label: string;
-  @Input() labelWrap: boolean = true;
-  @Input() size: NzSizeLDSType = 'large';
-  @Input() status: NzValidateStatus;
-  @Input() isFeedback: boolean;
-  @Input() message: string;
-  @Input() type: string = 'text';
-  @Input() autocomplete: string;
+  value = model<string>();
+  required = input<boolean>();
+  label = input<string>();
+  labelWrap = input<boolean>(true);
+  size = input<NzSizeLDSType>('large');
+  status = input<NzValidateStatus>("");
+  isFeedback = input<boolean>();
+  message = input<string>();
+  type = input<string>('text');
+  autocomplete = input<string>();
+  disabled = signal<boolean>(false);
 
-  disabled: boolean;
-
-  onChange: Function = () => {};
-  onTouched: Function = () => {};
-
-  constructor(private cdr: ChangeDetectorRef){}
+  onChange: FunctionType = () => {};
+  onTouched: FunctionType = () => {};
 
   writeValue(value: string): void {
-    this.value = value;
-
-    this.cdr.markForCheck();
+    this.value.set(value);
   }
 
-  registerOnChange(fn: Function): void {
+  registerOnChange(fn: FunctionType): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: Function): void {
+  registerOnTouched(fn: FunctionType): void {
     this.onTouched = fn;
   }
 
   setDisabledState(state: boolean): void {
-    this.disabled = state;
+    this.disabled.set(state);
   }
 
   onModelChange($event: string): void {

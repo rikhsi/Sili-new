@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, WritableSignal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzValidateStatus } from 'ng-zorro-antd/core/types';
 import { EMPTY, Observable, catchError, map, takeUntil, tap } from 'rxjs';
@@ -17,8 +17,8 @@ import { AuthLoginForm, NZ_ICONS_TYPE } from 'src/app/typings';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup<AuthLoginForm>;
-  eye: WritableSignal<NZ_ICONS_TYPE> = signal('eye-invisible');
-  passwordType: WritableSignal<string> = signal('password');
+  eye = signal<NZ_ICONS_TYPE>('eye-invisible');
+  passwordType = signal<string>('password');
 
   constructor(
     private fb: FormBuilder,
