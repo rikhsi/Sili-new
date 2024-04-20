@@ -1,7 +1,7 @@
 import { Directive, HostListener, input, output } from '@angular/core';
 
 @Directive({
-  selector: '[sili-submit]',
+  selector: '[siliSubmit]',
   standalone: true
 })
 export class SubmitDirective {

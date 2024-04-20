@@ -1,12 +1,13 @@
+import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
-import { BehaviorSubject, EMPTY, Observable, from, of } from 'rxjs';
+import { BehaviorSubject, EMPTY, from, Observable, of } from 'rxjs';
 import { catchError, first, map, switchMap, tap, toArray, withLatestFrom } from 'rxjs/operators';
 import { ERROR_MESSAGE, PRIMARY_COLOR, SUCCESS_MESSAGE, THEME } from 'src/app/constants';
-import { DOCUMENT } from '@angular/common';
 import { ThemeItem, ThemeType } from 'src/app/typings';
-import { StorageService } from './storage.service';
-import { MetaService } from './meta.service';
+
 import { MessageService } from './message.service';
+import { MetaService } from './meta.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { RecoverRoutingModule } from './recover-routing.module';
 import { RecoverComponent } from './recover.component';
+import { RecoverRoutingModule } from './recover-routing.module';
 
 
 @NgModule({

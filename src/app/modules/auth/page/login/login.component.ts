@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzValidateStatus } from 'ng-zorro-antd/core/types';
-import { EMPTY, Observable, catchError, map, takeUntil, tap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, takeUntil, tap } from 'rxjs';
 import { AUTH_QUERY } from 'src/app/api/constants';
 import { BaseApiService } from 'src/app/api/services';
-import { IAuthLoginResponse, AuthLoginData } from 'src/app/api/typings';
+import { AuthLoginData,IAuthLoginResponse } from 'src/app/api/typings';
 import { DestroyService, NavigationService, StorageService, ValidationService } from 'src/app/core/services';
 import { AuthLoginForm, NZ_ICONS_TYPE } from 'src/app/typings';
 
@@ -32,32 +32,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.initLoginForm(); 
-  }
-
-  private initLoginForm(): void {
-    this.loginForm = this.fb.group<AuthLoginForm>({
-      login: this.fb.control(null, [
-        Validators.required, 
-        Validators.minLength(3)
-      ]),
-      password: this.fb.control(null, [
-        Validators.required, 
-        Validators.minLength(8)
-      ])
-    }) ;
-  }
-
-  private onLoginError$(): Observable<never> {
-    this.loginForm.reset();
-    this.loginForm.enable();
-    this.cdr.markForCheck();
-
-    return EMPTY;
-  }
-
-  private onLoginSuccess(token: string): void {
-    this.storageService.token = token;
-    this.navigationService.onLogIn();
   }
 
   toggleEye(): void {
@@ -103,5 +77,31 @@ export class LoginComponent implements OnInit {
         this.loginForm
       );
     }
+  }
+
+  private initLoginForm(): void {
+    this.loginForm = this.fb.group<AuthLoginForm>({
+      login: this.fb.control(null, [
+        Validators.required, 
+        Validators.minLength(3)
+      ]),
+      password: this.fb.control(null, [
+        Validators.required, 
+        Validators.minLength(8)
+      ])
+    }) ;
+  }
+
+  private onLoginError$(): Observable<never> {
+    this.loginForm.reset();
+    this.loginForm.enable();
+    this.cdr.markForCheck();
+
+    return EMPTY;
+  }
+
+  private onLoginSuccess(token: string): void {
+    this.storageService.token = token;
+    this.navigationService.onLogIn();
   }
 }

@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { TranslocoService } from '@ngneat/transloco';
-import { Observable, first, tap } from 'rxjs';
+import { first, Observable, tap } from 'rxjs';
 import { LANGUAGE, PRIMARY_COLOR, THEME } from 'src/app/constants';
 
 @Injectable({

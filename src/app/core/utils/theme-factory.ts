@@ -1,7 +1,8 @@
 import { Observable } from "rxjs";
-import { StorageService, ThemeService } from "../services";
-import { ThemeType } from "src/app/typings";
 import { THEME } from "src/app/constants";
+import { ThemeType } from "src/app/typings";
+
+import { StorageService, ThemeService } from "../services";
 
 export function themeFactory(
     themeService: ThemeService, 

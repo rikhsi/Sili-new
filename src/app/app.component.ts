@@ -1,10 +1,11 @@
+import { AsyncPipe } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgProgressComponent, NgProgressModule } from 'ngx-progressbar';
+import { map, Observable, takeUntil } from 'rxjs';
+
 import { DestroyService, ProgressService, ThemeService } from './core/services';
-import { Observable, map, takeUntil } from 'rxjs';
 import { AuthLayoutComponent, DashboardLayoutModule } from './layout';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'sili-root',

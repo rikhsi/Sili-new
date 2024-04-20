@@ -1,8 +1,8 @@
 import { NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ICONS_CURSOR_TYPE, ICONS_TYPE } from 'src/app/typings';
-import { NzFlexModule } from 'ng-zorro-antd/flex';
 
 @Component({
   selector: 'sili-svg-icon',

@@ -1,13 +1,13 @@
+import { AsyncPipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslocoDirective } from '@ngneat/transloco';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzFlexModule } from 'ng-zorro-antd/flex';
+import { Observable, Subject, switchMap, takeUntil} from 'rxjs';
 import { BRAND, LANGUAGE, THEME } from 'src/app/constants';
 import { DestroyService, LanguageService, ThemeService } from 'src/app/core/services';
 import { CircleButtonComponent, SvgIconComponent } from 'src/app/shared/components';
-import { NzFlexModule } from 'ng-zorro-antd/flex';
-import { AsyncPipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { Observable, Subject, switchMap, takeUntil} from 'rxjs';
 import { LanguageItem, ThemeItem, ThemeType } from 'src/app/typings';
 
 @Component({

@@ -1,6 +1,7 @@
-import { LANGUAGE } from "src/app/constants";
-import { LanguageService, StorageService } from "../services";
 import { Observable } from "rxjs";
+import { LANGUAGE } from "src/app/constants";
+
+import { LanguageService, StorageService } from "../services";
 
 export function langFactory(
     langService: LanguageService, 

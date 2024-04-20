@@ -1,4 +1,5 @@
 import { en_US, ru_RU } from "ng-zorro-antd/i18n";
+
 import { LocaleType } from "../typings";
 
 export enum LANGUAGE {

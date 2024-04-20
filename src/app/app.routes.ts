@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { DASHBOARD_ROUTE, ROOT_ROUTE } from './constants';
 import { authGuard, coreGuard } from './core/guards';
 import { AuthLayoutComponent, DashboardLayoutComponent } from './layout';

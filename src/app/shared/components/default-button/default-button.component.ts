@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzButtonModule, NzButtonType } from 'ng-zorro-antd/button';
+import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 
 @Component({
   selector: 'sili-default-button',

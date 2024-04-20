@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DashboardLayoutService } from './services';
-import { DashboardMenuItem } from 'src/app/typings';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DestroyService} from 'src/app/core/services';
+import { DashboardMenuItem } from 'src/app/typings';
+
+import { DashboardLayoutService } from './services';
 
 @Component({
   selector: 'sili-dashboard-layout',
@@ -11,7 +12,7 @@ import { DestroyService} from 'src/app/core/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DashboardLayoutService, DestroyService]
 })
-export class DashboardLayoutComponent {
+export class DashboardLayoutComponent implements OnInit {
   menuItems$: Observable<DashboardMenuItem[]>;
 
   constructor(

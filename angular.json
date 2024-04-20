@@ -56,7 +56,9 @@
               }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/assets/styles"]
+              "includePaths": [
+                "src/assets/styles"
+              ]
             },
             "scripts": []
           },
@@ -146,15 +148,29 @@
               }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/assets/styles"]
+              "includePaths": [
+                "src/assets/styles"
+              ]
             },
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
     }
   },
   "cli": {
-    "analytics": "53a682fe-c1b4-481a-9e65-53519229982d"
+    "analytics": "53a682fe-c1b4-481a-9e65-53519229982d",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

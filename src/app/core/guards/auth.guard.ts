@@ -1,8 +1,9 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { StorageService } from '../services';
 import { AUTH_ROUTE, ROOT_ROUTE } from 'src/app/constants';
+
+import { StorageService } from '../services';
 
 export const authGuard: CanActivateFn = (): boolean => {
   const jwt = inject(JwtHelperService);

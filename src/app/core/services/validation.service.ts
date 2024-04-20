@@ -27,21 +27,6 @@ export class ValidationService {
 
   constructor(private translocoService: TranslocoService){}
 
-  private getTranslation(key: string, control?: AbstractControl): string {
-    const translation = this.translocoService.translate(
-      `validation.${key}`
-    );
-
-    if(control) {
-      return (
-        `${translation}: 
-         ${control.getError(key).requiredLength}`
-      )
-    }
-
-    return translation;
-  }
-
   validateStatus(control: AbstractControl): NzValidateStatus {
     if(control?.valid && control?.dirty) return 'success';
     
@@ -97,6 +82,21 @@ export class ValidationService {
 
   isControlInvalid(control: AbstractControl): boolean {
     return control.dirty && control.invalid;
+  }
+
+  private getTranslation(key: string, control?: AbstractControl): string {
+    const translation = this.translocoService.translate(
+      `validation.${key}`
+    );
+
+    if(control) {
+      return (
+        `${translation}: 
+         ${control.getError(key).requiredLength}`
+      )
+    }
+
+    return translation;
   }
 }
 
