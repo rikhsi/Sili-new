@@ -4,7 +4,7 @@ import { APP_INITIALIZER, importProvidersFrom, isDevMode } from '@angular/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { routes } from './app/app.routes';
-import { provideTransloco } from '@ngneat/transloco';
+import { flatten, provideTransloco, translocoConfig } from '@ngneat/transloco';
 import { LANGUAGE } from './app/constants';
 import { LanguageService, StorageService, ThemeService, TranslocoHttpLoader } from './app/core/services';
 import { provideServiceWorker } from '@angular/service-worker';
@@ -24,7 +24,7 @@ bootstrapApplication(
         withInterceptors([
           progressInterceptor,
           coreInterceptor,
-          errorInterceptor
+          errorInterceptor,
         ])
       ),
       provideRouter(routes),
@@ -48,16 +48,19 @@ bootstrapApplication(
         registrationStrategy: 'registerWhenStable:30000'
       }),
       provideTransloco({
-        config: {
-          availableLangs: [
-            LANGUAGE.ru, 
-            LANGUAGE.uz, 
-            LANGUAGE.en
-          ],
-          reRenderOnLangChange: true,
-          prodMode: !isDevMode(),
-        },
-        loader: TranslocoHttpLoader
+          config: {
+            flatten: {
+              aot: !isDevMode()
+            },
+            availableLangs: [
+              LANGUAGE.ru, 
+              LANGUAGE.uz, 
+              LANGUAGE.en
+            ],
+            reRenderOnLangChange: true,
+            prodMode: !isDevMode(),
+          },
+          loader: TranslocoHttpLoader
       }),
       {
         provide: APP_INITIALIZER,

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, input } from '@angular/core';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { NzButtonModule, NzButtonType } from 'ng-zorro-antd/button';
 
@@ -11,12 +11,13 @@ import { NzButtonModule, NzButtonType } from 'ng-zorro-antd/button';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultButtonComponent {
-  @Input() size: NzSizeLDSType;
-  @Input() danger: boolean;
-  @Input() blocked: boolean;
-  @Input() ghost: boolean;
-  @Input() loading: boolean;
-  @Input() mode: NzButtonType;
-  @Input() block: boolean;
+  size = input<NzSizeLDSType>();
+  danger = input<boolean>();
+  blocked = input<boolean>();
+  ghost = input<boolean>();
+  loading = input<boolean>();
+  mode = input<NzButtonType>();
+  block = input<boolean>();
+ 
   @Output() clicked = new EventEmitter<void>();
 }

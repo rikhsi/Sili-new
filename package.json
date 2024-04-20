@@ -4,9 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build-prod": "ng build --prod && npm run transloco:optimize",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "transloco:optimize": "transloco-optimize dist/sili/assets/i18n"
   },
   "private": true,
   "dependencies": {
