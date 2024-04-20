@@ -45,6 +45,10 @@ export const routes: Routes = [
         {
           path: DASHBOARD_ROUTE.settings,
           loadChildren: () => import('./modules/settings/settings.module').then(m => m.SettingsModule)
+        },
+        {
+          path: "**",
+          redirectTo: DASHBOARD_ROUTE.shop
         }
       ]
     },

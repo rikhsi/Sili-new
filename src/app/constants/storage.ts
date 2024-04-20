@@ -1,5 +1,5 @@
 export enum STORAGE_KEY {
-    token = 'token',
+    token = 'access_token',
     lang = 'lang',
     theme = 'theme'
 }
