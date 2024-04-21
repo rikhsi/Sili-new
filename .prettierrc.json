@@ -7,7 +7,7 @@
     "endOfLine": "auto",
     "bracketSameLine": false,
     "singleQuote": true,
-    "printWidth": 100,
+    "printWidth": 120,
     "trailingComma": "all",
     "proseWrap": "always"
 }

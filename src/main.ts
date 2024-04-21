@@ -14,12 +14,7 @@ import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 import { LANGUAGE } from './app/constants';
 import { coreInterceptor, errorInterceptor, progressInterceptor } from './app/core/interceptors';
-import {
-  LanguageService,
-  StorageService,
-  ThemeService,
-  TranslocoHttpLoader,
-} from './app/core/services';
+import { LanguageService, StorageService, ThemeService, TranslocoHttpLoader } from './app/core/services';
 import { iconFactory, jwtOptionsFactory, langFactory, themeFactory } from './app/core/utils';
 
 bootstrapApplication(AppComponent, {

@@ -20,7 +20,7 @@
             "plugin:prettier/recommended"
         ],
         "rules": {
-            "max-len": ["error", 140],
+            "max-len": ["error", 120],
             "prettier/prettier": "error",
             "simple-import-sort/imports": "error",
             "simple-import-sort/exports": "error",
