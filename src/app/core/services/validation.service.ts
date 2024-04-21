@@ -6,30 +6,26 @@ import { VALIDATION_ERROR } from 'src/app/constants';
 import { ControlType } from 'src/app/typings';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class ValidationService {
   #validationMessages = {
     [VALIDATION_ERROR.required]: () => this.getTranslation(VALIDATION_ERROR.required),
-    [VALIDATION_ERROR.minlength]: (control: AbstractControl) => (
-      this.getTranslation(VALIDATION_ERROR.minlength, control)
-    ),
-    [VALIDATION_ERROR.maxlength]: (control: AbstractControl) => (
-      this.getTranslation(VALIDATION_ERROR.maxlength, control)
-    )
+    [VALIDATION_ERROR.minlength]: (control: AbstractControl) => this.getTranslation(VALIDATION_ERROR.minlength, control),
+    [VALIDATION_ERROR.maxlength]: (control: AbstractControl) => this.getTranslation(VALIDATION_ERROR.maxlength, control),
   };
-  
+
   #validationStatusType = {
     [VALIDATION_ERROR.required]: () => 'error',
-    [VALIDATION_ERROR.minlength]: () =>'error',
-    [VALIDATION_ERROR.maxlength]: () =>'error'
-  }
+    [VALIDATION_ERROR.minlength]: () => 'error',
+    [VALIDATION_ERROR.maxlength]: () => 'error',
+  };
 
-  constructor(private translocoService: TranslocoService){}
+  constructor(private translocoService: TranslocoService) {}
 
   validateStatus(control: AbstractControl): NzValidateStatus {
-    if(control?.valid && control?.dirty) return 'success';
-    
+    if (control?.valid && control?.dirty) return 'success';
+
     if (control?.errors && control?.dirty) {
       const controlKeys = Object.keys(control?.errors ? control?.errors : {});
 
@@ -39,7 +35,7 @@ export class ValidationService {
         }
         return arr;
       }, new Array<string>());
-    
+
       return messages.join('. ') as NzValidateStatus;
     }
 
@@ -49,15 +45,9 @@ export class ValidationService {
   validateField(control: AbstractControl): string {
     if (!control?.invalid || !control?.dirty) return '';
 
-    const controlErrorKeys = Object.keys(
-      control?.errors ? 
-      control?.errors : {}
-    );
+    const controlErrorKeys = Object.keys(control?.errors ? control?.errors : {});
 
-    const errorMessages = Object.values(VALIDATION_ERROR).reduce((
-      arr, 
-      error
-    ) => {
+    const errorMessages = Object.values(VALIDATION_ERROR).reduce((arr, error) => {
       if (controlErrorKeys.includes(VALIDATION_ERROR[error])) {
         arr.push(this.#validationMessages[error](control));
       }
@@ -85,18 +75,13 @@ export class ValidationService {
   }
 
   private getTranslation(key: string, control?: AbstractControl): string {
-    const translation = this.translocoService.translate(
-      `validation.${key}`
-    );
+    const translation = this.translocoService.translate(`validation.${key}`);
 
-    if(control) {
-      return (
-        `${translation}: 
-         ${control.getError(key).requiredLength}`
-      )
+    if (control) {
+      return `${translation}: 
+         ${control.getError(key).requiredLength}`;
     }
 
     return translation;
   }
 }
-

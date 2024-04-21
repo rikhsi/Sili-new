@@ -8,7 +8,7 @@ import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
   imports: [NzButtonModule],
   templateUrl: './default-button.component.html',
   styleUrl: './default-button.component.less',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultButtonComponent {
   size = input<NzSizeLDSType>();

@@ -3,12 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { CarRoutingModule } from './car-routing.module';
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    CarRoutingModule
-  ]
+  imports: [CommonModule, CarRoutingModule],
 })
-export class CarModule { }
+export class CarModule {}

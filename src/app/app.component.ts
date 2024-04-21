@@ -11,24 +11,13 @@ import { AuthLayoutComponent, DashboardLayoutModule } from './layout';
   selector: 'sili-root',
   standalone: true,
   providers: [DestroyService],
-  imports: [
-    RouterOutlet,
-    AuthLayoutComponent,
-    DashboardLayoutModule,
-    NgProgressModule,
-    AsyncPipe
-  ],
+  imports: [RouterOutlet, AuthLayoutComponent, DashboardLayoutModule, NgProgressModule, AsyncPipe],
   template: `
-    <ng-progress 
-      [ariaLabel]="'progress'"
-      [color]="statusColor$ | async"
-      [spinner]="false"
-      [thick]="true">
-    </ng-progress>
+    <ng-progress [ariaLabel]="'progress'" [color]="statusColor$ | async" [spinner]="false" [thick]="true"> </ng-progress>
     <router-outlet></router-outlet>
-  `
+  `,
 })
-export class AppComponent implements OnInit, AfterViewInit{
+export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild(NgProgressComponent) progress: NgProgressComponent;
 
   statusColor$: Observable<string>;
@@ -36,7 +25,7 @@ export class AppComponent implements OnInit, AfterViewInit{
   constructor(
     private progressService: ProgressService,
     private destroy$: DestroyService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
   ) {}
 
   ngOnInit(): void {
@@ -49,17 +38,16 @@ export class AppComponent implements OnInit, AfterViewInit{
 
   private initProgress(): void {
     this.progressService.status$
-    .pipe(
-      map(status => {
-        if(status) {
-          this.progress.start();
-        } else {
-          this.progress.complete();
-        }
-      }),
-      takeUntil(this.destroy$)
-    )
-    .subscribe();
+      .pipe(
+        map((status) => {
+          if (status) {
+            this.progress.start();
+          } else {
+            this.progress.complete();
+          }
+        }),
+        takeUntil(this.destroy$),
+      )
+      .subscribe();
   }
-
 }

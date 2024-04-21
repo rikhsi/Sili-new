@@ -4,8 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'sili-error',
   templateUrl: './error.component.html',
   styleUrl: './error.component.less',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ErrorComponent {
-
-}
+export class ErrorComponent {}

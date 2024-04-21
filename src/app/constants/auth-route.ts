@@ -1,4 +1,4 @@
 export enum AUTH_ROUTE {
-    login = 'login',
-    recover = 'recover'
+  login = 'login',
+  recover = 'recover',
 }

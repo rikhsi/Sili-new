@@ -4,13 +4,12 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { ERROR_MESSAGE, INFO_MESSAGE, SUCCESS_MESSAGE } from 'src/app/constants';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MessageService {
-
   constructor(
-    private msg: NzMessageService, 
-    private translocoService: TranslocoService
+    private msg: NzMessageService,
+    private translocoService: TranslocoService,
   ) {}
 
   onNotifySuccess(msg: SUCCESS_MESSAGE): void {
@@ -27,7 +26,7 @@ export class MessageService {
 
   onNotifyError(msg: ERROR_MESSAGE): void {
     const text = this.translocoService.translate(msg);
-    
+
     this.msg.error(text);
   }
 }

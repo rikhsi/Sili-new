@@ -16,33 +16,33 @@ export class DashboardLayoutService {
       {
         title: 'menu.shop',
         icon: 'shop',
-        route: DASHBOARD_ROUTE.shop
+        route: DASHBOARD_ROUTE.shop,
       },
       {
         title: 'menu.car',
         icon: 'car',
-        route: DASHBOARD_ROUTE.car
+        route: DASHBOARD_ROUTE.car,
       },
       {
         title: 'menu.partner',
         icon: 'team',
-        route: DASHBOARD_ROUTE.partner
+        route: DASHBOARD_ROUTE.partner,
       },
       {
         title: 'menu.request',
         icon: 'message',
-        route: DASHBOARD_ROUTE.request
+        route: DASHBOARD_ROUTE.request,
       },
       {
         title: 'menu.feedback',
         icon: 'phone',
-        route: DASHBOARD_ROUTE.feedback
+        route: DASHBOARD_ROUTE.feedback,
       },
       {
         title: 'menu.settings',
         icon: 'setting',
-        route: DASHBOARD_ROUTE.settings
-      }
-    ]
+        route: DASHBOARD_ROUTE.settings,
+      },
+    ];
   }
 }

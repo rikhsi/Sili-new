@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { LANGUAGE, STORAGE_KEY, THEME } from 'src/app/constants';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
-
   get lang(): LANGUAGE {
     return localStorage.getItem(STORAGE_KEY.lang) as LANGUAGE;
   }

@@ -1,4 +1,4 @@
 export const environment = {
-    production: true,
-    apiUrl: 'https://bipbip.uz/api/'
+  production: true,
+  apiUrl: 'https://bipbip.uz/api/',
 };

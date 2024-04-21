@@ -6,20 +6,20 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: AUTH_ROUTE.login
+    redirectTo: AUTH_ROUTE.login,
   },
   {
     path: AUTH_ROUTE.login,
-    loadChildren: () => import('./page/login/login.module').then(m => m.LoginModule)
+    loadChildren: () => import('./page/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: AUTH_ROUTE.recover,
-    loadChildren: () => import('./page/recover/recover.module').then(m => m.RecoverModule)
-  }
+    loadChildren: () => import('./page/recover/recover.module').then((m) => m.RecoverModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {}

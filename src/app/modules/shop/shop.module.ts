@@ -3,12 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { ShopRoutingModule } from './shop-routing.module';
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    ShopRoutingModule
-  ]
+  imports: [CommonModule, ShopRoutingModule],
 })
-export class ShopModule { }
+export class ShopModule {}

@@ -25,7 +25,7 @@ import { LoginRoutingModule } from './login-routing.module';
     TranslocoModule,
     NzFlexModule,
     SubmitDirective,
-    SvgIconComponent
-  ]
+    SvgIconComponent,
+  ],
 })
-export class LoginModule { }
+export class LoginModule {}

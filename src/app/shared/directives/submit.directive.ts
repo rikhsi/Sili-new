@@ -2,7 +2,7 @@ import { Directive, HostListener, input, output } from '@angular/core';
 
 @Directive({
   selector: '[siliSubmit]',
-  standalone: true
+  standalone: true,
 })
 export class SubmitDirective {
   stopTrigger = input<boolean>();

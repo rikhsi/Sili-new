@@ -9,35 +9,36 @@ import { ICONS_CURSOR_TYPE, ICONS_TYPE } from 'src/app/typings';
   standalone: true,
   imports: [NzIconModule, NgStyle, NzFlexModule],
   template: `
-    <div 
-          nz-flex 
-          [nzVertical]="false"
-          [nzGap]="gap()"
-          [nzAlign]="'center'"
-          [nzJustify]="'center'"
-          [ngStyle]="{ cursor: cursor() }"
-          (click)="clicked.emit()"
+    <div
+      nz-flex
+      [nzVertical]="false"
+      [nzGap]="gap()"
+      [nzAlign]="'center'"
+      [nzJustify]="'center'"
+      [ngStyle]="{ cursor: cursor() }"
+      (click)="clicked.emit()"
+    >
+      <span
+        nz-icon
+        [attr.aria-label]="ariaLabel()"
+        [nzType]="name()"
+        [ngStyle]="{
+          fontSize: size() + 'px',
+          color: color()
+        }"
       >
-      <span 
-          nz-icon 
-          [attr.aria-label]="ariaLabel()"
-          [nzType]="name()" 
-          [ngStyle]="{ 
-              fontSize: size() + 'px', 
-              color: color() 
-          }">
       </span>
-      
+
       <ng-content></ng-content>
     </div>
   `,
-  styles:`
+  styles: `
     :host {
       width: fit-content;
       user-select: none;
     }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SvgIconComponent {
   size = input<number>();

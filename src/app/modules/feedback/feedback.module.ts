@@ -3,12 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { FeedbackRoutingModule } from './feedback-routing.module';
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    FeedbackRoutingModule
-  ]
+  imports: [CommonModule, FeedbackRoutingModule],
 })
-export class FeedbackModule { }
+export class FeedbackModule {}

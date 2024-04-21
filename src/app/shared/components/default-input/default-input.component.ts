@@ -16,9 +16,9 @@ import { FunctionType } from 'src/app/typings';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DefaultInputComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class DefaultInputComponent implements ControlValueAccessor {
   value = model<string>();
@@ -26,7 +26,7 @@ export class DefaultInputComponent implements ControlValueAccessor {
   label = input<string>();
   labelWrap = input<boolean>(true);
   size = input<NzSizeLDSType>('large');
-  status = input<NzValidateStatus>("");
+  status = input<NzValidateStatus>('');
   isFeedback = input<boolean>();
   message = input<string>();
   type = input<string>('text');

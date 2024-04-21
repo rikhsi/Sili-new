@@ -3,12 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { RequestRoutingModule } from './request-routing.module';
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    RequestRoutingModule
-  ]
+  imports: [CommonModule, RequestRoutingModule],
 })
-export class RequestModule { }
+export class RequestModule {}

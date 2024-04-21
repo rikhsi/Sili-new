@@ -5,7 +5,7 @@ import { DashboardMenuItem } from 'src/app/typings';
   selector: 'sili-dashboard-main',
   templateUrl: './dashboard-main.component.html',
   styleUrl: './dashboard-main.component.less',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardMainComponent {
   menuItems = input<DashboardMenuItem[]>();

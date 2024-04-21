@@ -17,76 +17,57 @@ import { coreInterceptor, errorInterceptor, progressInterceptor } from './app/co
 import { LanguageService, StorageService, ThemeService, TranslocoHttpLoader } from './app/core/services';
 import { iconFactory, jwtOptionsFactory, langFactory, themeFactory } from './app/core/utils';
 
-bootstrapApplication(
-  AppComponent, 
-  {
-    providers: [
-      provideHttpClient(
-        withInterceptors([
-          progressInterceptor,
-          coreInterceptor,
-          errorInterceptor,
-        ])
-      ),
-      provideRouter(routes),
-      importProvidersFrom(
-        NzMessageService,
-        AngularYandexMapsModule.forRoot({
-          apikey: 'd306c0df-8591-4784-ae3e-23323936fbd4',
-          lang: 'ru_RU'
-        }),
-        JwtModule.forRoot({
-          jwtOptionsProvider: {
-            provide: JWT_OPTIONS,
-            useFactory: jwtOptionsFactory,
-            deps: [StorageService],
-          },
-        }),
-        BrowserAnimationsModule
-      ),
-      provideServiceWorker('ngsw-worker.js',{
-        enabled: !isDevMode(),
-        registrationStrategy: 'registerWhenStable:30000'
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideHttpClient(withInterceptors([progressInterceptor, coreInterceptor, errorInterceptor])),
+    provideRouter(routes),
+    importProvidersFrom(
+      NzMessageService,
+      AngularYandexMapsModule.forRoot({
+        apikey: 'd306c0df-8591-4784-ae3e-23323936fbd4',
+        lang: 'ru_RU',
       }),
-      provideTransloco({
-          config: {
-            flatten: {
-              aot: !isDevMode()
-            },
-            availableLangs: [
-              LANGUAGE.ru, 
-              LANGUAGE.uz, 
-              LANGUAGE.en
-            ],
-            reRenderOnLangChange: true,
-            prodMode: !isDevMode(),
-          },
-          loader: TranslocoHttpLoader
+      JwtModule.forRoot({
+        jwtOptionsProvider: {
+          provide: JWT_OPTIONS,
+          useFactory: jwtOptionsFactory,
+          deps: [StorageService],
+        },
       }),
-      {
-        provide: APP_INITIALIZER,
-        useFactory: themeFactory,
-        multi: true,
-        deps: [
-          ThemeService, 
-          StorageService
-        ],
+      BrowserAnimationsModule,
+    ),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
+    provideTransloco({
+      config: {
+        flatten: {
+          aot: !isDevMode(),
+        },
+        availableLangs: [LANGUAGE.ru, LANGUAGE.uz, LANGUAGE.en],
+        reRenderOnLangChange: true,
+        prodMode: !isDevMode(),
       },
-      {
-        provide: APP_INITIALIZER,
-        useFactory: langFactory,
-        multi: true,
-        deps: [
-          LanguageService, 
-          StorageService
-        ],
-      },
-      {
-        provide: APP_INITIALIZER,
-        useFactory: iconFactory,
-        multi: true,
-        deps: [NzIconService],
-      }
-    ]
-  }
-);
+      loader: TranslocoHttpLoader,
+    }),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: themeFactory,
+      multi: true,
+      deps: [ThemeService, StorageService],
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: langFactory,
+      multi: true,
+      deps: [LanguageService, StorageService],
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: iconFactory,
+      multi: true,
+      deps: [NzIconService],
+    },
+  ],
+});

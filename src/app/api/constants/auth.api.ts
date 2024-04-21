@@ -1,3 +1,3 @@
 export enum AUTH_QUERY {
-    login = 'auth/login'
+  login = 'auth/login',
 }

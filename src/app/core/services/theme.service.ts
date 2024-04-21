@@ -10,7 +10,7 @@ import { MetaService } from './meta.service';
 import { StorageService } from './storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
   #currentTheme = new BehaviorSubject<ThemeType>(null);
@@ -21,32 +21,23 @@ export class ThemeService {
 
   get themeList$(): Observable<ThemeItem[]> {
     return this.currentTheme$.pipe(
-      map(themeState => themeState.current),
-      withLatestFrom(
-        of(Object.values(THEME))
-      ),
-      switchMap(([
-        currentTheme, 
-        themeList
-      ]) => (
+      map((themeState) => themeState.current),
+      withLatestFrom(of(Object.values(THEME))),
+      switchMap(([currentTheme, themeList]) =>
         from(themeList).pipe(
-          map(theme => ({
+          map((theme) => ({
             theme,
             name: `theme.${theme}`,
-            isSelected: currentTheme === theme
+            isSelected: currentTheme === theme,
           })),
-          toArray()
-        )
-      ))
+          toArray(),
+        ),
+      ),
     );
   }
 
   get primaryColor$(): Observable<string> {
-    return this.currentTheme$.pipe(
-      map(state => (
-        PRIMARY_COLOR[state.current]
-      ))
-    );  
+    return this.currentTheme$.pipe(map((state) => PRIMARY_COLOR[state.current]));
   }
 
   get theme(): ThemeType {
@@ -54,7 +45,7 @@ export class ThemeService {
   }
 
   get renderer(): Renderer2 {
-    return this.rendererF.createRenderer(null,null);
+    return this.rendererF.createRenderer(null, null);
   }
 
   get documentEl(): HTMLElement {
@@ -70,25 +61,19 @@ export class ThemeService {
     private rendererF: RendererFactory2,
     private storageService: StorageService,
     private metaService: MetaService,
-    private messageService: MessageService
-  ){}
+    private messageService: MessageService,
+  ) {}
 
-  loadTheme$(
-    current: THEME,
-    isMessage: boolean = true
-  ): Observable<ThemeType> {
+  loadTheme$(current: THEME, isMessage: boolean = true): Observable<ThemeType> {
     const prev = this.theme?.current;
-  
-    return this.loadCss$({current, prev})
-      .pipe(
-        first(),
-        tap(theme => {
-          this.themeChangeSuccess(theme,isMessage);
-        }),
-        catchError(() => (
-          this.themeChangeError$()
-        ))
-      );
+
+    return this.loadCss$({ current, prev }).pipe(
+      first(),
+      tap((theme) => {
+        this.themeChangeSuccess(theme, isMessage);
+      }),
+      catchError(() => this.themeChangeError$()),
+    );
   }
 
   private getElementByID(theme: THEME): HTMLElement {
@@ -96,7 +81,7 @@ export class ThemeService {
   }
 
   private loadCss$(themeState: ThemeType): Observable<ThemeType> {
-    return new Observable<ThemeType>(observer => {
+    return new Observable<ThemeType>((observer) => {
       const link = this.renderer.createElement('link');
 
       link.rel = 'stylesheet';
@@ -106,11 +91,11 @@ export class ThemeService {
       link.onload = () => {
         observer.next(themeState);
         observer.complete();
-      }
+      };
 
       link.onerror = (error: ErrorEvent) => {
         observer.error(error);
-      }
+      };
 
       this.documentHead.appendChild(link);
     });
@@ -120,15 +105,9 @@ export class ThemeService {
     const prev = this.getElementByID(theme);
 
     if (prev) {
-      this.renderer.removeClass(
-        this.documentEl, 
-        theme
-      );
-      
-      this.renderer.removeChild(
-        this.documentHead, 
-        prev
-      );
+      this.renderer.removeClass(this.documentEl, theme);
+
+      this.renderer.removeChild(this.documentHead, prev);
     }
   }
 
@@ -137,30 +116,21 @@ export class ThemeService {
       this.removePrevTheme(theme.prev);
     }
 
-    this.renderer.addClass(
-      this.documentEl, 
-      theme.current
-    );
+    this.renderer.addClass(this.documentEl, theme.current);
 
-    this.metaService.updateWorkerColor(
-      theme.current
-    );
+    this.metaService.updateWorkerColor(theme.current);
 
     this.#currentTheme.next(theme);
 
     this.storageService.theme = theme.current;
 
-    if(isMessage) {
-      this.messageService.onNotifySuccess(
-        SUCCESS_MESSAGE.theme
-      );
+    if (isMessage) {
+      this.messageService.onNotifySuccess(SUCCESS_MESSAGE.theme);
     }
   }
 
   private themeChangeError$(): Observable<never> {
-    this.messageService.onNotifyError(
-      ERROR_MESSAGE.theme
-    );
+    this.messageService.onNotifyError(ERROR_MESSAGE.theme);
 
     return EMPTY;
   }

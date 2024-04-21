@@ -5,7 +5,7 @@ import { BRAND } from 'src/app/constants';
   selector: 'sili-dashboard-header',
   templateUrl: './dashboard-header.component.html',
   styleUrl: './dashboard-header.component.less',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardHeaderComponent {
   readonly brands = signal<typeof BRAND>(BRAND);

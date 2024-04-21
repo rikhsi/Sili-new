@@ -4,8 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'sili-recover',
   templateUrl: './recover.component.html',
   styleUrl: './recover.component.less',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecoverComponent {
-
-}
+export class RecoverComponent {}

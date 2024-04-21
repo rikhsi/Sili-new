@@ -3,9 +3,8 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class DestroyService extends Subject<void> implements OnDestroy {
-
- ngOnDestroy(): void {
-   this.next();
-   this.complete();
- }
+  ngOnDestroy(): void {
+    this.next();
+    this.complete();
+  }
 }

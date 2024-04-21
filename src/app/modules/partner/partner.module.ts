@@ -3,12 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { PartnerRoutingModule } from './partner-routing.module';
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    PartnerRoutingModule
-  ]
+  imports: [CommonModule, PartnerRoutingModule],
 })
-export class PartnerModule { }
+export class PartnerModule {}

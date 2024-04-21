@@ -13,20 +13,7 @@ import { DashboardMainComponent } from './components/dashboard-main/dashboard-ma
 import { DashboardLayoutComponent } from './dashboard-layout.component';
 
 @NgModule({
-  declarations: [
-    DashboardLayoutComponent, 
-    DashboardHeaderComponent, 
-    DashboardMainComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    NzLayoutModule, 
-    NzMenuModule,
-    SvgIconComponent, 
-    NzIconModule,
-    TranslocoModule,
-    NzFlexModule
-  ]
+  declarations: [DashboardLayoutComponent, DashboardHeaderComponent, DashboardMainComponent],
+  imports: [CommonModule, RouterModule, NzLayoutModule, NzMenuModule, SvgIconComponent, NzIconModule, TranslocoModule, NzFlexModule],
 })
-export class DashboardLayoutModule { }
+export class DashboardLayoutModule {}

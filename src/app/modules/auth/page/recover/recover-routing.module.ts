@@ -6,12 +6,12 @@ import { RecoverComponent } from './recover.component';
 const routes: Routes = [
   {
     path: '',
-    component: RecoverComponent
-  }
+    component: RecoverComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class RecoverRoutingModule { }
+export class RecoverRoutingModule {}

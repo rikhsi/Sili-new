@@ -9,7 +9,7 @@ import { NzToolTipModule, NzTooltipTrigger } from 'ng-zorro-antd/tooltip';
   imports: [NzButtonModule, NzToolTipModule],
   templateUrl: './circle-button.component.html',
   styleUrl: './circle-button.component.less',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CircleButtonComponent {
   size = input<NzSizeLDSType>();
@@ -25,8 +25,6 @@ export class CircleButtonComponent {
   tooltipMouseEnterDelay = input<number>(1);
   isTooltip = input<boolean>(false);
   clicked = output<void>();
-  
-  tooltipTitle = computed(() => (
-    this.isTooltip() ? this.tooltipText() : null
-  ));
+
+  tooltipTitle = computed(() => (this.isTooltip() ? this.tooltipText() : null));
 }
