@@ -31,7 +31,8 @@ export const routes: Routes = [
       },
       {
         path: DASHBOARD_ROUTE.feedback,
-        loadChildren: () => import('./modules/feedback/feedback.module').then((m) => m.FeedbackModule),
+        loadChildren: () =>
+          import('./modules/feedback/feedback.module').then((m) => m.FeedbackModule),
       },
       {
         path: DASHBOARD_ROUTE.request,
@@ -43,7 +44,8 @@ export const routes: Routes = [
       },
       {
         path: DASHBOARD_ROUTE.settings,
-        loadChildren: () => import('./modules/settings/settings.module').then((m) => m.SettingsModule),
+        loadChildren: () =>
+          import('./modules/settings/settings.module').then((m) => m.SettingsModule),
       },
       {
         path: '**',

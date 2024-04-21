@@ -5,7 +5,11 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { NzDividerComponent } from 'ng-zorro-antd/divider';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import { DefaultButtonComponent, DefaultInputComponent, SvgIconComponent } from 'src/app/shared/components';
+import {
+  DefaultButtonComponent,
+  DefaultInputComponent,
+  SvgIconComponent,
+} from 'src/app/shared/components';
 import { SubmitDirective } from 'src/app/shared/directives';
 
 import { LoginComponent } from './login.component';

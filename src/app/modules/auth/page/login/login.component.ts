@@ -1,11 +1,22 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzValidateStatus } from 'ng-zorro-antd/core/types';
 import { catchError, EMPTY, map, Observable, takeUntil, tap } from 'rxjs';
 import { AUTH_QUERY } from 'src/app/api/constants';
 import { BaseApiService } from 'src/app/api/services';
 import { AuthLoginData, IAuthLoginResponse } from 'src/app/api/typings';
-import { DestroyService, NavigationService, StorageService, ValidationService } from 'src/app/core/services';
+import {
+  DestroyService,
+  NavigationService,
+  StorageService,
+  ValidationService,
+} from 'src/app/core/services';
 import { AuthLoginForm, NZ_ICONS_TYPE } from 'src/app/typings';
 
 @Component({

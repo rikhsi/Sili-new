@@ -13,7 +13,12 @@ import { AuthLayoutComponent, DashboardLayoutModule } from './layout';
   providers: [DestroyService],
   imports: [RouterOutlet, AuthLayoutComponent, DashboardLayoutModule, NgProgressModule, AsyncPipe],
   template: `
-    <ng-progress [ariaLabel]="'progress'" [color]="statusColor$ | async" [spinner]="false" [thick]="true"></ng-progress>
+    <ng-progress
+      [ariaLabel]="'progress'"
+      [color]="statusColor$ | async"
+      [spinner]="false"
+      [thick]="true"
+    ></ng-progress>
     <router-outlet></router-outlet>
   `,
 })

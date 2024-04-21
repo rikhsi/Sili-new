@@ -1,7 +1,9 @@
+import { JwtOptions } from 'src/app/typings';
+
 import { StorageService } from '../services';
 
-export function jwtOptionsFactory(storageService: StorageService) {
+export function jwtOptionsFactory(storageService: StorageService): JwtOptions {
   return {
-    tokenGetter: () => storageService.token,
+    tokenGetter: (): string => storageService.token,
   };
 }

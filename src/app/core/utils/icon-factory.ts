@@ -12,5 +12,5 @@ export function iconFactory(iconService: NzIconService): () => Observable<void> 
     });
   });
 
-  return () => EMPTY;
+  return (): Observable<never> => EMPTY;
 }

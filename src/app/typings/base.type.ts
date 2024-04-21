@@ -7,3 +7,7 @@ export type FormValue<T> = {
 export type ControlType = AbstractControl | FormGroup | FormArray;
 
 export type FunctionType = (value?: string | number) => void;
+
+export type JwtOptions = {
+  tokenGetter: () => string;
+};
