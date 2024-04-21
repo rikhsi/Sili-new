@@ -11,8 +11,10 @@ import { ControlType } from 'src/app/typings';
 export class ValidationService {
   #validationMessages = {
     [VALIDATION_ERROR.required]: () => this.getTranslation(VALIDATION_ERROR.required),
-    [VALIDATION_ERROR.minlength]: (control: AbstractControl) => this.getTranslation(VALIDATION_ERROR.minlength, control),
-    [VALIDATION_ERROR.maxlength]: (control: AbstractControl) => this.getTranslation(VALIDATION_ERROR.maxlength, control),
+    [VALIDATION_ERROR.minlength]: (control: AbstractControl) =>
+      this.getTranslation(VALIDATION_ERROR.minlength, control),
+    [VALIDATION_ERROR.maxlength]: (control: AbstractControl) =>
+      this.getTranslation(VALIDATION_ERROR.maxlength, control),
   };
 
   #validationStatusType = {
