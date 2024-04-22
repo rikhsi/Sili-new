@@ -1,13 +1,22 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*", "*.html"],
-  "plugins": ["unused-imports", "simple-import-sort", "prettier"],
+  "ignorePatterns": [
+    "projects/**/*",
+    "*.html"
+  ],
+  "plugins": [
+    "unused-imports",
+    "simple-import-sort",
+    "prettier"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "extends": [
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
@@ -15,7 +24,10 @@
         "plugin:prettier/recommended"
       ],
       "rules": {
-        "max-len": ["error", 100],
+        "max-len": [
+          "error",
+          100
+        ],
         "prettier/prettier": "error",
         "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error",
@@ -64,5 +76,8 @@
         ]
       }
     }
+  ],
+  "extends": [
+    "plugin:storybook/recommended"
   ]
 }
