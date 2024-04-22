@@ -1,59 +1,59 @@
 {
-    "validation": {
-        "required": "Majburiy maydon",
-        "minlength": "Minimun belgilar soni",
-        "maxlength": "Maksimun belgilar soni"
+  "validation": {
+    "required": "Majburiy maydon",
+    "minlength": "Minimun belgilar soni",
+    "maxlength": "Maksimun belgilar soni"
+  },
+  "messages": {
+    "success": {
+      "update": "Muvaffaqiyatli yangilandi",
+      "delete": "Muvaffaqiyatli o'chirildi",
+      "create": "Muvaffaqiyatli yaratildi",
+      "lang": "Til muvaffaqiyatli yuklandi",
+      "theme": "Ranglar muvaffaqiyatli yuklandi"
     },
-    "messages": {
-        "success": {
-            "update": "Muvaffaqiyatli yangilandi",
-            "delete": "Muvaffaqiyatli o'chirildi",
-            "create": "Muvaffaqiyatli yaratildi",
-            "lang": "Til muvaffaqiyatli yuklandi",
-            "theme": "Ranglar muvaffaqiyatli yuklandi"
-        },
-        "info": {
-            "change": "O'zgarishlar aniqlanmadi"
-        },
-        "error": {
-            "unauthorized": "Iltimos, autentifikatsiyadan o'ting",
-            "server": "Kechirasiz, hozirgi vaqtda serverga kirish mumkin emas",
-            "forbidden": "Kechirasiz, sizga ushbu resursga kirish ruhsati mavjud emas",
-            "lang": "Kechirasiz, hozirgi vaqtda til mavjud emas",
-            "theme": "Kechirasiz, hozirgi vaqtda ranglar mavjud emas"
-        }
+    "info": {
+      "change": "O'zgarishlar aniqlanmadi"
     },
-    "auth": {
-        "login_title": "Kirish",
-        "layout_description": "Barcha Sili xizmatlari uchun yagona kirish tizimi",
-        "actions": {
-            "theme": "Ranglar ro`yxati",
-            "lang": "Tillar ro`yxati"
-        }
-    },
-    "theme": {
-        "default": "Asosiy",
-        "dark": "Tun"
-    },
-    "inputs": {
-        "login": {
-            "label": "Login",
-            "placeholder": ""
-        },
-        "password": {
-            "label": "Parol",
-            "placeholder": ""
-        }
-    },
-    "buttons": {
-        "continue": "Davom etish"
-    },
-    "menu": {
-        "shop": "Do'konlar",
-        "car": "Avtomobillar",
-        "partner": "Hamkorlar",
-        "request": "So'rovnoma",
-        "feedback": "Qayta aloqa",
-        "settings": "Sozlamalar"
+    "error": {
+      "unauthorized": "Iltimos, autentifikatsiyadan o'ting",
+      "server": "Kechirasiz, hozirgi vaqtda serverga kirish mumkin emas",
+      "forbidden": "Kechirasiz, sizga ushbu resursga kirish ruhsati mavjud emas",
+      "lang": "Kechirasiz, hozirgi vaqtda til mavjud emas",
+      "theme": "Kechirasiz, hozirgi vaqtda ranglar mavjud emas"
     }
+  },
+  "auth": {
+    "login_title": "Kirish",
+    "layout_description": "Barcha Sili xizmatlari uchun yagona kirish tizimi",
+    "actions": {
+      "theme": "Ranglar ro`yxati",
+      "lang": "Tillar ro`yxati"
+    }
+  },
+  "theme": {
+    "default": "Asosiy",
+    "dark": "Tun"
+  },
+  "inputs": {
+    "login": {
+      "label": "Login",
+      "placeholder": ""
+    },
+    "password": {
+      "label": "Parol",
+      "placeholder": ""
+    }
+  },
+  "buttons": {
+    "continue": "Davom etish"
+  },
+  "menu": {
+    "shop": "Do'konlar",
+    "car": "Avtomobillar",
+    "partner": "Hamkorlar",
+    "request": "So'rovnoma",
+    "feedback": "Qayta aloqa",
+    "settings": "Sozlamalar"
+  }
 }

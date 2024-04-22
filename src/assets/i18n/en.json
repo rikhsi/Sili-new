@@ -1,59 +1,59 @@
 {
-    "validation": {
-        "required": "Required field",
-        "minlength": "Minimum number of characters",
-        "maxlength": "Maximum number of characters"
+  "validation": {
+    "required": "Required field",
+    "minlength": "Minimum number of characters",
+    "maxlength": "Maximum number of characters"
+  },
+  "messages": {
+    "success": {
+      "update": "Successfully updated",
+      "delete": "Successfully deleted",
+      "create": "Successfully created",
+      "lang": "Language successfully loaded",
+      "theme": "Theme successfully loaded"
     },
-    "messages": {
-        "success": {
-            "update": "Successfully updated",
-            "delete": "Successfully deleted",
-            "create": "Successfully created",
-            "lang": "Language successfully loaded",
-            "theme": "Theme successfully loaded"
-        },
-        "info": {
-            "change": "No changes detected"
-        },
-        "error": {
-            "unauthorized": "Please, authorize",
-            "server": "Sorry, server is currently unavailable",
-            "forbidden": "Sorry, you do not have permission to access this resource",
-            "lang": "Sorry, lang is currently unavailable",
-            "theme": "Sorry, theme is currently unavailable"
-        }
+    "info": {
+      "change": "No changes detected"
     },
-    "auth": {
-        "login_title": "Authorization",
-        "layout_description": "Single login system for all Sili services",
-        "actions": {
-            "theme": "Theme list",
-            "lang": "Language list"
-        }
-    },
-    "theme": {
-        "default": "Default",
-        "dark": "Dark"
-    },
-    "inputs": {
-        "login": {
-            "label": "Login",
-            "placeholder": ""
-        },
-        "password": {
-            "label": "Password",
-            "placeholder": ""
-        }
-    },
-    "buttons": {
-        "continue": "Continue"
-    },
-    "menu": {
-        "shop": "Shops",
-        "car": "Cars",
-        "partner": "Partners",
-        "request": "Requests",
-        "feedback": "Feedback",
-        "settings": "Settings"
+    "error": {
+      "unauthorized": "Please, authorize",
+      "server": "Sorry, server is currently unavailable",
+      "forbidden": "Sorry, you do not have permission to access this resource",
+      "lang": "Sorry, lang is currently unavailable",
+      "theme": "Sorry, theme is currently unavailable"
     }
+  },
+  "auth": {
+    "login_title": "Authorization",
+    "layout_description": "Single login system for all Sili services",
+    "actions": {
+      "theme": "Theme list",
+      "lang": "Language list"
+    }
+  },
+  "theme": {
+    "default": "Default",
+    "dark": "Dark"
+  },
+  "inputs": {
+    "login": {
+      "label": "Login",
+      "placeholder": ""
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": ""
+    }
+  },
+  "buttons": {
+    "continue": "Continue"
+  },
+  "menu": {
+    "shop": "Shops",
+    "car": "Cars",
+    "partner": "Partners",
+    "request": "Requests",
+    "feedback": "Feedback",
+    "settings": "Settings"
+  }
 }
