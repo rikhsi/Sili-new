@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { NzButtonModule, NzButtonType } from 'ng-zorro-antd/button';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
-import { DefaultButtonComponent } from '../../../src/app/shared/components';
+import { DefaultButtonComponent } from 'src/app/shared/components';
 
 type DefaultButton = {
   size: NzSizeLDSType;
