@@ -172,7 +172,6 @@
             "compodoc": true,
             "compodocArgs": [
               "-e",
-              "json",
               "-d",
               "."
             ],
@@ -187,7 +186,6 @@
             "compodoc": true,
             "compodocArgs": [
               "-e",
-              "json",
               "-d",
               "."
             ],
