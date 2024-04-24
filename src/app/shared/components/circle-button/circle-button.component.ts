@@ -17,7 +17,7 @@ export class CircleButtonComponent {
   blocked = input<boolean>();
   ghost = input<boolean>();
   loading = input<boolean>();
-  type = input<NzButtonType>();
+  mode = input<NzButtonType>();
   ariaLabel = input<string>();
   tooltipText = input<string>();
   tooltipTrigger = input<NzTooltipTrigger>('hover');

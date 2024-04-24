@@ -5,7 +5,7 @@
     [nzTooltipTrigger]="tooltipTrigger()"
     [nzTooltipArrowPointAtCenter]="tooltipArrow()"
     [nzTooltipMouseEnterDelay]="tooltipMouseEnterDelay()"
-    [nzType]="type()"
+    [nzType]="mode()"
     [nzShape]="'circle'"
     [nzSize]="size()"
     [nzDanger]="danger()"
@@ -15,5 +15,7 @@
     [attr.aria-label]="ariaLabel()"
     (click)="clicked.emit()"
 >
-    <ng-content></ng-content>
+    @if(!loading()) {
+        <ng-content></ng-content>
+    }
 </button>

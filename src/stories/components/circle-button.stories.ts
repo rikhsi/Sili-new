@@ -1,9 +1,10 @@
 import { action } from '@storybook/addon-actions';
 import { argsToTemplate, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { DefaultButtonComponent } from 'src/app/shared/components';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { CircleButtonComponent } from 'src/app/shared/components';
 
-import { DefaultButton } from '../typings';
+import { CircleButton } from '../typings';
 
 export default {
   parameters: {
@@ -15,10 +16,10 @@ export default {
       exclude: ['clicked'],
     },
   },
-  component: DefaultButtonComponent,
+  component: CircleButtonComponent,
   decorators: [
     moduleMetadata({
-      imports: [NzButtonModule],
+      imports: [NzButtonModule, NzToolTipModule],
     }),
   ],
   argTypes: {
@@ -72,14 +73,6 @@ export default {
         type: { summary: 'boolean' },
       },
     },
-    block: {
-      description: 'Toggle block state',
-      control: { type: 'boolean' },
-      table: {
-        defaultValue: { summary: 'false' },
-        type: { summary: 'boolean' },
-      },
-    },
     clicked: { action: 'clicked' },
   },
   args: {
@@ -89,21 +82,20 @@ export default {
     blocked: false,
     ghost: false,
     loading: false,
-    block: false,
   },
-  render: (args: DefaultButton) => ({
+  render: (args: CircleButton) => ({
     props: {
       ...args,
       onCLick: action('clicked'),
     },
     template: `
-      <sili-default-button 
+      <sili-circle-button 
         ${argsToTemplate(args)} 
         (clicked)="onCLick()"
       >
-        Your Text
-      </sili-default-button>`,
+        RU
+      </sili-circle-button>`,
   }),
-} as Meta<DefaultButton>;
+} as Meta<CircleButton>;
 
-export const UI: StoryObj<DefaultButton> = {};
+export const UI: StoryObj<CircleButton> = {};
