@@ -1,5 +1,13 @@
 @import 'mixins';
 
+.theme-mixin({
+    :host {
+        .brand {
+            color: fade(@sili-white-1, 85%);
+        }
+    }
+});
+
 .header {
     position: relative;
     width: 100%;
@@ -13,7 +21,6 @@
         width: fit-content;
 
         .brand {
-            color: fade(@sili-white-1, 85%);
             .text-mixin(600,35px,100%);
         }
     }
