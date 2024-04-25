@@ -1,0 +1,8 @@
+<section class="feedback">
+    <sili-feedback-statistics></sili-feedback-statistics>
+    
+    <sili-feedback-table
+        [tableData]="tableData$ | async"
+        [isLoading]="filterForm.disabled">
+    </sili-feedback-table>
+</section>

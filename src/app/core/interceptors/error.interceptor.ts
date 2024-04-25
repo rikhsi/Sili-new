@@ -24,14 +24,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         messageService.onNotifyError(ERROR_MESSAGE.forbidden);
       }
 
-      if (err.status === 500) {
-        if (storageService.token) {
-          storageService.removeToken();
-        }
-
-        navigationService.onServerErrorPage();
-      }
-
       return throwError(() => err);
     }),
   );

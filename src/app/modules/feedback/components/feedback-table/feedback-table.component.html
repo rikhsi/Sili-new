@@ -1,0 +1,26 @@
+<ng-container *transloco="let t">
+    <nz-table 
+      #basicTable
+      [nzData]="tableData()"
+      [nzLoading]="isLoading()"
+      [nzShowPagination]="true"
+    >
+      <thead>
+        <tr>
+          @for (col of tableCols(); track col) {
+            <th>{{t(col)}}</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of basicTable.data; track item.id) {
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.telephone_number}}</td>
+            <td>{{item.created_at | date: 'd-MMMM, yyyy'}}</td>
+            <td>{{item.status}}</td>
+          </tr>
+        }
+      </tbody>
+  </nz-table>
+</ng-container>
