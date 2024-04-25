@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { Observable } from 'rxjs';
 import { FeedbackItem } from 'src/app/api/typings';
-import { FeedbackFilterForm } from 'src/app/typings';
+import { FeedbackFilterForm, TableHeaderCol } from 'src/app/typings';
 
 import { FeedbackService } from '../../feedback.service';
 
@@ -11,10 +13,10 @@ import { FeedbackService } from '../../feedback.service';
   styleUrl: './feedback-table.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeedbackTableComponent {
+export class FeedbackTableComponent implements OnInit {
   isLoading = input<boolean>();
   tableData = input<FeedbackItem[]>();
-  tableCols = signal<string[]>(this.initCols());
+  tableCols$: Observable<TableHeaderCol<FeedbackFilterForm>[]>;
 
   get feedbackForm(): FormGroup<FeedbackFilterForm> {
     return this.feedbackService.filterForm;
@@ -22,7 +24,14 @@ export class FeedbackTableComponent {
 
   constructor(private feedbackService: FeedbackService) {}
 
-  private initCols(): string[] {
-    return ['name', 'phone_number', 'time', 'status'];
+  ngOnInit(): void {
+    this.tableCols$ = this.feedbackService.tableCols$;
+  }
+
+  onPageSizeChange(query: NzTableQueryParams): void {
+    this.feedbackForm.patchValue({
+      skip: (query.pageIndex - 1) * query.pageSize,
+      limit: query.pageSize,
+    });
   }
 }

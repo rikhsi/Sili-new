@@ -11,6 +11,7 @@ export type NZ_ICONS_TYPE =
   | 'star'
   | 'eye'
   | 'eye-invisible'
-  | 'setting';
+  | 'setting'
+  | 'search';
 
 export type ICONS_TYPE = CUSTOM_ICONS_TYPE | NZ_ICONS_TYPE;

@@ -1,14 +1,28 @@
 <ng-container *transloco="let t">
     <nz-table 
       #basicTable
+      nzShowSizeChanger
       [nzData]="tableData()"
       [nzLoading]="isLoading()"
-      [nzShowPagination]="true"
+      [nzTotal]="100"
+      [nzFrontPagination]="false"
+      [nzPageSizeOptions]="[10,20,40]"
+      (nzQueryParams)="onPageSizeChange($event)"
     >
       <thead>
         <tr>
-          @for (col of tableCols(); track col) {
-            <th>{{t(col)}}</th>
+          @for (col of tableCols$ | async; track col) {
+            <th nzCustomFilter>
+              {{t(col.name)}}
+              
+              @if (col.icon) {
+                <nz-filter-trigger>
+                  <sili-svg-icon 
+                    [name]="col.icon">
+                  </sili-svg-icon>
+                </nz-filter-trigger>
+              }
+            </th>
           }
         </tr>
       </thead>
@@ -24,3 +38,4 @@
       </tbody>
   </nz-table>
 </ng-container>
+

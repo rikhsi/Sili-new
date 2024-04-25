@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { debounceTime, Observable, startWith, switchMap, takeUntil, tap } from 'rxjs';
+import { debounceTime, Observable, switchMap, takeUntil, tap } from 'rxjs';
 import { FeedbackItem } from 'src/app/api/typings';
 import { DestroyService } from 'src/app/core/services';
 import { FeedbackFilterForm } from 'src/app/typings';
@@ -24,6 +24,7 @@ export class FeedbackComponent implements OnInit {
   constructor(
     private destroy$: DestroyService,
     private feedbackService: FeedbackService,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -35,9 +36,11 @@ export class FeedbackComponent implements OnInit {
   private initFeedbackData(): void {
     this.filterForm.valueChanges
       .pipe(
-        debounceTime(1000),
-        startWith(this.filterForm.value),
-        tap(() => this.filterForm.disable({ emitEvent: false })),
+        debounceTime(500),
+        tap(() => {
+          this.filterForm.disable({ emitEvent: false });
+          this.cdr.markForCheck();
+        }),
         switchMap((formValue) => this.feedbackService.getFeedbackRes$(formValue)),
         takeUntil(this.destroy$),
       )

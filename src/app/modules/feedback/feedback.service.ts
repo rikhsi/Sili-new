@@ -6,7 +6,7 @@ import { BaseApiService } from 'src/app/api/services';
 import { FeedbackData, FeedbackItem, FeedbackResponse } from 'src/app/api/typings';
 import { ERROR_MESSAGE } from 'src/app/constants';
 import { MessageService } from 'src/app/core/services';
-import { FeedbackFilterForm } from 'src/app/typings';
+import { FeedbackFilterForm, TableHeaderCol } from 'src/app/typings';
 
 @Injectable()
 export class FeedbackService {
@@ -22,6 +22,12 @@ export class FeedbackService {
 
   get tableData$(): Observable<FeedbackItem[]> {
     return this.#tableData.asObservable();
+  }
+
+  #tableCols = new BehaviorSubject<TableHeaderCol<FeedbackFilterForm>[]>(this.initCols());
+
+  get tableCols$(): Observable<TableHeaderCol<FeedbackFilterForm>[]> {
+    return this.#tableCols.asObservable();
   }
 
   constructor(
@@ -44,5 +50,26 @@ export class FeedbackService {
           return EMPTY;
         }),
       );
+  }
+
+  initCols(): TableHeaderCol<FeedbackFilterForm>[] {
+    return [
+      {
+        name: 'name',
+        icon: 'search',
+      },
+      {
+        name: 'phone',
+        icon: 'search',
+      },
+      {
+        name: 'time',
+      },
+      {
+        name: 'status',
+        icon: 'search',
+        control: 'status',
+      },
+    ];
   }
 }
