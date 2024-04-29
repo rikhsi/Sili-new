@@ -1,0 +1,12 @@
+<thead *transloco="let t">
+    <tr>
+        @for (col of tableCols(); track col.name) {
+            <th 
+              [nzFilterMultiple]="col.isMultipleSort"
+              [nzFilters]="col.sortOptions"
+            >
+                {{t('table.cols.' + col.name)}}
+            </th>
+        }
+    </tr>
+</thead>

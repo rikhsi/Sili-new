@@ -1,5 +1,5 @@
 export enum VALIDATION_ERROR {
   required = 'required',
-  minlength = 'minlength',
-  maxlength = 'maxlength',
+  minlength = 'min_length',
+  maxlength = 'max_length',
 }

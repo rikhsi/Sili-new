@@ -4,7 +4,7 @@ import { BehaviorSubject, catchError, EMPTY, Observable, tap } from 'rxjs';
 import { FEEDBACK_QUERY } from 'src/app/api/constants';
 import { BaseApiService } from 'src/app/api/services';
 import { FeedbackData, FeedbackItem, FeedbackResponse } from 'src/app/api/typings';
-import { ERROR_MESSAGE } from 'src/app/constants';
+import { ERROR_MESSAGE, STATUS } from 'src/app/constants';
 import { MessageService } from 'src/app/core/services';
 import { FeedbackFilterForm, TableHeaderCol } from 'src/app/typings';
 
@@ -52,23 +52,31 @@ export class FeedbackService {
       );
   }
 
-  initCols(): TableHeaderCol<FeedbackFilterForm>[] {
+  private initCols(): TableHeaderCol<FeedbackFilterForm>[] {
     return [
       {
         name: 'name',
-        icon: 'search',
+        field: 'name',
+        fieldType: 'text',
       },
       {
         name: 'phone',
-        icon: 'search',
+        field: 'telephone_number',
+        fieldType: 'phone',
       },
       {
         name: 'time',
+        field: 'created_at',
+        fieldType: 'time',
       },
       {
         name: 'status',
-        icon: 'search',
-        control: 'status',
+        field: 'status',
+        fieldType: 'status',
+        sortOptions: Object.values(STATUS).map((item) => ({
+          text: item,
+          value: item,
+        })),
       },
     ];
   }

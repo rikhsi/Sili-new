@@ -1,8 +1,8 @@
 {
   "validation": {
     "required": "Required field",
-    "minlength": "Minimum number of characters",
-    "maxlength": "Maximum number of characters"
+    "min_length": "Minimum number of characters",
+    "max_length": "Maximum number of characters"
   },
   "messages": {
     "success": {
@@ -55,5 +55,20 @@
     "request": "Requests",
     "feedback": "Feedback",
     "settings": "Settings"
+  },
+  "status": {
+    "new": "New",
+    "processing": "Processing",
+    "refusal": "Refused",
+    "completed": "Completed"
+  },
+  "table": {
+    "cols": {
+      "name": "Name",
+      "phone": "Phone number",
+      "time": "Time",
+      "status": "Status"
+    },
+    "total": "Total items"
   }
 }

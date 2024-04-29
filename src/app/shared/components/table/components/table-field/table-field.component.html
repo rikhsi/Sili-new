@@ -1,0 +1,29 @@
+<ng-container *transloco="let t">
+    @switch (type()) {
+        @case ('time') {
+            {{value() | date: 'dd-MM-yyyy HH:mm'}}
+        }
+        @case ('status') {
+            <nz-tag 
+                [nzColor]="statusColor()" 
+                class="tag"
+            >
+                <sili-svg-icon 
+                    [name]="statusIcon()">
+                </sili-svg-icon>
+    
+                <span>{{ t('status.' + value()) }}</span>
+            </nz-tag>
+        }
+        @default {
+            <span>
+                <a 
+                    [ngClass]="{default: type() === 'text'}"
+                    [href]="hrefLink()"
+                >
+                    {{value()}}
+                </a>
+            </span>
+        }
+    }
+</ng-container>

@@ -12,6 +12,10 @@ export type NZ_ICONS_TYPE =
   | 'eye'
   | 'eye-invisible'
   | 'setting'
-  | 'search';
+  | 'search'
+  | 'check-circle'
+  | 'sync'
+  | 'close-circle'
+  | 'exclamation-circle';
 
 export type ICONS_TYPE = CUSTOM_ICONS_TYPE | NZ_ICONS_TYPE;

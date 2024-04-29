@@ -1,0 +1,38 @@
+<nz-table 
+    #basicTable
+    [nzShowSizeChanger]="isSizeChanger()"
+    [nzData]="tableData()"
+    [nzLoading]="isLoading()"
+    [nzTotal]="totalItems()"
+    [nzFrontPagination]="false"
+    [nzPageSizeOptions]="pageSizeOptions()"
+    [nzFooter]="footerRef"
+    (nzQueryParams)="onQueryChange.emit($event)"
+>
+    <sili-table-header
+        [tableCols]="tableCols()">
+    </sili-table-header>
+
+    <tbody>
+        @for (item of basicTable.data; track item['id']) {
+            <tr>
+                @for (col of tableCols(); track col.name) {
+                    <td>
+                        <sili-table-field 
+                            [type]="col.fieldType"
+                            [value]="item[col.field]">
+                        </sili-table-field>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</nz-table>
+
+<ng-template #footerRef>
+    <p class="total">
+        {{'table.total' | transloco}}:
+        {{totalItems()}}
+    </p>
+</ng-template>
+

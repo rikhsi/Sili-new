@@ -1,8 +1,8 @@
 {
   "validation": {
     "required": "Majburiy maydon",
-    "minlength": "Minimun belgilar soni",
-    "maxlength": "Maksimun belgilar soni"
+    "min_length": "Minimun belgilar soni",
+    "max_length": "Maksimun belgilar soni"
   },
   "messages": {
     "success": {
@@ -55,5 +55,20 @@
     "request": "So'rovnoma",
     "feedback": "Qayta aloqa",
     "settings": "Sozlamalar"
+  },
+  "status": {
+    "new": "Yangi",
+    "processing": "Jarayonda",
+    "refusal": "Rad etildi",
+    "completed": "Yakunladi"
+  },
+  "table": {
+    "cols": {
+      "name": "FIO",
+      "phone": "Telefon raqami",
+      "time": "Vaqt",
+      "status": "Holat"
+    },
+    "total": "Barchasi"
   }
 }

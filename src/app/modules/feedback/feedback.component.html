@@ -1,8 +1,9 @@
 <section class="feedback">
-    <sili-feedback-statistics></sili-feedback-statistics>
-    
-    <sili-feedback-table
+    <sili-table
+        [tableCols]="tableCols$ | async"
+        [isLoading]="filterForm.disabled"
         [tableData]="tableData$ | async"
-        [isLoading]="filterForm.disabled">
-    </sili-feedback-table>
+        [isSizeChanger]="true"
+        (onQueryChange)="onQueryChange($event)">
+    </sili-table>
 </section>
