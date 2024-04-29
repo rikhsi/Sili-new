@@ -1,5 +1,5 @@
 <nz-table 
-    #basicTable
+    #table
     [nzShowSizeChanger]="isSizeChanger()"
     [nzData]="tableData()"
     [nzLoading]="isLoading()"
@@ -16,7 +16,7 @@
 
     <tbody>
         @if (!customBody()) {
-            @for (item of basicTable.data; track item['id']) {
+            @for (item of table.data; track item['id']) {
                 <tr>
                     @for (col of tableCols(); track col.name) {
                         <td>
