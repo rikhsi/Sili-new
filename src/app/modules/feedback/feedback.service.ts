@@ -52,31 +52,54 @@ export class FeedbackService {
       );
   }
 
-  private initCols(): TableHeaderCol<FeedbackFilterForm>[] {
+  private initCols(): TableHeaderCol<FeedbackFilterForm, STATUS>[] {
     return [
       {
         name: 'name',
         field: 'name',
         fieldType: 'text',
+        isSort: true,
+        customFilters: [
+          {
+            type: 'search',
+            icon: 'search',
+          },
+        ],
       },
       {
         name: 'phone',
         field: 'telephone_number',
         fieldType: 'phone',
+        customFilters: [
+          {
+            type: 'search',
+            icon: 'search',
+          },
+        ],
       },
       {
         name: 'time',
         field: 'created_at',
         fieldType: 'time',
+        isSort: true,
+        customFilters: [
+          {
+            type: 'datePicker',
+            icon: 'calendar',
+          },
+        ],
       },
       {
         name: 'status',
         field: 'status',
         fieldType: 'status',
-        sortOptions: Object.values(STATUS).map((item) => ({
-          text: item,
-          value: item,
-        })),
+        customFilters: [
+          {
+            type: 'select',
+            options: Object.values(STATUS),
+            icon: 'filter',
+          },
+        ],
       },
     ];
   }

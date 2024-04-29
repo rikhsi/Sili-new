@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { NzTablePaginationType, NzTableQueryParams } from 'ng-zorro-antd/table';
 import { TableHeaderCol } from 'src/app/typings';
 
 @Component({
@@ -16,5 +16,6 @@ export class TableComponent<C, D> {
   totalItems = input<number>(100);
   isSizeChanger = input<boolean>();
   customBody = input<boolean>();
+  paginationType = input<NzTablePaginationType>();
   onQueryChange = output<NzTableQueryParams>();
 }

@@ -16,6 +16,8 @@ export type NZ_ICONS_TYPE =
   | 'check-circle'
   | 'sync'
   | 'close-circle'
-  | 'exclamation-circle';
+  | 'exclamation-circle'
+  | 'filter'
+  | 'calendar';
 
 export type ICONS_TYPE = CUSTOM_ICONS_TYPE | NZ_ICONS_TYPE;
