@@ -12,6 +12,6 @@ import { TableComponent } from './table.component';
 @NgModule({
   declarations: [TableComponent, TableHeaderComponent, TableFieldComponent],
   imports: [CommonModule, NzTableModule, TranslocoModule, NzTagModule, SvgIconComponent],
-  exports: [TableComponent],
+  exports: [TableComponent, TableFieldComponent],
 })
 export class TableModule {}

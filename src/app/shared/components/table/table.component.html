@@ -14,17 +14,21 @@
     </sili-table-header>
 
     <tbody>
-        @for (item of basicTable.data; track item['id']) {
-            <tr>
-                @for (col of tableCols(); track col.name) {
-                    <td>
-                        <sili-table-field 
-                            [type]="col.fieldType"
-                            [value]="item[col.field]">
-                        </sili-table-field>
-                    </td>
-                }
-            </tr>
+        @if (!customBody()) {
+            @for (item of basicTable.data; track item['id']) {
+                <tr>
+                    @for (col of tableCols(); track col.name) {
+                        <td>
+                            <sili-table-field 
+                                [type]="col.fieldType"
+                                [value]="item[col.field]">
+                            </sili-table-field>
+                        </td>
+                    }
+                </tr>
+            }
+        } @else {
+            <ng-content></ng-content>
         }
     </tbody>
 </nz-table>

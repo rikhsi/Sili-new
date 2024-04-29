@@ -15,5 +15,6 @@ export class TableComponent<C, D> {
   pageSizeOptions = input<number[]>([10, 30, 50]);
   totalItems = input<number>(100);
   isSizeChanger = input<boolean>();
+  customBody = input<boolean>();
   onQueryChange = output<NzTableQueryParams>();
 }
