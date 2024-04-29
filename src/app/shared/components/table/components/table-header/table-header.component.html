@@ -11,7 +11,11 @@
                     {{t('table.cols.' + col.name)}}
     
                     @for (filter of col.customFilters; track $index) {
-                        <nz-filter-trigger>
+                        <nz-filter-trigger 
+                            #trigger 
+                            nz-dropdown
+                            [id]="filter.type"
+                        >
                             <sili-svg-icon 
                                 [name]="filter.icon">
                             </sili-svg-icon>
@@ -22,3 +26,21 @@
         </tr>
     </thead>
 </ng-container>
+
+<nz-dropdown-menu #search="nzDropdownMenu">
+    <ul nz-menu nzSelectable>
+      <li nz-menu-item>1st menu item</li>
+      <li nz-menu-item>2nd menu item</li>
+      <li nz-menu-item>3rd menu item</li>
+      <li nz-menu-item nzDanger>4th danger item</li>
+    </ul>
+</nz-dropdown-menu>
+
+<nz-dropdown-menu #select="nzDropdownMenu">
+    <ul nz-menu nzSelectable>
+      <li nz-menu-item>1st menu item</li>
+      <li nz-menu-item>2nd menu item</li>
+      <li nz-menu-item>3rd menu item</li>
+      <li nz-menu-item nzDanger>4th danger item</li>
+    </ul>
+</nz-dropdown-menu>

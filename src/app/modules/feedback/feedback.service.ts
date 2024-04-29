@@ -52,7 +52,7 @@ export class FeedbackService {
       );
   }
 
-  private initCols(): TableHeaderCol<FeedbackFilterForm, STATUS>[] {
+  private initCols(): TableHeaderCol<FeedbackFilterForm>[] {
     return [
       {
         name: 'name',
@@ -96,7 +96,10 @@ export class FeedbackService {
         customFilters: [
           {
             type: 'select',
-            options: Object.values(STATUS),
+            options: Object.values(STATUS).map((item) => ({
+              label: item,
+              value: item,
+            })),
             icon: 'filter',
           },
         ],
