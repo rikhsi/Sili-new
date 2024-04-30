@@ -67,7 +67,9 @@
       "name": "FIO",
       "phone": "Telefon raqami",
       "time": "Vaqt",
-      "status": "Holat"
+      "status": "Holat",
+      "shop": "Magazin",
+      "message": "Xabar"
     },
     "total": "Barchasi"
   }

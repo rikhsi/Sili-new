@@ -2,36 +2,36 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { FormGroup } from '@angular/forms';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { debounceTime, Observable, switchMap, takeUntil, tap } from 'rxjs';
-import { FeedbackItem } from 'src/app/api/typings';
+import { Partner } from 'src/app/api/typings';
 import { DestroyService } from 'src/app/core/services';
-import { FeedbackFilterForm, TableHeaderCol } from 'src/app/typings';
+import { PartnersFilterForm, TableHeaderCol } from 'src/app/typings';
 
-import { FeedbackService } from './feedback.service';
+import { PartnerService } from './partner.service';
 
 @Component({
-  selector: 'sili-feedback',
-  templateUrl: './feedback.component.html',
-  styleUrl: './feedback.component.less',
+  selector: 'sili-partner',
+  templateUrl: './partner.component.html',
+  styleUrl: './partner.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [FeedbackService, DestroyService],
+  providers: [PartnerService, DestroyService],
 })
-export class FeedbackComponent implements OnInit {
-  tableData$: Observable<FeedbackItem[]>;
+export class PartnerComponent implements OnInit {
+  tableData$: Observable<Partner[]>;
   tableCols$: Observable<TableHeaderCol[]>;
 
-  get filterForm(): FormGroup<FeedbackFilterForm> {
-    return this.feedbackService.filterForm;
+  get filterForm(): FormGroup<PartnersFilterForm> {
+    return this.partnerService.filterForm;
   }
 
   constructor(
     private destroy$: DestroyService,
-    private feedbackService: FeedbackService,
+    private partnerService: PartnerService,
     private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
-    this.tableData$ = this.feedbackService.tableData$;
-    this.tableCols$ = this.feedbackService.tableCols$;
+    this.tableData$ = this.partnerService.tableData$;
+    this.tableCols$ = this.partnerService.tableCols$;
 
     this.initFeedbackData();
   }
@@ -51,7 +51,7 @@ export class FeedbackComponent implements OnInit {
           this.filterForm.disable({ emitEvent: false });
           this.cdr.markForCheck();
         }),
-        switchMap((formValue) => this.feedbackService.getFeedbackRes$(formValue)),
+        switchMap((formValue) => this.partnerService.getFeedbackRes$(formValue)),
         takeUntil(this.destroy$),
       )
       .subscribe();

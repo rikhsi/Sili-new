@@ -67,7 +67,9 @@
       "name": "Name",
       "phone": "Phone number",
       "time": "Time",
-      "status": "Status"
+      "status": "Status",
+      "shop": "Shop",
+      "message": "Message"
     },
     "total": "Total items"
   }

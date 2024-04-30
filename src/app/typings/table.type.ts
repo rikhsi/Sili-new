@@ -1,4 +1,3 @@
-import { FormValue } from './base.type';
 import { NZ_ICONS_TYPE } from './icons.type';
 
 export type TableFieldType = 'text' | 'phone' | 'mail' | 'time' | 'status' | 'link';
@@ -16,11 +15,10 @@ export type CustomFilter = {
   options?: CustomFilterOption[];
 };
 
-export type TableHeaderCol<F> = {
+export type TableHeaderCol = {
   name: string;
   fieldType: TableFieldType;
   field: string;
-  control?: keyof FormValue<F>;
   isSort?: boolean;
   customFilters?: CustomFilter[];
 };

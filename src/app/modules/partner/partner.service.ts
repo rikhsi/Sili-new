@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BehaviorSubject, catchError, EMPTY, Observable, tap } from 'rxjs';
-import { FEEDBACK_QUERY } from 'src/app/api/constants';
+import { PARTNERS_QUERY } from 'src/app/api/constants';
 import { BaseApiService } from 'src/app/api/services';
-import { FeedbackData, FeedbackItem, FeedbackResponse } from 'src/app/api/typings';
+import { Partner, PartnersData, PartnersResponse } from 'src/app/api/typings';
 import { ERROR_MESSAGE, STATUS } from 'src/app/constants';
 import { MessageService } from 'src/app/core/services';
-import { TableHeaderCol } from 'src/app/typings';
+import { PartnersFilterForm, TableHeaderCol } from 'src/app/typings';
 
 @Injectable()
-export class FeedbackService {
-  readonly filterForm = this.fb.group({
+export class PartnerService {
+  readonly filterForm = this.fb.group<PartnersFilterForm>({
+    shop: this.fb.control(null),
+    phone: this.fb.control(null),
+    name: this.fb.control(null),
     status: this.fb.control(null),
     min_date: this.fb.control(null),
     max_date: this.fb.control(null),
@@ -18,9 +21,9 @@ export class FeedbackService {
     limit: this.fb.control(10),
   });
 
-  #tableData = new BehaviorSubject<FeedbackItem[]>([]);
+  #tableData = new BehaviorSubject<Partner[]>([]);
 
-  get tableData$(): Observable<FeedbackItem[]> {
+  get tableData$(): Observable<Partner[]> {
     return this.#tableData.asObservable();
   }
 
@@ -36,12 +39,12 @@ export class FeedbackService {
     private messageService: MessageService,
   ) {}
 
-  getFeedbackRes$(value: FeedbackData): Observable<FeedbackResponse> {
+  getFeedbackRes$(value: PartnersData): Observable<PartnersResponse> {
     return this.baseApiService
-      .getQuery$<FeedbackResponse>(this.baseApiService.generateParams(value, FEEDBACK_QUERY.get))
+      .getQuery$<PartnersResponse>(this.baseApiService.generateParams(value, PARTNERS_QUERY.get))
       .pipe(
-        tap(({ requests }) => {
-          this.#tableData.next(requests);
+        tap(({ partners }) => {
+          this.#tableData.next(partners);
           this.filterForm.enable({ emitEvent: false });
         }),
         catchError(() => {
@@ -76,6 +79,22 @@ export class FeedbackService {
             icon: 'search',
           },
         ],
+      },
+      {
+        name: 'shop',
+        field: 'shop_name',
+        fieldType: 'text',
+        customFilters: [
+          {
+            type: 'search',
+            icon: 'search',
+          },
+        ],
+      },
+      {
+        name: 'message',
+        field: 'message',
+        fieldType: 'text',
       },
       {
         name: 'time',
