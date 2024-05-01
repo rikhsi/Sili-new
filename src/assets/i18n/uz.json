@@ -69,7 +69,9 @@
       "time": "Vaqt",
       "status": "Holat",
       "shop": "Magazin",
-      "message": "Xabar"
+      "message": "Xabar",
+      "car_name": "Mashina nomi",
+      "configuration": "Xususiyatlari"
     },
     "total": "Barchasi"
   }

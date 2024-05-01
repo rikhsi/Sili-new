@@ -1,1 +1,9 @@
-<p>request works!</p>
+<section class="partner">
+    <sili-table
+        [tableCols]="tableCols$ | async"
+        [isLoading]="filterForm.disabled"
+        [tableData]="tableData$ | async"
+        [isSizeChanger]="true"
+        (onQueryChange)="onQueryChange($event)">
+    </sili-table>
+</section>

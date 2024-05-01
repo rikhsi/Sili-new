@@ -69,7 +69,9 @@
       "time": "Time",
       "status": "Status",
       "shop": "Shop",
-      "message": "Message"
+      "message": "Message",
+      "car_name": "Name of car",
+      "configuration": "Configuration"
     },
     "total": "Total items"
   }

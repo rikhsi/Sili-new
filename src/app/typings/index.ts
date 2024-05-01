@@ -6,5 +6,6 @@ export * from './language.type';
 export * from './locale.type';
 export * from './menu.type';
 export * from './partners.type';
+export * from './request.type';
 export * from './table.type';
 export * from './theme.type';
