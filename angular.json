@@ -26,9 +26,7 @@
             "index": "src/index.html",
             "browser": "src/main.ts",
             "extractLicenses": true,
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "less",
             "aot": true,
@@ -56,11 +54,9 @@
               }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/assets/styles"
-              ]
+              "includePaths": ["src/assets/styles"]
             },
-            "scripts": []
+            "scripts": ["node_modules/apexcharts/dist/apexcharts.min.js"]
           },
           "configurations": {
             "production": {
@@ -118,10 +114,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "less",
             "assets": [
@@ -148,9 +141,7 @@
               }
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/assets/styles"
-              ]
+              "includePaths": ["src/assets/styles"]
             },
             "scripts": []
           }
@@ -158,10 +149,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         },
         "storybook": {
@@ -170,11 +158,7 @@
             "configDir": ".storybook",
             "browserTarget": "Sili:build",
             "compodoc": true,
-            "compodocArgs": [
-              "-e",
-              "-d",
-              "."
-            ],
+            "compodocArgs": ["-e", "-d", "."],
             "port": 6006
           }
         },
@@ -184,11 +168,7 @@
             "configDir": ".storybook",
             "browserTarget": "Sili:build",
             "compodoc": true,
-            "compodocArgs": [
-              "-e",
-              "-d",
-              "."
-            ],
+            "compodocArgs": ["-e", "-d", "."],
             "outputDir": "storybook-static"
           }
         }
@@ -197,8 +177,6 @@
   },
   "cli": {
     "analytics": "53a682fe-c1b4-481a-9e65-53519229982d",
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ]
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }

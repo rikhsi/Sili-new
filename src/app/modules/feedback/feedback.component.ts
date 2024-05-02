@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ApexAxisChartSeries } from 'ng-apexcharts';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { debounceTime, Observable, switchMap, takeUntil, tap } from 'rxjs';
 import { FeedbackItem } from 'src/app/api/typings';
 import { DestroyService } from 'src/app/core/services';
-import { FeedbackFilterForm, TableHeaderCol } from 'src/app/typings';
+import { ChartOptions, FeedbackFilterForm, TableHeaderCol } from 'src/app/typings';
 
 import { FeedbackService } from './feedback.service';
 
@@ -18,6 +19,8 @@ import { FeedbackService } from './feedback.service';
 export class FeedbackComponent implements OnInit {
   tableData$: Observable<FeedbackItem[]>;
   tableCols$: Observable<TableHeaderCol[]>;
+  chartSeries$: Observable<ApexAxisChartSeries>;
+  chartOptions$: Observable<ChartOptions>;
 
   get filterForm(): FormGroup<FeedbackFilterForm> {
     return this.feedbackService.filterForm;
@@ -32,6 +35,8 @@ export class FeedbackComponent implements OnInit {
   ngOnInit(): void {
     this.tableData$ = this.feedbackService.tableData$;
     this.tableCols$ = this.feedbackService.tableCols$;
+    this.chartSeries$ = this.feedbackService.chartSeries$;
+    this.chartOptions$ = this.feedbackService.chartOptions$;
 
     this.initFeedbackData();
   }

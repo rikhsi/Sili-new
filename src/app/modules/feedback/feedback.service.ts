@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { BehaviorSubject, catchError, EMPTY, Observable, tap } from 'rxjs';
+import { ApexAxisChartSeries } from 'ng-apexcharts';
+import { BehaviorSubject, catchError, EMPTY, map, Observable, switchMap, tap } from 'rxjs';
 import { FEEDBACK_QUERY } from 'src/app/api/constants';
 import { BaseApiService } from 'src/app/api/services';
 import { FeedbackData, FeedbackItem, FeedbackResponse } from 'src/app/api/typings';
 import { ERROR_MESSAGE, STATUS } from 'src/app/constants';
 import { MessageService } from 'src/app/core/services';
-import { TableHeaderCol } from 'src/app/typings';
+import { ChartOptions, TableHeaderCol } from 'src/app/typings';
 
 @Injectable()
 export class FeedbackService {
@@ -30,13 +31,25 @@ export class FeedbackService {
     return this.#tableCols.asObservable();
   }
 
+  #chartOptions = new BehaviorSubject<ChartOptions>(this.initChartOptions());
+
+  get chartOptions$(): Observable<ChartOptions> {
+    return this.#chartOptions.asObservable();
+  }
+
+  #chartSeries = new BehaviorSubject<ApexAxisChartSeries>(null);
+
+  get chartSeries$(): Observable<ApexAxisChartSeries> {
+    return this.#chartSeries.asObservable();
+  }
+
   constructor(
     private fb: FormBuilder,
     private baseApiService: BaseApiService,
     private messageService: MessageService,
   ) {}
 
-  getFeedbackRes$(value: FeedbackData): Observable<FeedbackResponse> {
+  getFeedbackRes$(value: FeedbackData): Observable<never> {
     return this.baseApiService
       .getQuery$<FeedbackResponse>(this.baseApiService.generateParams(value, FEEDBACK_QUERY.get))
       .pipe(
@@ -44,12 +57,39 @@ export class FeedbackService {
           this.#tableData.next(requests);
           this.filterForm.enable({ emitEvent: false });
         }),
+        map(() => [
+          {
+            data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+          },
+        ]),
+        tap((series) => this.#chartSeries.next(series)),
+        switchMap(() => EMPTY),
         catchError(() => {
           this.messageService.onNotifyError(ERROR_MESSAGE.server);
 
           return EMPTY;
         }),
       );
+  }
+
+  private initChartOptions(): ChartOptions {
+    return {
+      series: [
+        {
+          name: 'My-series',
+          data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+        },
+      ],
+      chart: {
+        height: 350,
+        type: 'bar',
+        toolbar: { show: false },
+      },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+      },
+      tooltip: { enabled: false },
+    };
   }
 
   private initCols(): TableHeaderCol[] {
