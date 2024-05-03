@@ -20,7 +20,10 @@ export class FeedbackComponent implements OnInit {
   tableData$: Observable<FeedbackItem[]>;
   tableCols$: Observable<TableHeaderCol[]>;
   chartSeries$: Observable<ApexAxisChartSeries>;
-  chartOptions$: Observable<ChartOptions>;
+  chartStatusOptions$: Observable<ChartOptions>;
+  chartYearOptions$: Observable<ChartOptions>;
+  chartMonthOptions$: Observable<ChartOptions>;
+  chartWeekOptions$: Observable<ChartOptions>;
 
   get filterForm(): FormGroup<FeedbackFilterForm> {
     return this.feedbackService.filterForm;
@@ -35,8 +38,10 @@ export class FeedbackComponent implements OnInit {
   ngOnInit(): void {
     this.tableData$ = this.feedbackService.tableData$;
     this.tableCols$ = this.feedbackService.tableCols$;
-    this.chartSeries$ = this.feedbackService.chartSeries$;
-    this.chartOptions$ = this.feedbackService.chartOptions$;
+    this.chartStatusOptions$ = this.feedbackService.chartStatusOptions$;
+    this.chartYearOptions$ = this.feedbackService.chartYearOptions$;
+    this.chartMonthOptions$ = this.feedbackService.chartMonthOptions$;
+    this.chartWeekOptions$ = this.feedbackService.chartWeekOptions$;
 
     this.initFeedbackData();
   }

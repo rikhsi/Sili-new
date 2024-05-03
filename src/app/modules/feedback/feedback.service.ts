@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ApexAxisChartSeries } from 'ng-apexcharts';
-import { BehaviorSubject, catchError, EMPTY, map, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, Observable, switchMap, tap } from 'rxjs';
 import { FEEDBACK_QUERY } from 'src/app/api/constants';
 import { BaseApiService } from 'src/app/api/services';
 import { FeedbackData, FeedbackItem, FeedbackResponse } from 'src/app/api/typings';
@@ -31,16 +30,28 @@ export class FeedbackService {
     return this.#tableCols.asObservable();
   }
 
-  #chartOptions = new BehaviorSubject<ChartOptions>(this.initChartOptions());
+  #chartStatusOptions = new BehaviorSubject<ChartOptions>(this.initStatusChartOptions());
 
-  get chartOptions$(): Observable<ChartOptions> {
-    return this.#chartOptions.asObservable();
+  get chartStatusOptions$(): Observable<ChartOptions> {
+    return this.#chartStatusOptions.asObservable();
   }
 
-  #chartSeries = new BehaviorSubject<ApexAxisChartSeries>(null);
+  #chartYearOptions = new BehaviorSubject<ChartOptions>(this.initYearChartOptions());
 
-  get chartSeries$(): Observable<ApexAxisChartSeries> {
-    return this.#chartSeries.asObservable();
+  get chartYearOptions$(): Observable<ChartOptions> {
+    return this.#chartYearOptions.asObservable();
+  }
+
+  #chartMonthOptions = new BehaviorSubject<ChartOptions>(this.initMonthChartOptions());
+
+  get chartMonthOptions$(): Observable<ChartOptions> {
+    return this.#chartMonthOptions.asObservable();
+  }
+
+  #chartWeekOptions = new BehaviorSubject<ChartOptions>(this.initWeekChartOptions());
+
+  get chartWeekOptions$(): Observable<ChartOptions> {
+    return this.#chartWeekOptions.asObservable();
   }
 
   constructor(
@@ -57,12 +68,6 @@ export class FeedbackService {
           this.#tableData.next(requests);
           this.filterForm.enable({ emitEvent: false });
         }),
-        map(() => [
-          {
-            data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
-          },
-        ]),
-        tap((series) => this.#chartSeries.next(series)),
         switchMap(() => EMPTY),
         catchError(() => {
           this.messageService.onNotifyError(ERROR_MESSAGE.server);
@@ -72,21 +77,88 @@ export class FeedbackService {
       );
   }
 
-  private initChartOptions(): ChartOptions {
+  private initStatusChartOptions(): ChartOptions {
+    return {
+      series: [10, 41, 35, 51],
+      chart: {
+        width: 350,
+        type: 'pie',
+      },
+      stroke: {
+        width: 0,
+      },
+      labels: [STATUS.new, STATUS.processing, STATUS.completed, STATUS.refusal],
+    };
+  }
+
+  private initYearChartOptions(): ChartOptions {
     return {
       series: [
         {
-          name: 'My-series',
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+          data: [10, 41, 35, 51, 23, 45, 56, 23, 2, 65, 6, 2],
         },
       ],
       chart: {
-        height: 350,
+        height: 220,
         type: 'bar',
         toolbar: { show: false },
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+        categories: [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ],
+      },
+      tooltip: { enabled: false },
+    };
+  }
+
+  private initMonthChartOptions(): ChartOptions {
+    return {
+      series: [
+        {
+          data: [10, 41, 35, 51, 23, 45, 56, 23, 2, 65, 6, 2],
+        },
+      ],
+      chart: {
+        height: 220,
+        type: 'bar',
+        toolbar: { show: false },
+      },
+      xaxis: {
+        categories: [
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+          26, 27, 28, 29, 30, 31,
+        ],
+      },
+      tooltip: { enabled: false },
+    };
+  }
+
+  private initWeekChartOptions(): ChartOptions {
+    return {
+      series: [
+        {
+          data: [10, 41, 35, 51, 23, 45, 56],
+        },
+      ],
+      chart: {
+        height: 220,
+        type: 'bar',
+        toolbar: { show: false },
+      },
+      xaxis: {
+        categories: [1, 2, 3, 4, 5, 6, 7],
       },
       tooltip: { enabled: false },
     };

@@ -1,23 +1,57 @@
 <section class="feedback">
     <div class="charts">
-        <ng-container *ngIf="chartOptions$ | async as options">
+        <ng-container *ngIf="chartYearOptions$ | async as options">
             <apx-chart
                 [series]="options?.series"
                 [chart]="options?.chart"
                 [xaxis]="options?.xaxis"
                 [tooltip]="options?.tooltip"
-                class="bar">
+                [plotOptions]="options?.plotOptions"
+                class="year">
             </apx-chart>
         </ng-container>
-        <ng-container *ngIf="chartOptions$ | async as options">
+        <ng-container *ngIf="chartWeekOptions$ | async as options">
             <apx-chart
                 [series]="options?.series"
                 [chart]="options?.chart"
                 [xaxis]="options?.xaxis"
                 [tooltip]="options?.tooltip"
-                class="chart">
+                class="week">
             </apx-chart>
         </ng-container>
+        <div 
+            nz-row 
+            style="flex: 1 1 100%;"
+        >
+            <ng-container *ngIf="chartStatusOptions$ | async as options">
+                <div
+                    nz-col 
+                    nzFlex="0 1 350px"
+                >
+                    <apx-chart
+                        [series]="options?.series"
+                        [chart]="options?.chart"
+                        [labels]="options?.labels"
+                        [stroke]="options?.stroke">
+                    </apx-chart>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="chartMonthOptions$ | async as options">
+                <div
+                    nz-col 
+                    nzFlex="76%"
+                >
+                    <apx-chart
+                        nz-col 
+                        nzFlex="1 1 200px"
+                        [series]="options?.series"
+                        [chart]="options?.chart"
+                        [xaxis]="options?.xaxis"
+                        [tooltip]="options?.tooltip">
+                    </apx-chart>
+                </div>
+            </ng-container>
+        </div>
     </div>
     <sili-table
         [tableCols]="tableCols$ | async"
