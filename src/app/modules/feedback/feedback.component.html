@@ -4,7 +4,7 @@
             <apx-chart
                 [series]="options?.series"
                 [chart]="options?.chart"
-                [xaxis]="options?.xaxis"
+                [xaxis]="options?.xaxis | translateObj: 'categories'"
                 [tooltip]="options?.tooltip"
                 [plotOptions]="options?.plotOptions"
                 class="year">
@@ -31,7 +31,7 @@
                     <apx-chart
                         [series]="options?.series"
                         [chart]="options?.chart"
-                        [labels]="options?.labels"
+                        [labels]="options?.labels | translateList"
                         [stroke]="options?.stroke">
                     </apx-chart>
                 </div>

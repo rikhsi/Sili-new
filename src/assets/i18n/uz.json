@@ -75,18 +75,18 @@
     },
     "total": "Barchasi"
   },
-  "months": {
-    "Jan": "Yanvar",
-    "Feb": "Fevral",
-    "Mar": "Mart",
-    "Apr": "Aprel",
-    "May": "May",
-    "Jun": "Iyun",
-    "Jul": "Iyul",
-    "Aug": "Avgust",
-    "Sep": "Sentabr",
-    "Oct": "Oktabr",
-    "Nov": "Noyabr",
-    "Dec": "Dekabr"
+  "month": {
+    "jan": "Yanvar",
+    "feb": "Fevral",
+    "mar": "Mart",
+    "apr": "Aprel",
+    "may": "May",
+    "jun": "Iyun",
+    "jul": "Iyul",
+    "aug": "Avgust",
+    "sep": "Sentabr",
+    "oct": "Oktabr",
+    "nov": "Noyabr",
+    "dec": "Dekabr"
   }
 }

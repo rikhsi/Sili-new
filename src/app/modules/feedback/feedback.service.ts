@@ -87,7 +87,7 @@ export class FeedbackService {
       stroke: {
         width: 0,
       },
-      labels: [STATUS.new, STATUS.processing, STATUS.completed, STATUS.refusal],
+      labels: Object.values(STATUS),
     };
   }
 
@@ -105,18 +105,18 @@ export class FeedbackService {
       },
       xaxis: {
         categories: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dec',
+          'month.jan',
+          'month.feb',
+          'month.mar',
+          'month.apr',
+          'month.may',
+          'month.jun',
+          'month.jul',
+          'month.aug',
+          'month.sep',
+          'month.oct',
+          'month.nov',
+          'month.dec',
         ],
       },
       tooltip: { enabled: false },

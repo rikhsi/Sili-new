@@ -3,20 +3,20 @@ import { NzStatusColor } from 'ng-zorro-antd/core/color';
 import { NZ_ICONS_TYPE } from '../typings';
 
 export enum STATUS {
-  new = 'new',
-  processing = 'processing',
-  refusal = 'refusal',
-  completed = 'completed',
+  new = 'status.new',
+  processing = 'status.processing',
+  refusal = 'status.refusal',
+  completed = 'status.completed',
 }
 
-export const STATUS_COLOR: { [key in STATUS]: NzStatusColor } = {
+export const STATUS_COLOR: { [key in keyof typeof STATUS]: NzStatusColor } = {
   new: 'warning',
   processing: 'processing',
   refusal: 'error',
   completed: 'success',
 };
 
-export const STATUS_ICON: { [key in STATUS]: NZ_ICONS_TYPE } = {
+export const STATUS_ICON: { [key in keyof typeof STATUS]: NZ_ICONS_TYPE } = {
   new: 'exclamation-circle',
   processing: 'sync',
   refusal: 'close-circle',

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ApexAxisChartSeries } from 'ng-apexcharts';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { debounceTime, Observable, switchMap, takeUntil, tap } from 'rxjs';
 import { FeedbackItem } from 'src/app/api/typings';
@@ -17,13 +16,13 @@ import { FeedbackService } from './feedback.service';
   providers: [FeedbackService, DestroyService],
 })
 export class FeedbackComponent implements OnInit {
-  tableData$: Observable<FeedbackItem[]>;
-  tableCols$: Observable<TableHeaderCol[]>;
-  chartSeries$: Observable<ApexAxisChartSeries>;
-  chartStatusOptions$: Observable<ChartOptions>;
-  chartYearOptions$: Observable<ChartOptions>;
-  chartMonthOptions$: Observable<ChartOptions>;
-  chartWeekOptions$: Observable<ChartOptions>;
+  tableData$: Observable<FeedbackItem[]> = this.feedbackService.tableData$;
+  tableCols$: Observable<TableHeaderCol[]> = this.feedbackService.tableCols$;
+
+  chartStatusOptions$: Observable<ChartOptions> = this.feedbackService.chartStatusOptions$;
+  chartYearOptions$: Observable<ChartOptions> = this.feedbackService.chartYearOptions$;
+  chartMonthOptions$: Observable<ChartOptions> = this.feedbackService.chartMonthOptions$;
+  chartWeekOptions$: Observable<ChartOptions> = this.feedbackService.chartWeekOptions$;
 
   get filterForm(): FormGroup<FeedbackFilterForm> {
     return this.feedbackService.filterForm;
@@ -36,13 +35,6 @@ export class FeedbackComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.tableData$ = this.feedbackService.tableData$;
-    this.tableCols$ = this.feedbackService.tableCols$;
-    this.chartStatusOptions$ = this.feedbackService.chartStatusOptions$;
-    this.chartYearOptions$ = this.feedbackService.chartYearOptions$;
-    this.chartMonthOptions$ = this.feedbackService.chartMonthOptions$;
-    this.chartWeekOptions$ = this.feedbackService.chartWeekOptions$;
-
     this.initFeedbackData();
   }
 

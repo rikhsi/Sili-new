@@ -27,6 +27,7 @@
     "@ngneat/transloco": "^6.0.4",
     "angular8-yandex-maps": "^17.1.0",
     "apexcharts": "^3.49.0",
+    "moment": "^2.30.1",
     "ng-apexcharts": "^1.10.0",
     "ng-zorro-antd": "^17.4.0",
     "ngx-progressbar": "^11.1.0",
