@@ -1,9 +1,15 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  OnInit,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
-import { debounceTime, Observable, switchMap, takeUntil, tap } from 'rxjs';
+import { debounceTime, Observable, switchMap, tap } from 'rxjs';
 import { FeedbackItem } from 'src/app/api/typings';
-import { DestroyService } from 'src/app/core/services';
 import { ChartOptions, FeedbackFilterForm, TableHeaderCol } from 'src/app/typings';
 
 import { FeedbackService } from './feedback.service';
@@ -13,7 +19,7 @@ import { FeedbackService } from './feedback.service';
   templateUrl: './feedback.component.html',
   styleUrl: './feedback.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [FeedbackService, DestroyService],
+  providers: [FeedbackService],
 })
 export class FeedbackComponent implements OnInit {
   tableData$: Observable<FeedbackItem[]> = this.feedbackService.tableData$;
@@ -27,7 +33,7 @@ export class FeedbackComponent implements OnInit {
   }
 
   constructor(
-    private destroy$: DestroyService,
+    private destroyRef: DestroyRef,
     private feedbackService: FeedbackService,
     private cdr: ChangeDetectorRef,
   ) {}
@@ -52,7 +58,7 @@ export class FeedbackComponent implements OnInit {
           this.cdr.markForCheck();
         }),
         switchMap((formValue) => this.feedbackService.getFeedbackRes$(formValue)),
-        takeUntil(this.destroy$),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe();
   }

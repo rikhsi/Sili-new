@@ -1,12 +1,13 @@
 import { AsyncPipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { TranslocoDirective } from '@ngneat/transloco';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
-import { Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import { Observable, Subject, switchMap } from 'rxjs';
 import { BRAND, LANGUAGE, THEME } from 'src/app/constants';
-import { DestroyService, LanguageService, ThemeService } from 'src/app/core/services';
+import { LanguageService, ThemeService } from 'src/app/core/services';
 import { CircleButtonComponent, SvgIconComponent } from 'src/app/shared/components';
 import { LanguageItem, ThemeItem, ThemeType } from 'src/app/typings';
 
@@ -27,7 +28,6 @@ import { LanguageItem, ThemeItem, ThemeType } from 'src/app/typings';
   ],
   templateUrl: './auth-layout.component.html',
   styleUrl: './auth-layout.component.less',
-  providers: [DestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthLayoutComponent implements OnInit {
@@ -45,7 +45,7 @@ export class AuthLayoutComponent implements OnInit {
   constructor(
     private languageService: LanguageService,
     private themeService: ThemeService,
-    private destroy$: DestroyService,
+    private destroyRef: DestroyRef,
   ) {}
 
   ngOnInit(): void {
@@ -72,7 +72,7 @@ export class AuthLayoutComponent implements OnInit {
     this.langEmit$
       .pipe(
         switchMap((lang) => this.languageService.onChangeLang$(lang)),
-        takeUntil(this.destroy$),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe();
   }
@@ -84,7 +84,7 @@ export class AuthLayoutComponent implements OnInit {
     this.themeEmit$
       .pipe(
         switchMap((theme) => this.themeService.loadTheme$(theme)),
-        takeUntil(this.destroy$),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe();
   }

@@ -2,28 +2,24 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DestroyRef,
   OnInit,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzValidateStatus } from 'ng-zorro-antd/core/types';
-import { catchError, EMPTY, map, Observable, takeUntil, tap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, tap } from 'rxjs';
 import { AUTH_QUERY } from 'src/app/api/constants';
 import { BaseApiService } from 'src/app/api/services';
 import { AuthLoginData, IAuthLoginResponse } from 'src/app/api/typings';
-import {
-  DestroyService,
-  NavigationService,
-  StorageService,
-  ValidationService,
-} from 'src/app/core/services';
+import { NavigationService, StorageService, ValidationService } from 'src/app/core/services';
 import { AuthLoginForm, NZ_ICONS_TYPE } from 'src/app/typings';
 
 @Component({
   selector: 'sili-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.less',
-  providers: [DestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
@@ -35,10 +31,10 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private validationService: ValidationService,
     private baseApiService: BaseApiService,
-    private destroy$: DestroyService,
     private storageService: StorageService,
     private navigationService: NavigationService,
     private cdr: ChangeDetectorRef,
+    private destroyRef: DestroyRef,
   ) {}
 
   ngOnInit(): void {
@@ -72,7 +68,7 @@ export class LoginComponent implements OnInit {
           map((response) => response.token),
           tap((token) => this.onLoginSuccess(token)),
           catchError(() => this.onLoginError$()),
-          takeUntil(this.destroy$),
+          takeUntilDestroyed(this.destroyRef),
         )
         .subscribe();
     } else {

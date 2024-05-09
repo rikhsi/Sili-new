@@ -1,16 +1,16 @@
 import { AsyncPipe } from '@angular/common';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, OnInit, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
 import { NgProgressComponent, NgProgressModule } from 'ngx-progressbar';
-import { map, Observable, takeUntil } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
-import { DestroyService, ProgressService, ThemeService } from './core/services';
+import { ProgressService, ThemeService } from './core/services';
 import { AuthLayoutComponent, DashboardLayoutModule } from './layout';
 
 @Component({
   selector: 'sili-root',
   standalone: true,
-  providers: [DestroyService],
   imports: [RouterOutlet, AuthLayoutComponent, DashboardLayoutModule, NgProgressModule, AsyncPipe],
   template: `
     <ng-progress
@@ -29,8 +29,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   constructor(
     private progressService: ProgressService,
-    private destroy$: DestroyService,
     private themeService: ThemeService,
+    private destroyRef: DestroyRef,
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, AfterViewInit {
             this.progress.complete();
           }
         }),
-        takeUntil(this.destroy$),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe();
   }

@@ -1,4 +1,3 @@
-export * from './destroy.service';
 export * from './language.service';
 export * from './message.service';
 export * from './meta.service';

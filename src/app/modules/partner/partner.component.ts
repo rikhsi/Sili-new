@@ -1,9 +1,15 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  OnInit,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
-import { debounceTime, Observable, switchMap, takeUntil, tap } from 'rxjs';
+import { debounceTime, Observable, switchMap, tap } from 'rxjs';
 import { Partner } from 'src/app/api/typings';
-import { DestroyService } from 'src/app/core/services';
 import { ChartOptions, PartnersFilterForm, TableHeaderCol } from 'src/app/typings';
 
 import { PartnerService } from './partner.service';
@@ -13,7 +19,7 @@ import { PartnerService } from './partner.service';
   templateUrl: './partner.component.html',
   styleUrl: './partner.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [PartnerService, DestroyService],
+  providers: [PartnerService],
 })
 export class PartnerComponent implements OnInit {
   tableData$: Observable<Partner[]>;
@@ -27,7 +33,7 @@ export class PartnerComponent implements OnInit {
   }
 
   constructor(
-    private destroy$: DestroyService,
+    private destroyRef: DestroyRef,
     private partnerService: PartnerService,
     private cdr: ChangeDetectorRef,
   ) {}
@@ -55,7 +61,7 @@ export class PartnerComponent implements OnInit {
           this.cdr.markForCheck();
         }),
         switchMap((formValue) => this.partnerService.getFeedbackRes$(formValue)),
-        takeUntil(this.destroy$),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe();
   }
