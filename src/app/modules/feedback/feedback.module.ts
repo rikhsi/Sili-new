@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 import { TableModule } from 'src/app/shared/components';
 import { TranslateListPipe, TranslateObjPipe } from 'src/app/shared/pipes';
 
@@ -15,7 +14,6 @@ import { FeedbackRoutingModule } from './feedback-routing.module';
     FeedbackRoutingModule,
     TableModule,
     NgApexchartsModule,
-    NzGridModule,
     TranslateListPipe,
     TranslateObjPipe,
   ],

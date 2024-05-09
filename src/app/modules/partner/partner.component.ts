@@ -4,7 +4,7 @@ import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { debounceTime, Observable, switchMap, takeUntil, tap } from 'rxjs';
 import { Partner } from 'src/app/api/typings';
 import { DestroyService } from 'src/app/core/services';
-import { PartnersFilterForm, TableHeaderCol } from 'src/app/typings';
+import { ChartOptions, PartnersFilterForm, TableHeaderCol } from 'src/app/typings';
 
 import { PartnerService } from './partner.service';
 
@@ -18,6 +18,9 @@ import { PartnerService } from './partner.service';
 export class PartnerComponent implements OnInit {
   tableData$: Observable<Partner[]>;
   tableCols$: Observable<TableHeaderCol[]>;
+
+  chartStatusOptions$: Observable<ChartOptions> = this.partnerService.chartStatusOptions$;
+  chartYearOptions$: Observable<ChartOptions> = this.partnerService.chartYearOptions$;
 
   get filterForm(): FormGroup<PartnersFilterForm> {
     return this.partnerService.filterForm;

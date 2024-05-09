@@ -10,12 +10,11 @@
         </ng-container>
         <ng-container *ngIf="chartYearOptions$ | async as options">
             <apx-chart
-                nz-col 
-                nzFlex="1 1 200px"
                 [series]="options?.series"
                 [chart]="options?.chart"
                 [xaxis]="options?.xaxis | translateObj: 'categories'"
-                [tooltip]="options?.tooltip">
+                [tooltip]="options?.tooltip"
+                class="year">
             </apx-chart>
         </ng-container>
     </div>

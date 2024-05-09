@@ -1,0 +1,15 @@
+export enum PERMISSION {
+  viewShop = 1,
+  createShop = 2,
+  editShop = 3,
+  viewCar = 4,
+  createCar = 5,
+  editCar = 6,
+  viewCarStatistics = 7,
+  viewPartner = 8,
+  editPartner = 9,
+  viewFeedback = 10,
+  editFeedback = 11,
+  viewRequest = 12,
+  editRequest = 13,
+}

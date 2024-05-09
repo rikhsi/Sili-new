@@ -5,6 +5,7 @@ export * from './icons';
 export * from './language';
 export * from './link';
 export * from './messages';
+export * from './permission';
 export * from './root-route';
 export * from './status';
 export * from './storage';

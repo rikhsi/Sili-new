@@ -10,24 +10,26 @@
             nzTheme="dark"
         >
             @for (item of menuItems(); track item.route) {
-                <li 
-                    nz-menu-item  
-                    nzMatchRouter
-                    [nzDisabled]="item.disabled"
-                >
-                    <a 
-                        [routerLink]="['/dashboard', item.route]"
-                        (click)="clicked.emit()"
+                <ng-template [siliPermission]="item.permissions">
+                    <li 
+                        nz-menu-item  
+                        nzMatchRouter
+                        [nzDisabled]="item.disabled"
                     >
-                        <span 
-                            nz-icon 
-                            [nzType]="item.icon">
-                        </span>
-                        <span>
-                            {{item.title | transloco}}
-                        </span>
-                    </a>
-                </li>
+                        <a 
+                            [routerLink]="['/dashboard', item.route]"
+                            (click)="clicked.emit()"
+                        >
+                            <span 
+                                nz-icon 
+                                [nzType]="item.icon">
+                            </span>
+                            <span>
+                                {{item.title | transloco}}
+                            </span>
+                        </a>
+                    </li>
+                </ng-template>
             }
         </ul>
     </nz-sider>

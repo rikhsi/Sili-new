@@ -7,6 +7,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { SvgIconComponent } from 'src/app/shared/components';
+import { PermissionDirective } from 'src/app/shared/directives';
 
 import { DashboardHeaderComponent } from './components/dashboard-header/dashboard-header.component';
 import { DashboardMainComponent } from './components/dashboard-main/dashboard-main.component';
@@ -23,6 +24,7 @@ import { DashboardLayoutComponent } from './dashboard-layout.component';
     NzIconModule,
     TranslocoModule,
     NzFlexModule,
+    PermissionDirective,
   ],
 })
 export class DashboardLayoutModule {}

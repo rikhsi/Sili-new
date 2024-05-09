@@ -6,7 +6,7 @@ import { BaseApiService } from 'src/app/api/services';
 import { Partner, PartnersData, PartnersResponse } from 'src/app/api/typings';
 import { ERROR_MESSAGE, STATUS } from 'src/app/constants';
 import { MessageService } from 'src/app/core/services';
-import { PartnersFilterForm, TableHeaderCol } from 'src/app/typings';
+import { ChartOptions, PartnersFilterForm, TableHeaderCol } from 'src/app/typings';
 
 @Injectable()
 export class PartnerService {
@@ -33,6 +33,18 @@ export class PartnerService {
     return this.#tableCols.asObservable();
   }
 
+  #chartStatusOptions = new BehaviorSubject<ChartOptions>(this.initStatusChartOptions());
+
+  get chartStatusOptions$(): Observable<ChartOptions> {
+    return this.#chartStatusOptions.asObservable();
+  }
+
+  #chartYearOptions = new BehaviorSubject<ChartOptions>(this.initYearChartOptions());
+
+  get chartYearOptions$(): Observable<ChartOptions> {
+    return this.#chartYearOptions.asObservable();
+  }
+
   constructor(
     private fb: FormBuilder,
     private baseApiService: BaseApiService,
@@ -53,6 +65,52 @@ export class PartnerService {
           return EMPTY;
         }),
       );
+  }
+
+  private initStatusChartOptions(): ChartOptions {
+    return {
+      series: [10, 41, 35, 51],
+      chart: {
+        width: 350,
+        type: 'pie',
+      },
+      stroke: {
+        width: 0,
+      },
+      labels: Object.values(STATUS),
+    };
+  }
+
+  private initYearChartOptions(): ChartOptions {
+    return {
+      series: [
+        {
+          data: [10, 41, 35, 51, 23, 45, 56, 23, 2, 65, 6, 2],
+        },
+      ],
+      chart: {
+        height: 220,
+        type: 'bar',
+        toolbar: { show: false },
+      },
+      xaxis: {
+        categories: [
+          'month.jan',
+          'month.feb',
+          'month.mar',
+          'month.apr',
+          'month.may',
+          'month.jun',
+          'month.jul',
+          'month.aug',
+          'month.sep',
+          'month.oct',
+          'month.nov',
+          'month.dec',
+        ],
+      },
+      tooltip: { enabled: false },
+    };
   }
 
   private initCols(): TableHeaderCol[] {

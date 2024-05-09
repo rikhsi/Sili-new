@@ -7,4 +7,5 @@ export * from './progress.service';
 export * from './storage.service';
 export * from './theme.service';
 export * from './transloco-loader.service';
+export * from './user.service';
 export * from './validation.service';
