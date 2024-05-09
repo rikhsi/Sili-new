@@ -42,18 +42,6 @@ export class FeedbackService {
     return this.#chartYearOptions.asObservable();
   }
 
-  #chartMonthOptions = new BehaviorSubject<ChartOptions>(this.initMonthChartOptions());
-
-  get chartMonthOptions$(): Observable<ChartOptions> {
-    return this.#chartMonthOptions.asObservable();
-  }
-
-  #chartWeekOptions = new BehaviorSubject<ChartOptions>(this.initWeekChartOptions());
-
-  get chartWeekOptions$(): Observable<ChartOptions> {
-    return this.#chartWeekOptions.asObservable();
-  }
-
   constructor(
     private fb: FormBuilder,
     private baseApiService: BaseApiService,
@@ -118,47 +106,6 @@ export class FeedbackService {
           'month.nov',
           'month.dec',
         ],
-      },
-      tooltip: { enabled: false },
-    };
-  }
-
-  private initMonthChartOptions(): ChartOptions {
-    return {
-      series: [
-        {
-          data: [10, 41, 35, 51, 23, 45, 56, 23, 2, 65, 6, 2],
-        },
-      ],
-      chart: {
-        height: 220,
-        type: 'bar',
-        toolbar: { show: false },
-      },
-      xaxis: {
-        categories: [
-          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
-          26, 27, 28, 29, 30, 31,
-        ],
-      },
-      tooltip: { enabled: false },
-    };
-  }
-
-  private initWeekChartOptions(): ChartOptions {
-    return {
-      series: [
-        {
-          data: [10, 41, 35, 51, 23, 45, 56],
-        },
-      ],
-      chart: {
-        height: 220,
-        type: 'bar',
-        toolbar: { show: false },
-      },
-      xaxis: {
-        categories: [1, 2, 3, 4, 5, 6, 7],
       },
       tooltip: { enabled: false },
     };

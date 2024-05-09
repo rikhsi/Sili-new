@@ -21,8 +21,6 @@ export class FeedbackComponent implements OnInit {
 
   chartStatusOptions$: Observable<ChartOptions> = this.feedbackService.chartStatusOptions$;
   chartYearOptions$: Observable<ChartOptions> = this.feedbackService.chartYearOptions$;
-  chartMonthOptions$: Observable<ChartOptions> = this.feedbackService.chartMonthOptions$;
-  chartWeekOptions$: Observable<ChartOptions> = this.feedbackService.chartWeekOptions$;
 
   get filterForm(): FormGroup<FeedbackFilterForm> {
     return this.feedbackService.filterForm;

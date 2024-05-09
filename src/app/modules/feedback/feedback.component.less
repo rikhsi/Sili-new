@@ -1,5 +1,3 @@
-@gap: 16px;
-
 .feedback {
     display: flex;
     flex-direction: column;
@@ -7,16 +5,7 @@
 
     .charts {
         display: flex;
+        overflow: hidden;
         align-items: center;
-        flex-wrap: wrap;
-        gap: @gap;
-
-        .year {
-            width: calc(50% - @gap);
-        }
-
-        .week { 
-            width: calc(50% - @gap);
-        }
     }
 }
