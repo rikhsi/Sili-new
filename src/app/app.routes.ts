@@ -44,8 +44,7 @@ export const routes: Routes = [
       },
       {
         path: DASHBOARD_ROUTE.settings,
-        loadChildren: () =>
-          import('./modules/settings/settings.module').then((m) => m.SettingsModule),
+        loadChildren: () => import('./modules/setting/setting.module').then((m) => m.SettingModule),
       },
       {
         path: '**',

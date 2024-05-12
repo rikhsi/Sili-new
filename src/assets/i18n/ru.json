@@ -60,7 +60,9 @@
     "new": "Новый",
     "processing": "В процессе",
     "refusal": "Отказано",
-    "completed": "Завершено"
+    "completed": "Завершено",
+    "active": "Активный",
+    "inactive": "Неактивный"
   },
   "table": {
     "cols": {
@@ -71,7 +73,9 @@
       "shop": "Магазин",
       "message": "Сообщение",
       "car_name": "Название машины",
-      "configuration": "Конфигурация"
+      "configuration": "Конфигурация",
+      "payment": "Оплата",
+      "location": "Локация"
     },
     "total": "Общее количество"
   },

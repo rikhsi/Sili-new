@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { NzStatusColor } from 'ng-zorro-antd/core/color';
-import { LINK_NAME, STATUS_COLOR, STATUS_ICON } from 'src/app/constants';
-import { NZ_ICONS_TYPE, TableFieldType } from 'src/app/typings';
+import { LINK_NAME } from 'src/app/constants';
+import { TableFieldType, TimeType } from 'src/app/typings';
 
 @Component({
   selector: 'sili-table-field',
@@ -9,10 +8,9 @@ import { NZ_ICONS_TYPE, TableFieldType } from 'src/app/typings';
   styleUrl: './table-field.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableFieldComponent {
+export class TableFieldComponent<T> {
   type = input<TableFieldType>();
-  value = input<string>();
-  statusColor = computed<NzStatusColor>(() => STATUS_COLOR[this.value()]);
-  statusIcon = computed<NZ_ICONS_TYPE>(() => STATUS_ICON[this.value()]);
+  value = input<T>();
   hrefLink = computed<string>(() => LINK_NAME[this.type()] + this.value());
+  time = computed<TimeType>(() => this.value() as TimeType);
 }

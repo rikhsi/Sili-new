@@ -9,36 +9,33 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { debounceTime, Observable, switchMap, tap } from 'rxjs';
-import { ChartOptions, FeedbackFilterForm, FeedbackItem, TableHeaderCol } from 'src/app/typings';
+import { ShopFilterForm, ShopItem, TableHeaderCol } from 'src/app/typings';
 
-import { FeedbackService } from './feedback.service';
+import { ShopHomeService } from './shop-home.service';
 
 @Component({
-  selector: 'sili-feedback',
-  templateUrl: './feedback.component.html',
-  styleUrl: './feedback.component.less',
+  selector: 'sili-shop-home',
+  templateUrl: './shop-home.component.html',
+  styleUrl: './shop-home.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [FeedbackService],
+  providers: [ShopHomeService],
 })
-export class FeedbackComponent implements OnInit {
-  tableData$: Observable<FeedbackItem[]> = this.feedbackService.tableData$;
-  tableCols$: Observable<TableHeaderCol[]> = this.feedbackService.tableCols$;
+export class ShopHomeComponent implements OnInit {
+  tableData$: Observable<ShopItem[]> = this.shopHomeService.tableData$;
+  tableCols$: Observable<TableHeaderCol[]> = this.shopHomeService.tableCols$;
 
-  chartStatusOptions$: Observable<ChartOptions> = this.feedbackService.chartStatusOptions$;
-  chartYearOptions$: Observable<ChartOptions> = this.feedbackService.chartYearOptions$;
-
-  get filterForm(): FormGroup<FeedbackFilterForm> {
-    return this.feedbackService.filterForm;
+  get filterForm(): FormGroup<ShopFilterForm> {
+    return this.shopHomeService.filterForm;
   }
 
   constructor(
+    private shopHomeService: ShopHomeService,
     private destroyRef: DestroyRef,
-    private feedbackService: FeedbackService,
     private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
-    this.initFeedbackData();
+    this.initShopHomeData();
   }
 
   onQueryChange(query: NzTableQueryParams): void {
@@ -48,7 +45,7 @@ export class FeedbackComponent implements OnInit {
     });
   }
 
-  private initFeedbackData(): void {
+  private initShopHomeData(): void {
     this.filterForm.valueChanges
       .pipe(
         debounceTime(500),
@@ -56,7 +53,7 @@ export class FeedbackComponent implements OnInit {
           this.filterForm.disable({ emitEvent: false });
           this.cdr.markForCheck();
         }),
-        switchMap((formValue) => this.feedbackService.getFeedbackRes$(formValue)),
+        switchMap((formValue) => this.shopHomeService.getShopHomeRes$(formValue)),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe();

@@ -7,3 +7,7 @@ export enum API_PARAM {
   id = 'id',
   namePhone = 'name_or_phone_number',
 }
+
+export enum ROUTE_PARAM {
+  shopID = 'shopID',
+}

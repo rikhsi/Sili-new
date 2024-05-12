@@ -1,0 +1,10 @@
+<nz-tag 
+    [nzColor]="statusColor()" 
+    class="tag"
+>
+    <sili-svg-icon 
+        [name]="statusIcon()">
+    </sili-svg-icon>
+
+    <span>{{this.statusText() | transloco}}</span>
+</nz-tag>

@@ -9,8 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { debounceTime, Observable, switchMap, tap } from 'rxjs';
-import { RequestItem } from 'src/app/api/typings';
-import { RequestFilterForm, TableHeaderCol } from 'src/app/typings';
+import { RequestFilterForm, RequestItem, TableHeaderCol } from 'src/app/typings';
 
 import { RequestService } from './request.service';
 

@@ -60,7 +60,9 @@
     "new": "New",
     "processing": "Processing",
     "refusal": "Refused",
-    "completed": "Completed"
+    "completed": "Completed",
+    "active": "active",
+    "inactive": "inactive"
   },
   "table": {
     "cols": {
@@ -71,7 +73,9 @@
       "shop": "Shop",
       "message": "Message",
       "car_name": "Name of car",
-      "configuration": "Configuration"
+      "configuration": "Configuration",
+      "payment": "Payment",
+      "location": "Location"
     },
     "total": "Total items"
   },

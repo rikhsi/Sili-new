@@ -60,7 +60,9 @@
     "new": "Yangi",
     "processing": "Jarayonda",
     "refusal": "Rad etildi",
-    "completed": "Yakunladi"
+    "completed": "Yakunladi",
+    "active": "Aktiv",
+    "inactive": "Noaktiv"
   },
   "table": {
     "cols": {
@@ -71,7 +73,9 @@
       "shop": "Magazin",
       "message": "Xabar",
       "car_name": "Mashina nomi",
-      "configuration": "Xususiyatlari"
+      "configuration": "Xususiyatlari",
+      "payment": "To`lov",
+      "location": "Manzil"
     },
     "total": "Barchasi"
   },

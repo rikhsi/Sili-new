@@ -9,8 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup } from '@angular/forms';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { debounceTime, Observable, switchMap, tap } from 'rxjs';
-import { Partner } from 'src/app/api/typings';
-import { ChartOptions, PartnersFilterForm, TableHeaderCol } from 'src/app/typings';
+import { ChartOptions, Partner, PartnersFilterForm, TableHeaderCol } from 'src/app/typings';
 
 import { PartnerService } from './partner.service';
 

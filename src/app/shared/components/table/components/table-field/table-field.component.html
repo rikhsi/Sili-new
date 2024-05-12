@@ -1,19 +1,19 @@
 <ng-container *transloco="let t">
     @switch (type()) {
         @case ('time') {
-            {{value() | date: 'dd-MM-yyyy HH:mm'}}
+            {{time() | date: 'dd-MM-yyyy HH:mm'}}
         }
         @case ('status') {
-            <nz-tag 
-                [nzColor]="statusColor()" 
-                class="tag"
-            >
-                <sili-svg-icon 
-                    [name]="statusIcon()">
-                </sili-svg-icon>
-    
-                <span>{{ t('status.' + value()) }}</span>
-            </nz-tag>
+            <ng-container 
+                [ngTemplateOutlet]="tagRef"
+                [ngTemplateOutletContext]="{ data: 'status'}">
+            </ng-container>
+        }
+        @case ('checkStatus') {
+            <ng-container 
+                [ngTemplateOutlet]="tagRef"
+                [ngTemplateOutletContext]="{ data: 'checkStatus'}">
+            </ng-container>
         }
         @default {
             <span>
@@ -26,4 +26,12 @@
             </span>
         }
     }
+
+    <ng-template #tagRef let-data="data">
+        <sili-tag 
+            [type]="data"
+            [value]="value()">
+        </sili-tag>
+    </ng-template>
 </ng-container>
+

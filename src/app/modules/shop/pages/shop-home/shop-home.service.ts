@@ -1,34 +1,27 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BehaviorSubject, catchError, EMPTY, Observable, tap } from 'rxjs';
-import { ERROR_MESSAGE, REQUEST_QUERY, STATUS } from 'src/app/constants';
+import { ERROR_MESSAGE, PAYMENT, SHOP_QUERY, STATUS } from 'src/app/constants';
 import { BaseApiService, MessageService } from 'src/app/core/services';
-import {
-  RequestData,
-  RequestFilterForm,
-  RequestItem,
-  RequestResponse,
-  TableHeaderCol,
-} from 'src/app/typings';
+import { ShopData, ShopFilterForm, ShopItem, ShopResponse, TableHeaderCol } from 'src/app/typings';
 
 @Injectable()
-export class RequestService {
-  readonly filterForm = this.fb.group<RequestFilterForm>({
-    phone: this.fb.control(null),
+export class ShopHomeService {
+  readonly filterForm = this.fb.group<ShopFilterForm>({
     name: this.fb.control(null),
-    shop_name: this.fb.control(null),
-    configuration: this.fb.control(null),
-    status: this.fb.control(null),
-    car_name: this.fb.control(null),
+    phone: this.fb.control(null),
+    payment: this.fb.control(null),
+    active: this.fb.control(null),
     min_date: this.fb.control(null),
     max_date: this.fb.control(null),
+    location: this.fb.control(null),
     skip: this.fb.control(0),
     limit: this.fb.control(10),
   });
 
-  #tableData = new BehaviorSubject<RequestItem[]>([]);
+  #tableData = new BehaviorSubject<ShopItem[]>([]);
 
-  get tableData$(): Observable<RequestItem[]> {
+  get tableData$(): Observable<ShopItem[]> {
     return this.#tableData.asObservable();
   }
 
@@ -40,16 +33,16 @@ export class RequestService {
 
   constructor(
     private fb: FormBuilder,
-    private messageService: MessageService,
     private baseApiService: BaseApiService,
+    private messageService: MessageService,
   ) {}
 
-  getRequestRes$(value: RequestData): Observable<RequestResponse> {
+  getShopHomeRes$(value: ShopData): Observable<ShopResponse> {
     return this.baseApiService
-      .getQuery$<RequestResponse>(this.baseApiService.generateParams(value, REQUEST_QUERY.get))
+      .getQuery$<ShopResponse>(this.baseApiService.generateParams(value, SHOP_QUERY.get))
       .pipe(
-        tap(({ applications }) => {
-          this.#tableData.next(applications);
+        tap(({ shops }) => {
+          this.#tableData.next(shops);
           this.filterForm.enable({ emitEvent: false });
         }),
         catchError(() => {
@@ -86,31 +79,24 @@ export class RequestService {
         ],
       },
       {
-        name: 'shop',
-        field: 'shop_name',
-        fieldType: 'link',
+        name: 'payment',
+        field: 'payment',
+        fieldType: 'payment',
         customFilters: [
           {
-            type: 'search',
-            icon: 'search',
+            type: 'multiSelect',
+            options: Object.values(PAYMENT).map((item) => ({
+              label: item,
+              value: item,
+            })),
+            icon: 'filter',
           },
         ],
       },
       {
-        name: 'car_name',
-        field: 'car_name',
+        name: 'location',
+        field: 'location',
         fieldType: 'link',
-        customFilters: [
-          {
-            type: 'search',
-            icon: 'search',
-          },
-        ],
-      },
-      {
-        name: 'configuration',
-        field: 'configuration',
-        fieldType: 'text',
         customFilters: [
           {
             type: 'search',
@@ -132,8 +118,8 @@ export class RequestService {
       },
       {
         name: 'status',
-        field: 'status',
-        fieldType: 'status',
+        field: 'is_active',
+        fieldType: 'checkStatus',
         customFilters: [
           {
             type: 'select',

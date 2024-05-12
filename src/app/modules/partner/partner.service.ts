@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BehaviorSubject, catchError, EMPTY, Observable, tap } from 'rxjs';
-import { PARTNERS_QUERY } from 'src/app/api/constants';
-import { BaseApiService } from 'src/app/api/services';
-import { Partner, PartnersData, PartnersResponse } from 'src/app/api/typings';
-import { ERROR_MESSAGE, STATUS } from 'src/app/constants';
-import { MessageService } from 'src/app/core/services';
-import { ChartOptions, PartnersFilterForm, TableHeaderCol } from 'src/app/typings';
+import { ERROR_MESSAGE, PARTNER_QUERY, STATUS } from 'src/app/constants';
+import { BaseApiService, MessageService } from 'src/app/core/services';
+import {
+  ChartOptions,
+  Partner,
+  PartnersData,
+  PartnersFilterForm,
+  PartnersResponse,
+  TableHeaderCol,
+} from 'src/app/typings';
 
 @Injectable()
 export class PartnerService {
@@ -53,7 +57,7 @@ export class PartnerService {
 
   getFeedbackRes$(value: PartnersData): Observable<PartnersResponse> {
     return this.baseApiService
-      .getQuery$<PartnersResponse>(this.baseApiService.generateParams(value, PARTNERS_QUERY.get))
+      .getQuery$<PartnersResponse>(this.baseApiService.generateParams(value, PARTNER_QUERY.get))
       .pipe(
         tap(({ partners }) => {
           this.#tableData.next(partners);

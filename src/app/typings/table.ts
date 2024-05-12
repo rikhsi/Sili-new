@@ -1,6 +1,14 @@
-import { NZ_ICONS_TYPE } from './icons.type';
+import { NZ_ICONS_TYPE } from './icons';
 
-export type TableFieldType = 'text' | 'phone' | 'mail' | 'time' | 'status' | 'link';
+export type TableFieldType =
+  | 'text'
+  | 'phone'
+  | 'mail'
+  | 'time'
+  | 'status'
+  | 'link'
+  | 'payment'
+  | 'checkStatus';
 
 export type CustomFilterType = 'search' | 'select' | 'multiSelect' | 'datePicker';
 

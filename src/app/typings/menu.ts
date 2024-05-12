@@ -1,5 +1,5 @@
 import { DASHBOARD_ROUTE } from '../constants';
-import { NZ_ICONS_TYPE } from './icons.type';
+import { NZ_ICONS_TYPE } from './icons';
 
 export type DashboardMenuItem = {
   title: string;

@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BehaviorSubject, catchError, EMPTY, Observable, switchMap, tap } from 'rxjs';
-import { FEEDBACK_QUERY } from 'src/app/api/constants';
-import { BaseApiService } from 'src/app/api/services';
-import { FeedbackData, FeedbackItem, FeedbackResponse } from 'src/app/api/typings';
-import { ERROR_MESSAGE, STATUS } from 'src/app/constants';
-import { MessageService } from 'src/app/core/services';
-import { ChartOptions, TableHeaderCol } from 'src/app/typings';
+import { ERROR_MESSAGE, FEEDBACK_QUERY, STATUS } from 'src/app/constants';
+import { BaseApiService, MessageService } from 'src/app/core/services';
+import {
+  ChartOptions,
+  FeedbackData,
+  FeedbackItem,
+  FeedbackResponse,
+  TableHeaderCol,
+} from 'src/app/typings';
 
 @Injectable()
 export class FeedbackService {

@@ -7,6 +7,8 @@ export enum STATUS {
   processing = 'status.processing',
   refusal = 'status.refusal',
   completed = 'status.completed',
+  active = 'status.active',
+  inactive = 'status.inactive',
 }
 
 export const STATUS_COLOR: { [key in keyof typeof STATUS]: NzStatusColor } = {
@@ -14,6 +16,8 @@ export const STATUS_COLOR: { [key in keyof typeof STATUS]: NzStatusColor } = {
   processing: 'processing',
   refusal: 'error',
   completed: 'success',
+  active: 'success',
+  inactive: 'warning',
 };
 
 export const STATUS_ICON: { [key in keyof typeof STATUS]: NZ_ICONS_TYPE } = {
@@ -21,4 +25,6 @@ export const STATUS_ICON: { [key in keyof typeof STATUS]: NZ_ICONS_TYPE } = {
   processing: 'sync',
   refusal: 'close-circle',
   completed: 'check-circle',
+  active: 'check-circle',
+  inactive: 'close-circle',
 };
