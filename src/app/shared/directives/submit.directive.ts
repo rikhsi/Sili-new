@@ -10,6 +10,6 @@ export class SubmitDirective {
 
   @HostListener('document:keydown.enter', ['$event'])
   handleKeyDown(): void {
-    this.enterTrigger.emit();
+    if (!this.stopTrigger()) this.enterTrigger.emit();
   }
 }
