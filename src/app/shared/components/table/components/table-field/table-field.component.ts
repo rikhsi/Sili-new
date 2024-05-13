@@ -8,9 +8,10 @@ import { TableFieldType, TimeType } from 'src/app/typings';
   styleUrl: './table-field.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableFieldComponent<T> {
+export class TableFieldComponent {
   type = input<TableFieldType>();
-  value = input<T>();
+  value = input<any>();
+  item = input<any>();
   hrefLink = computed<string>(() => LINK_NAME[this.type()] + this.value());
   time = computed<TimeType>(() => this.value() as TimeType);
 }

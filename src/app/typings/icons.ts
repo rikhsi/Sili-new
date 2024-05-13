@@ -18,6 +18,8 @@ export type NZ_ICONS_TYPE =
   | 'close-circle'
   | 'exclamation-circle'
   | 'filter'
-  | 'calendar';
+  | 'calendar'
+  | 'dollar'
+  | 'swap';
 
 export type ICONS_TYPE = CUSTOM_ICONS_TYPE | NZ_ICONS_TYPE;

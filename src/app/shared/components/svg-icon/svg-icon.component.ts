@@ -35,6 +35,7 @@ import { ICONS_CURSOR_TYPE, ICONS_TYPE } from 'src/app/typings';
   styles: `
     :host {
       width: fit-content;
+      display: inline-block;
       user-select: none;
     }
   `,

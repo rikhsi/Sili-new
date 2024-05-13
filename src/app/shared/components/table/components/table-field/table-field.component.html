@@ -15,6 +15,23 @@
                 [ngTemplateOutletContext]="{ data: 'checkStatus'}">
             </ng-container>
         }
+        @case('payment') {
+            <div class="payment">
+                @defer (when item().cash) {
+                    <sili-svg-icon 
+                        [name]="'dollar'"
+                        [size]="18">
+                    </sili-svg-icon>
+                }
+    
+                @defer (when item().swap) {
+                    <sili-svg-icon 
+                        [name]="'swap'"
+                        [size]="18">
+                    </sili-svg-icon>
+                }
+            </div>
+        }
         @default {
             <span>
                 <a 
